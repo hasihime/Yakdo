@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Getter
+@Getter  // 객체지향 구현을 위해서
 @NoArgsConstructor
 @Entity
 public class Posts {
