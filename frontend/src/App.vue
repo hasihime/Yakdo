@@ -1,17 +1,30 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app id="app">
+    <!-- <toolbar />
+    <drawer /> -->
+    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <route-view/>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import Drawer from "@/components/Drawer";
+// import Toolbar from "@/components/Toolbar";
+// import router from "./router"
+import RouteView from "./components/RouteView"
+// import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
-    HelloWorld
+    // Drawer,
+    // Toolbar,
+    // HelloWorld,
+    RouteView,
+  },
+  computed: {
+
   }
 }
 </script>
