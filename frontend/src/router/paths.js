@@ -4,10 +4,10 @@ export default [
     view: "Home",
     name: "home"
   },
-  // {
-  //   path: "/store/:id/review",
-  //   view: "ReviewCreate",
-  //   name: "reviewCreate"
-  // },
+  {
+    path: "/pharmacy", // /:id
+    view: "PharmacyDetail",
+    name: "pharmacyDetail"
+  },
  
 ];
