@@ -1,21 +1,21 @@
 <template>
   <v-app id="app">
-    <toolbar />
-    <drawer />
+<!--    <toolbar />-->
+<!--    <drawer />-->
     <route-view/>
   </v-app>
 </template>
 
 <script>
-import Drawer from "@/components/main/Drawer";
-import Toolbar from "@/components/main/Toolbar";
+// import Drawer from "@/components/main/Drawer";
+// import Toolbar from "@/components/main/Toolbar";
 import RouteView from "./components/RouteView"
 
 export default {
   name: 'app',
   components: {
-    Drawer,
-    Toolbar,
+    // Drawer,
+    // Toolbar,
     RouteView,
   },
   computed: {
