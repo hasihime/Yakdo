@@ -1,46 +1,34 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
-import colors from 'vuetify/lib/util/colors'
+// import colors from 'vuetify/lib/util/colors'
 
-Vue.use(Vuetify, {
-    theme: {
-        // themes: {
-        //     light: {
-                primary: colors.purple,
-                secondary: colors.grey.darken1,
-                accent: '',
-                error: '',
-                info: '',
-                success: '',
-                warning: '',
-            // },
-            // dark: {
-
-            // }
-        // }
-    }
-})
+Vue.use(Vuetify)
 
 const opts = {
-    // theme: {
-    //     // light: true,
-    //     themes: {
-    //         light: {
-    //             primary: 'red',
-    //             secondary: 'blue',
-    //             accent: '',
-    //             error: '',
-    //             info: '',
-    //             success: '',
-    //             warning: '',
-    //         },
-    //         dark: {
-    //             // primary: 'gray',
-    //             // secondary: 'red'
-    //         }
-    //     }
-    // }
+    theme: {
+        // dark: true, // 다크모드
+        themes: {
+            light: {
+                primary: "#457b3e", // rgb(69, 123, 62)
+                secondary: "#70b366", // rgb(112,179,102)
+                accent: 'black',
+                error: '',
+                info: '$fafafa',
+                success: '',
+                warning: '',
+            },
+            dark: {
+                primary: "#70b366", // rgb(69, 123, 62)
+                secondary: "#32572d", // rgb(112,179,102)
+                accent: 'white',
+                error: '',
+                info: '#303030',
+                success: '',
+                warning: '',
+            }
+        }
+    },
 }
 
 export default new Vuetify(opts)
