@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.ZonedDateTime;
 
 @ToString
 @Getter  // 객체지향 구현을 위해서
@@ -46,5 +45,19 @@ public class Pharmacy {
     @Column
     private double p_y;
 
+    @Builder
+    public Pharmacy(int p_id, String p_name, String p_addr, String p_tel, String p_oper, String p_status, String p_special, String p_loc, String p_post, double p_x, double p_y) {
+        this.p_id = p_id;
+        this.p_name = p_name;
+        this.p_addr = p_addr;
+        this.p_tel = p_tel;
+        this.p_oper = p_oper;
+        this.p_status = p_status;
+        this.p_special = p_special;
+        this.p_loc = p_loc;
+        this.p_post = p_post;
+        this.p_x = p_x;
+        this.p_y =p_y;
+    }
 
 }
