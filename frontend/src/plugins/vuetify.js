@@ -14,7 +14,7 @@ const opts = {
                 secondary: "#70b366", // rgb(112,179,102)
                 accent: 'black',
                 error: '',
-                info: '$fafafa',
+                info: '#fafafa',
                 success: '',
                 warning: '',
             },

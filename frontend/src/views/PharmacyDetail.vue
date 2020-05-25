@@ -32,12 +32,12 @@
         />
       </v-tab-item>
       <v-tab-item> <!-- 지도-->
-        <!-- <Map
-          :name="store.name"
+        <Map
+        />
+          <!-- :name="store.name"
           :address="store.address"
           :latitude="store.latitude"
-          :longitude="store.longitude"
-        /> 지도 -->
+          :longitude="store.longitude" -->
       </v-tab-item>
       <v-tab-item> <!--리뷰-->
         <ReviewList
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-// import Menu from "@/components/common/Menu"
+import Map from "@/components/Map"
 import ReviewList from "@/components/ReviewList"
 import Information from "@/components/Information"
 // import Map from "@/components/Map"
@@ -60,7 +60,7 @@ import Information from "@/components/Information"
 export default {
   components : {
     Information,
-    // Menu,
+    Map,
     ReviewList,
   },
   data : function() {
