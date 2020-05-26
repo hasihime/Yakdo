@@ -120,9 +120,14 @@ export default {
     this.p_tel = pharmacy.p_tel
     this.p_oper = pharmacy.p_oper
     // console.log(typeof(pharmacy.p_status))
-    if(pharmacy.p_status.indexOf("연중")) {
+
+    // 문자열 포함 여분
+    // includes("aaa") : ES6부터 사용 가능
+    // search("aaa") : 문자 포함하고있으면 인덱스리턴, 없으면 -1 리턴
+    if(pharmacy.p_status.includes("연중")) {
       this.p_status = "연중무휴"
-    }else if(pharmacy.p_status.indexOf(".")){
+    }else if(pharmacy.p_status.includes(".")){
+      alert("여기실해오딤")
       this.p_status = "연중무휴,야간"
     }else {
       this.p_status = pharmacy.p_status
