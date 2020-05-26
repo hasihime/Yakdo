@@ -2,17 +2,20 @@
   <v-container class="mt-5">
     <v-card-text class="text-center" > <!-- v-if="store"-->
     <p class="display-1 pa-2">💊</p>
-    <p id="title" class="accent--text">약국 이름</p> <!-- {{store.name}} {{store.branch}} -->
+    <p id="title" class="accent--text">{{this.p_name}}</p>
+    <!-- <p id="title" class="accent--text">{{this.$store.state.data.pharmacy.p_name}}</p> -->
+    <!-- <p id="title" class="accent--text">{{pharmacy.p_name}}</p> mapState 사용할때 -->
     </v-card-text>
     
+      <!-- v-if="p_status.length!= 0" -->
     <v-chip
-          label
-          class="ma-1"
-          color="secondary"
-          text-color="white"
-          v-for="category in (categories.split(','))" :key="category">
-          {{category}}
-        </v-chip>
+      label
+      class="ma-1"
+      color="secondary"
+      text-color="white"
+      v-for="category in (p_status.split(','))" :key="category">
+      {{category}}
+    </v-chip>
     <v-tabs
       style="margin-top:20px"
       background-color="rgb(250,250,250)" 
@@ -28,16 +31,18 @@
       <v-tab>리뷰</v-tab>
       <v-tab-item> <!-- 상세정보 -->
         <Information
-        
+          :p_tel="this.p_tel"
+          :p_oper="this.p_oper"
+          :p_special="this.p_special"
         />
       </v-tab-item>
       <v-tab-item> <!-- 지도-->
         <Map
+          :p_post="this.p_post"
+          :p_loc="this.p_loc"
+          :latitude="this.p_y"
+          :longitude="this.p_x"
         />
-          <!-- :name="store.name"
-          :address="store.address"
-          :latitude="store.latitude"
-          :longitude="store.longitude" -->
       </v-tab-item>
       <v-tab-item> <!--리뷰-->
         <ReviewList
@@ -55,7 +60,7 @@ import Map from "@/components/Map"
 import ReviewList from "@/components/ReviewList"
 import Information from "@/components/Information"
 // import Map from "@/components/Map"
-// import { mapState, mapActions } from "vuex";
+import {  mapActions } from "vuex"; //mapState,
 
 export default {
   components : {
@@ -65,30 +70,77 @@ export default {
   },
   data : function() {
     return {
-      categories: "연중무휴, 야간"
+      p_id: 0,
+      p_name: "",
+      p_addr: "",
+      p_tel: "",
+      p_oper: "",
+      p_status: "",
+      p_special: "",
+      p_loc: "",
+      p_post: "",
+      p_x: 0,
+      p_y: 0,
+      // categories: "연중무휴, 야간"
     }
   },
   computed: {
+    // mapState : state의 속성을 가져온다
+
     // ...mapState({
-    //   store : state => state.data.store,
-    //   menus : state => state.data.menus,
-    //   reviews: state => state.data.reviews,
-    //   reviewStatistics: state => state.data.reviewStatistics,
-    //   reviewPhotos: state => state.data.reviewPhotos,
+    //   pharmacy : state => state.data.pharmacy,
+    // }),
+
+    // // mapGetter : getters에 정의된 메서드를 가져온다
+    // ...mapGetters('modulename', {
+    //   getId: 'get_id'
     // })
-  },
-  mounted() {
-    // this.getStoreDetail(this.$route.params.id)
   },
   beforeDestroy() {
     // this.removeStoreInfo()
   },
   methods: {
-    // ...mapActions("data", ["getStoreDetail", "removeStoreInfo"]),
+    // actions에 정의된 메서드를 가져온다
+
+    ...mapActions("data", ["getPharmacyDetail"]),
     // goCreateReview() {
-    //   // router.pus가 작동이 안된다..!
+      //   // router.pus가 작동이 안된다..!
     //   this.$router.push(`/store/${this.$route.params.id}/review`)
     // }
+  },
+  mounted() {
+    this.getPharmacyDetail(this.$route.params.id)
+
+    // console.log(this.$store.state.data.pharmacy)
+    const pharmacy = this.$store.state.data.pharmacy
+
+    this.p_id = pharmacy.p_id
+    this.p_name = pharmacy.p_name
+    this.p_addr = pharmacy.p_addr
+    this.p_tel = pharmacy.p_tel
+    this.p_oper = pharmacy.p_oper
+    // console.log(typeof(pharmacy.p_status))
+    if(pharmacy.p_status.indexOf("연중")) {
+      this.p_status = "연중무휴"
+    }else if(pharmacy.p_status.indexOf(".")){
+      this.p_status = "연중무휴,야간"
+    }else {
+      this.p_status = pharmacy.p_status
+    }
+    if(pharmacy.p_special.length) {
+      var specialArr = pharmacy.p_special.split(":")
+      // 공백제거, ]제거
+      var special_blank = specialArr[1],
+          special = special_blank.replace(' ',''),
+          p_special = special.replace(']','')
+      this.p_special = p_special
+    }else{
+      this.p_special  = pharmacy.p_special
+    } 
+    this.p_loc = pharmacy.p_loc
+    this.p_post = pharmacy.p_post
+    this.p_x = pharmacy.p_x
+    this.p_y = pharmacy.p_y
   },
 }
 </script>

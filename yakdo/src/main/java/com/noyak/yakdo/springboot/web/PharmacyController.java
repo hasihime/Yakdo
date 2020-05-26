@@ -23,7 +23,7 @@ public class PharmacyController {
 
     private final PharmacyService pService;
 
-    @GetMapping("/getPharmacyDetail/{p_id}")
+    @GetMapping("/pharmacy/{p_id}")
     public ResponseEntity<Map<String, Object>> findPharmacyById(@PathVariable int p_id) {
         log.trace("findPharmacyById: {}", p_id);
         Map<String, Object> resultMap = new HashMap<>();

@@ -21,13 +21,16 @@
     <div id="list" >
         <div>
             <h3>영업시간</h3>
-                🕛 00:00 ~ 00:00
-            연중무휴 등등
+                🕛 {{p_oper}}
         </div>
         <div>
             <h3>전화번호</h3>
-            📞 060-2423-2323
+            📞 {{p_tel}}
             <v-btn small color="primary">전화걸기</v-btn>
+        </div>
+        <div v-if="p_special.length">
+            <h3>특이사항</h3>
+             {{p_special}}
         </div>
 
     </div>
@@ -36,7 +39,20 @@
 
 <script>
 export default {
-
+    props: {
+        p_tel : {
+            type: String,
+            default: () => "",
+        },
+        p_oper: {
+            type: String,
+            default: () => "",
+        },
+        p_special: {
+            type: String,
+            default: () => "",
+        }
+    }
 }
 </script>
 
