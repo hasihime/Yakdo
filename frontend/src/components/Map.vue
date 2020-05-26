@@ -8,7 +8,11 @@
             <span @click="zoomOut"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
             </div>
         </div>
-        <div style="text-align:left;">📍 상세주소</div>
+        <div style="text-align:left;">
+            📍 상세주소
+            <v-btn style="margin-left:5px;" small color="primary">길찾기</v-btn>
+            <p style="padding:8px">제주특별시 서귀포구 ~</p>
+        </div>
       </v-container>
   </v-card>
 </template>
