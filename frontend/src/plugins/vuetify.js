@@ -1,46 +1,29 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
-import colors from 'vuetify/lib/util/colors'
+// import colors from 'vuetify/lib/util/colors'
 
-Vue.use(Vuetify, {
+Vue.use(Vuetify);
+
+const opts = {
     theme: {
-        // themes: {
-        //     light: {
-                primary: colors.purple,
-                secondary: colors.grey.darken1,
+        light: true,
+        themes: {
+            light: {
+                primary: 'red',
+                secondary: 'blue',
                 accent: '',
                 error: '',
                 info: '',
                 success: '',
                 warning: '',
-            // },
-            // dark: {
-
-            // }
-        // }
+            },
+            dark: {
+                primary: 'gray',
+                secondary: 'red'
+            }
+        }
     }
-})
-
-const opts = {
-    // theme: {
-    //     // light: true,
-    //     themes: {
-    //         light: {
-    //             primary: 'red',
-    //             secondary: 'blue',
-    //             accent: '',
-    //             error: '',
-    //             info: '',
-    //             success: '',
-    //             warning: '',
-    //         },
-    //         dark: {
-    //             // primary: 'gray',
-    //             // secondary: 'red'
-    //         }
-    //     }
-    // }
 }
 
 export default new Vuetify(opts)

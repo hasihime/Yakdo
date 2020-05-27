@@ -1,59 +1,58 @@
 <template>
-    <div>
-        <!-- 카카오맵 -->
-        <div id="map" style="height:100vh;"></div>
-        <!-- 상단바는 맵 위로 올라가야한다 -->
-
-        <v-btn class="menu-btn" v-if="responsive" icon @click.stop="onClickOpener">
-            메뉴버튼
-            <v-icon>mdi-view-list</v-icon>
-        </v-btn>
-
-        <div class="search-bar">
-            <input id=text type="text" class='input_text' name="search" onkeydown="enterSearch()"/>
-            <v-btn class="search-btn" icon @click.stop="clickSearch()">
-                검색
-                <v-icon>mdi-view-list</v-icon>
-            </v-btn>
+    <div class="z-index-structure">
+            <toolbar />
+            <drawer />
+        <div id="notice" @click="fold">
+            <span style="font-weight:bold">클릭 ▼</span>
+            <div id="contents" style="display:none;padding:5px">
+                이 페이지에 필요한 기능
+                <ol>
+                    <li>현재 위치 다시 부르기 버튼과 함수</li>
+                    <li>메뉴 보이기 버튼</li>
+                    <li>검색창과 검색된 리스트 화면에 띄우기</li>
+                    <li></li>
+                </ol>
+            </div>
         </div>
-
-        <!-- https://apis.map.kakao.com/web/sample/moveMap/ -->
-        <v-btn class="pos-btn" icon @click.stop="panTo()">
-            현위치
-            <v-icon>mdi-view-list</v-icon>
-        </v-btn>
-
-        <div class="notice-bar">
-            <!--안내 메시지 -->
-            (예시) 가장 가까운 약국은 500m 떨어진 XX 약국이며, 운영종료시간은 22시입니다.
-            <br>
-            (예시) 반경 1km 내에 열린 약국이 없습니다.
+        <br>
+        <br>
+        <!-- 검색결과가 반영되는 Main Map -->
+        <div id="map" class="z-fixed-map"/>
+        <!-- Modal -->
+        <div id="openModal" class="modal" v-show='menutoggle'>
+            <div class="modal__content">
+                <a href="#" class="close" @click='menutoggle = !menutoggle'>+</a>
+                <b>MEOW MEOW MEOW</b>
+                <div class="label" id="searchBar">
+                    <span class="center">검색창</span>
+                </div>
+            </div>
         </div>
-
-        <!-- 네비게이션바는 기본적으로 감춰져있어야한다 -->
-        <navbar></navbar>
-        <!--  -->
+        <!-- Menu Button -->
+        <div class="menu-btn">
+            <button @click='menutoggle = !menutoggle'> Menu </button>
+        </div>
     </div>
 </template>
 
 <script>
-    import Navbar from "@/components/main/Navbar";
-    import {mapState, mapActions, mapMutations} from "vuex";
+    import Drawer from "@/components/main/Drawer";
+    import Toolbar from "@/components/main/Toolbar";
+    import {mapState, mapActions} from "vuex";
 
     export default {
         components: {
-            Navbar,
+            Drawer,
+            Toolbar
         },
         data() {
             return {
-                responsive: false,
                 menutoggle : false,
                 centerlat: 0,
                 centerlng: 0,
             };
         },
         computed: {
-            ...mapState("navbar", ["isOpen"]),
             ...mapState({
                 mylat: function () {
                     return this.$store.state.map.mylat;
@@ -71,17 +70,10 @@
         },
         mounted() { // child 인 Home 의 mounted가 끝나고 => 상위 mounted 실행
             console.log("Home vue mounted");
-
-            this.onResponsiveInverted();
-            window.addEventListener("resize", this.onResponsiveInverted);
-
             this.getMyPos();
             window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
             this.centerlat = this.mylat;
             this.centerlng = this.mylng;
-        },
-        beforeDestroy() {
-            window.removeEventListener("resize", this.onResponsiveInverted);
         },
         methods: {
             ...mapActions("map", ["getMyPos"]),
@@ -130,28 +122,74 @@
                     con.style.display = "none";
                 }
             },
-            /* 햄버거 버튼 */
-            ...mapMutations("navbar", ["setOpen"]),
-            onClickOpener() {
-                this.setOpen(!this.isOpen);
-            },
-            onResponsiveInverted() {
-                if (window.innerWidth < 900) {
-                    this.responsive = true;
-                } else {
-                    this.responsive = false;
-                }
-            },
         },
     };
 </script>
 <style scoped>
+    .z-index-structure{
+        height:100%;
+    }
+
+    .z-fixed-map {
+        height:500px;
+    }
+
+    .modal {
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.2);
+        transition: opacity 300ms ease-in-out;
+    }
+    :target {
+         display: block;
+    }
+
+    .modal__content {  /* modal content*/
+         position: absolute;
+         width: 100%;
+         max-width: 240px;
+         margin: 20px auto;
+         padding: 20px;
+         background-color: #ffffff;
+         top: 45%;
+         left: 50%;
+         border-radius: 20px;
+         box-shadow: 0 0 10px rgba(0,0,0,0.25);
+         transform: translateX(-50%) translateY(-50%);
+         pointer-events: auto;
+    }
+
+    img {
+        width: 140px;
+    }
+
+    .close {
+        display: block;
+        position: absolute;
+        top: -26px;
+        right: 3px;
+        padding: 40px 5px;
+        font-size: 60px;
+        line-height: 23px;
+        color: rgba(0,0,0,0.75);
+        transform: rotate(45deg);
+        cursor: pointer;
+        transition: all 50ms ease-in-out;
+    }
+
+    :hover {
+        color: rgba(0,0,0,0.25);
+    }
 
     .menu-btn {
         position: fixed;
-        z-index: 3;
-        top: 2%;
-        left : 5%;
+        z-index: 5;
+        top: 5%;
+        right: -15px;
         padding: 15px 30px;
         border-radius: 10px;
         background-color: magenta;
@@ -159,51 +197,16 @@
         box-shadow: 0 -3px 7px rgba(0,0,0,0.3);
     }
 
-    .search-bar {
-        position: fixed;
-        z-index: 3;
-        top: 2%;
-        left: 15%;
+
+    .label .center {
+        padding: 10px;
+    }
+
+    .label * {
+        background-color: antiquewhite;
         display: inline-block;
-        width: 60%;
-        height: 36px;
-        border: 3px solid #200400;
-        background: white;
+        vertical-align: top;
     }
 
-    .search-btn {
-        position: fixed;
-        z-index: 3;
-        top: 2%;
-        right : 5%;
-        padding: 15px 30px;
-        border-radius: 10px;
-        background-color: magenta;
-        color: #ffffff;
-        box-shadow: 0 -3px 7px rgba(0,0,0,0.3);
-    }
-
-    .pos-btn {
-        position: fixed;
-        z-index: 3;
-        top: 2%;
-        right : 15%;
-        padding: 15px 30px;
-        border-radius: 10px;
-        background-color: magenta;
-        color: #ffffff;
-        box-shadow: 0 -3px 7px rgba(0,0,0,0.3);
-    }
-
-    .notice-bar {
-        position: fixed;
-        z-index: 3;
-        top: 8%;
-        left: 5%;
-        display: inline-block;
-        width: 90%;
-        height: 50px;
-        background: white;
-    }
 
 </style>

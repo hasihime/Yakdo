@@ -1,13 +1,13 @@
 import { set, toggle } from "@/utils/vuex";
 
 const state = {
-    drawer: null
+    isOpen: null
 };
 
 // mutations
 const mutations = {
-    setDrawer: set("drawer"),
-    toggleDrawer: toggle("drawer")
+    setOpen: set("isOpen"),
+    toggleOpen: toggle("isOpen")
 };
 
 export default {
