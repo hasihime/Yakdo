@@ -45,6 +45,9 @@ export const actions = {
                 // console.log(response.data.info)
                 commit('setPharmacy', response.data.info)
             })
+            .catch(() => {
+                console.log("받아오기 실패")
+            })
         // dispatch()
     }
 }

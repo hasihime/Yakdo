@@ -23,7 +23,7 @@
             <h3>영업시간</h3>
                 🕛 {{p_oper}}
         </div>
-        <div>
+        <div v-if="p_tel.length">
             <h3>전화번호</h3>
             📞 {{p_tel}}
             <v-btn small color="primary">전화걸기</v-btn>
