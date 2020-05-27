@@ -20,6 +20,9 @@
           />
         </div>
       <div v-if="reviews.length == 0" class="store_not_review">리뷰가 없습니다.</div> -->
+    <v-btn style="position:fixed;right:20px;bottom:20px;" class="mx-2 primary" fab dark>
+      <v-icon>mdi-pencil</v-icon>
+    </v-btn>
   </v-card>
 </template>
 
