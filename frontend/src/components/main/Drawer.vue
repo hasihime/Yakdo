@@ -45,11 +45,6 @@
                     icon: "mdi-home",
                     text: "Home"
                 },
-                {
-                    to: "/search",
-                    icon: "mdi-card-search",
-                    text: "지역 검색"
-                },
             ]
         }),
         computed: {

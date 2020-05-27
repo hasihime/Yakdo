@@ -1,5 +1,7 @@
 <template>
-    <div>
+    <div class="z-index-structure">
+            <toolbar />
+            <drawer />
         <div id="notice" @click="fold">
             <span style="font-weight:bold">클릭 ▼</span>
             <div id="contents" style="display:none;padding:5px">
@@ -8,21 +10,41 @@
                     <li>현재 위치 다시 부르기 버튼과 함수</li>
                     <li>메뉴 보이기 버튼</li>
                     <li>검색창과 검색된 리스트 화면에 띄우기</li>
+                    <li></li>
                 </ol>
             </div>
         </div>
         <br>
-        <div id="map" style="height: 500px"/>
+        <br>
+        <!-- 검색결과가 반영되는 Main Map -->
+        <div id="map" class="z-fixed-map"/>
+        <!-- Modal -->
+        <div id="openModal" class="modal" v-show='menutoggle'>
+            <div class="modal__content">
+                <a href="#" class="close" @click='menutoggle = !menutoggle'>+</a>
+                <b>MEOW MEOW MEOW</b>
+                <div class="label" id="searchBar">
+                    <span class="center">검색창</span>
+                </div>
+            </div>
+        </div>
+        <!-- Menu Button -->
+        <div class="menu-btn">
+            <button @click='menutoggle = !menutoggle'> Menu </button>
+        </div>
     </div>
-
 </template>
 
 <script>
-
+    import Drawer from "@/components/main/Drawer";
+    import Toolbar from "@/components/main/Toolbar";
     import {mapState, mapActions} from "vuex";
 
     export default {
-        components: {},
+        components: {
+            Drawer,
+            Toolbar
+        },
         data() {
             return {
                 menutoggle : false,
@@ -40,12 +62,14 @@
                 },
             }),
         },
-        created() {
+        created() { // 상위 App created => 하위 child created
+            console.log("Home vue created");
             this.getMyPos();
             // console.log("this.mylat : ", this.mylat);
             // console.log("this.mylng : ", this.mylng);
         },
-        mounted() {
+        mounted() { // child 인 Home 의 mounted가 끝나고 => 상위 mounted 실행
+            console.log("Home vue mounted");
             this.getMyPos();
             window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
             this.centerlat = this.mylat;
@@ -80,36 +104,6 @@
                 var wincss = document.getElementById("infowindow");
                 wincss.parentNode.style.position = "";
 
-                /* 커스텀 오버레이 버튼 */
-
-                // 1. 메뉴 버튼
-                var menuBtn = '<div class="label" >' +
-                    '<button class="center" @click="menutoggle = !menutoggle">메뉴 버튼</button>' +
-                    '</div>';
-                // 메뉴 버튼이 표시될 위치
-                var position = new kakao.maps.LatLng(this.mylat + 0.0001, this.mylng + 0.0007);
-                // 메뉴 버튼의 오버레이 생성
-                var customOverlay = new kakao.maps.CustomOverlay({
-                    position: position,
-                    content: menuBtn
-                });
-                // 커스텀 오버레이를 지도에 표시
-                customOverlay.setMap(map);
-
-                // 2. 검색창
-                var searchBar = '<div v-show="menutoggle" class="label" id="searchBar">' +
-                    '<span class="center">검색창</span>' +
-                    '</div>';
-                // 검색창이 표시될 위치
-                position = new kakao.maps.LatLng(this.mylat + 0.002, this.mylng);
-                // 검색창의 오버레이 생성
-                customOverlay = new kakao.maps.CustomOverlay({
-                    position: position,
-                    content: searchBar
-                });
-                // 커스텀 오버레이를 지도에 표시
-                customOverlay.setMap(map);
-
             },
             addScript() {
                 const script = document.createElement("script");
@@ -128,19 +122,81 @@
                     con.style.display = "none";
                 }
             },
-            menufold() {
-                console.log("클릭");
-                var con = document.getElementById("searchBar");
-                if (con.style.display == "none") {
-                    con.style.display = "block";
-                } else {
-                    con.style.display = "none";
-                }
-            },
         },
     };
 </script>
-<style>
+<style scoped>
+    .z-index-structure{
+        height:100%;
+    }
+
+    .z-fixed-map {
+        height:500px;
+    }
+
+    .modal {
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.2);
+        transition: opacity 300ms ease-in-out;
+    }
+    :target {
+         display: block;
+    }
+
+    .modal__content {  /* modal content*/
+         position: absolute;
+         width: 100%;
+         max-width: 240px;
+         margin: 20px auto;
+         padding: 20px;
+         background-color: #ffffff;
+         top: 45%;
+         left: 50%;
+         border-radius: 20px;
+         box-shadow: 0 0 10px rgba(0,0,0,0.25);
+         transform: translateX(-50%) translateY(-50%);
+         pointer-events: auto;
+    }
+
+    img {
+        width: 140px;
+    }
+
+    .close {
+        display: block;
+        position: absolute;
+        top: -26px;
+        right: 3px;
+        padding: 40px 5px;
+        font-size: 60px;
+        line-height: 23px;
+        color: rgba(0,0,0,0.75);
+        transform: rotate(45deg);
+        cursor: pointer;
+        transition: all 50ms ease-in-out;
+    }
+
+    :hover {
+        color: rgba(0,0,0,0.25);
+    }
+
+    .menu-btn {
+        position: fixed;
+        z-index: 5;
+        top: 5%;
+        right: -15px;
+        padding: 15px 30px;
+        border-radius: 10px;
+        background-color: magenta;
+        color: #ffffff;
+        box-shadow: 0 -3px 7px rgba(0,0,0,0.3);
+    }
+
 
     .label .center {
         padding: 10px;
@@ -152,8 +208,5 @@
         vertical-align: top;
     }
 
-    #searchBar {
-        display :none;
-    }
 
 </style>
