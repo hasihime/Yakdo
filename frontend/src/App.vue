@@ -1,10 +1,10 @@
 <template>
   <v-app id="app">
-    <!-- <toolbar />
-    <drawer /> -->
+    <!-- <drawer /> -->
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <route-view/>
+    <!-- <toolbar /> -->
   </v-app>
 </template>
 
@@ -29,13 +29,17 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: 'Jua', sans-serif !important; */
+  font-family: "Jua", Avenir, Helvetica, Arial, sans-serif !important;
+  // font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  background:rgb(239,247,238);
 }
 </style>
