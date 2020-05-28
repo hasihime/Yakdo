@@ -56,7 +56,7 @@ sequenceDiagram
 ```
 
 - 기능 5. 비로그인 ip 기반 댓글? 리뷰 기능
-- ![image-20200518135817526](image-20200518135817526.png)
+- ![20200518-image-135817526](20200518-image-135817526.png)
 
 ```mermaid
 sequenceDiagram
