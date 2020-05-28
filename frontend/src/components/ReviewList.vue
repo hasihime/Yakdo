@@ -91,15 +91,17 @@
 
 <script>
 import Review from "./Review" // 지승 : @/components가 안먹힘 왠지모르겠다.
-import {  mapActions  } from "vuex";
+// import {  mapActions  } from "vuex";
+import api from "../api"
+import axios from "axios"
 
 export default {
     data() {
         return {
             dialog: false,
-            r_writer: "작성자",   // 작성자(로그인:구글ID, 비로그인:IP)
-            r_pw: "1234",       // 비밀번호(비로그인)
-            r_content: "댓글입니다..",  // 댓글 내용
+            r_writer: "",   // 작성자(로그인:구글ID, 비로그인:IP)
+            r_pw: "",       // 비밀번호(비로그인)
+            r_content: "",  // 댓글 내용
             p_id: ""        // 약국 ID
         }
     },
@@ -107,7 +109,7 @@ export default {
         Review,
     },
     methods: {
-      ...mapActions("data", ["postReview"]),
+      // ...mapActions("data", ["postReview"]),
 
       async createReview() {
         console.log("writer:"+this.r_writer)
@@ -117,8 +119,8 @@ export default {
         // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         // 비밀번호 채워졌는지, 내용 채워졌는지 검사
         // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-        
-        await this.postReview({
+
+        await api.postReview({
           r_writer: this.r_writer,
           r_pw: this.r_pw,
           r_content: this.r_content,
@@ -131,11 +133,28 @@ export default {
         this.r_content = ""
         this.r_pw = ""
         alert("리뷰가 등록되었습니다.")
+      },
+      async getIP() {
+        var ip
+        await axios.get("http://ipinfo.io?token=86cc1c09262dd1")
+          .then(response => {
+            ip = response.data.ip;
+          })
+          .catch(() => {
+            console.log("실패")
+          })
+        console.log("ip:"+ip)
+        this.r_writer = ip
       }
     },
     mounted() {
       this.p_id = this.$route.params.id
       console.log("약국번호 : "+this.p_id)
+      // 로그인일 경우, this.r_writer는 구글 아이디
+      // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+      // 비로그인일 경우
+      this.getIP()
     },
 }
 </script>

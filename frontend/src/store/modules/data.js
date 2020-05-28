@@ -59,18 +59,20 @@ export const actions = {
             })
         // dispatch()
     },
-    postReview(review) {
-        console.log("store-data.js : reviewㅡㅡㅡㅡ")
-        console.log(review)
-        console.log("type:"+typeof(review))
-        api.postReview(review)
-            .then(response =>{
-                console.log(response.data)
-            })
-            .catch(() => {
-                console.log("리뷰 등록 실패")
-            })
-    }
+
+    // 안되는 코드! 따라하지마세유
+    // postReview(review) {
+    //     console.log("store-data.js : reviewㅡㅡㅡㅡ")
+    //     console.log(review)
+    //     console.log("type:"+typeof(review))
+    //     api.postReview(review)
+    //         .then(response =>{
+    //             console.log(response.data)
+    //         })
+    //         .catch(() => {
+    //             console.log("리뷰 등록 실패")
+    //         })
+    // }
 }
 
 // 각 Components의 계산된 속성(computed)의 공통 사용 정의
