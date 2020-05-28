@@ -1,7 +1,5 @@
 <template>
     <div class="z-index-structure">
-            <toolbar />
-            <drawer />
         <div id="notice" @click="fold">
             <span style="font-weight:bold">클릭 ▼</span>
             <div id="contents" style="display:none;padding:5px">
@@ -36,14 +34,10 @@
 </template>
 
 <script>
-    import Drawer from "@/components/main/Drawer";
-    import Toolbar from "@/components/main/Toolbar";
     import {mapState, mapActions} from "vuex";
 
     export default {
         components: {
-            Drawer,
-            Toolbar
         },
         data() {
             return {

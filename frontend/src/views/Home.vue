@@ -18,7 +18,9 @@
         </div>
 
         <!-- https://apis.map.kakao.com/web/sample/moveMap/ -->
-        <v-btn class="pos-btn" icon @click.stop="panTo()">
+        <v-btn class="pos-btn"
+               icon
+               @click.stop="panTo()">
             현위치
             <v-icon>mdi-view-list</v-icon>
         </v-btn>
@@ -50,6 +52,7 @@
                 menutoggle : false,
                 centerlat: 0,
                 centerlng: 0,
+                kmap:null,
             };
         },
         computed: {
@@ -94,12 +97,13 @@
                     level: 3,
                 };
                 var map = new kakao.maps.Map(container, options);
+                this.setMap(map);
                 // 마커 추가시 객체 추가
                 var marker = new kakao.maps.Marker({
-                    position: map.getCenter(),
+                    position: this.kmap.getCenter(),
                     title: "현위치",
                 });
-                marker.setMap(map);
+                marker.setMap(this.kmap);
 
                 var here = new kakao.maps.InfoWindow({
                     zIndex: 1,
@@ -107,11 +111,14 @@
                         '<div id="infowindow" style="padding:5px;font-size:12px;text-align:center;" onclick="this.parentNode.parentNode.style.display=\'none\';">현위치</div>',
                 });
 
-                here.open(map, marker);
+                here.open(this.kmap, marker);
 
                 var wincss = document.getElementById("infowindow");
                 wincss.parentNode.style.position = "";
 
+            },
+            setMap(map) {
+                this.kmap = map;
             },
             addScript() {
                 const script = document.createElement("script");
@@ -122,14 +129,23 @@
 
                 document.head.appendChild(script);
             },
-            fold() {
-                var con = document.getElementById("contents");
-                if (con.style.display == "none") {
-                    con.style.display = "block";
-                } else {
-                    con.style.display = "none";
-                }
+            panTo() {
+                // 이동할 위도 경도 위치를 생성합니다
+                var moveLatLon = new kakao.maps.LatLng(this.mylat, this.mylng);
+
+                // 지도 중심을 부드럽게 이동시킵니다
+                // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+                this.kmap.panTo(moveLatLon);
             },
+
+
+
+
+
+
+
+
+
             /* 햄버거 버튼 */
             ...mapMutations("navbar", ["setOpen"]),
             onClickOpener() {

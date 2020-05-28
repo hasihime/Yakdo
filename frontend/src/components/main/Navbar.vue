@@ -6,7 +6,7 @@
             dark
             floating
             persistent
-            mobile-break-point="900"
+            mobile-break-point="3000"
             width="250"
     >
         <h1 style="width:100%;">
