@@ -6,9 +6,11 @@
             dark
             floating
             persistent
-            mobile-break-point="3000"
+            mobile-break-point="10000"
             width="250"
     >
+        <!-- pc 화면에서 메뉴 버튼이 사라지는 버그 mobile-break-point와 연관있음 -->
+
         <h1 style="width:100%;">
             <div style="
               text-align:center;

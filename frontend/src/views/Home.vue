@@ -9,13 +9,18 @@
             <v-icon>mdi-view-list</v-icon>
         </v-btn>
 
-        <div class="search-bar">
-            <input id=text type="text" class='input_text' name="search" onkeydown="enterSearch()"/>
-            <v-btn class="search-btn" icon @click.stop="clickSearch()">
-                검색
-                <v-icon>mdi-view-list</v-icon>
-            </v-btn>
-        </div>
+        <input id=text
+               type="text"
+               class='search-bar'
+               name="search"
+               v-on:keyup.enter="submit"
+               placeholder="검색을 원하는 주소를 입력해주세요"
+        />
+
+        <v-btn class="search-btn" icon @click.stop="doSearch()">
+            검색
+            <v-icon>mdi-view-list</v-icon>
+        </v-btn>
 
         <!-- https://apis.map.kakao.com/web/sample/moveMap/ -->
         <v-btn class="pos-btn"
@@ -31,6 +36,8 @@
             <br>
             (예시) 반경 1km 내에 열린 약국이 없습니다.
         </div>
+
+
 
         <!-- 네비게이션바는 기본적으로 감춰져있어야한다 -->
         <navbar></navbar>
@@ -49,10 +56,10 @@
         data() {
             return {
                 responsive: false,
-                menutoggle : false,
+                menutoggle: false,
                 centerlat: 0,
                 centerlng: 0,
-                kmap:null,
+                kmap: null,
             };
         },
         computed: {
@@ -137,13 +144,19 @@
                 // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
                 this.kmap.panTo(moveLatLon);
             },
+            submit() {
+                console.log("enter 입력");
+                this.doSearch();
+            },
+            doSearch() {
+                console.log("doSearch");
+                // axios로 현위치와 시간을 전송하고
 
+                // 돌려받은 약국 리스트를 보여주는 방식 => 3개씩 슬라이드 방식?
 
+                //
 
-
-
-
-
+            },
 
 
             /* 햄버거 버튼 */
@@ -152,7 +165,7 @@
                 this.setOpen(!this.isOpen);
             },
             onResponsiveInverted() {
-                if (window.innerWidth < 900) {
+                if (window.innerWidth < 10000) {
                     this.responsive = true;
                 } else {
                     this.responsive = false;
@@ -167,12 +180,12 @@
         position: fixed;
         z-index: 3;
         top: 2%;
-        left : 5%;
+        left: 5%;
         padding: 15px 30px;
         border-radius: 10px;
         background-color: magenta;
         color: #ffffff;
-        box-shadow: 0 -3px 7px rgba(0,0,0,0.3);
+        box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.3);
     }
 
     .search-bar {
@@ -184,31 +197,34 @@
         width: 60%;
         height: 36px;
         border: 3px solid #200400;
+        border-radius: 25px;
         background: white;
+        padding-left: 15px;
+        padding-right: 15px;
     }
 
     .search-btn {
         position: fixed;
         z-index: 3;
         top: 2%;
-        right : 5%;
+        right: 15%;
         padding: 15px 30px;
         border-radius: 10px;
         background-color: magenta;
         color: #ffffff;
-        box-shadow: 0 -3px 7px rgba(0,0,0,0.3);
+        box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.3);
     }
 
     .pos-btn {
         position: fixed;
         z-index: 3;
         top: 2%;
-        right : 15%;
+        right: 5%;
         padding: 15px 30px;
         border-radius: 10px;
         background-color: magenta;
         color: #ffffff;
-        box-shadow: 0 -3px 7px rgba(0,0,0,0.3);
+        box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.3);
     }
 
     .notice-bar {

@@ -17,7 +17,7 @@
     // import { mapState, mapActions } from "vuex";
     // import axios from "axios";
     export default {
-        data: function() {
+        data: function () {
             return {
                 count: 0,
                 score: 0,
@@ -57,7 +57,8 @@
             //     .catch(() => {});
             // // console.log("axios완료");
         },
-        beforeDestroy() {},
+        beforeDestroy() {
+        },
         methods: {
             showDetailPage() {
                 this.$router.push(`/pharmacy/${this.id}`);

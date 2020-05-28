@@ -13,28 +13,29 @@
                     class="pa-5"
                     dark
             >
-                <slot v-if="!title && !text" name="header" />
+                <slot v-if="!title && !text" name="header"/>
                 <span v-else>
-          <p class="headline" v-text="title" />
+          <p class="headline" v-text="title"/>
         </span>
             </v-card>
-            <slot v-else name="offset" />
+            <slot v-else name="offset"/>
         </offset>
 
         <v-card-text>
-            <slot />
+            <slot/>
         </v-card-text>
 
-        <v-divider v-if="$slots.actions" class="mx-3" />
+        <v-divider v-if="$slots.actions" class="mx-3"/>
 
         <v-card-actions v-if="$slots.actions">
-            <slot name="actions" />
+            <slot name="actions"/>
         </v-card-actions>
     </v-card>
 </template>
 
 <script>
     import Offset from "@/components/main/Offset";
+
     export default {
         components: {
             Offset
