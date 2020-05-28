@@ -15,6 +15,15 @@ const state = {
         p_x: 0,
         p_y: 0,
     },
+    review: {
+        r_id: 0,
+        r_writer: "",   // 작성자(로그인:구글ID, 비로그인:IP)
+        r_pw: "",       // 비로그인시 패스워드
+        r_conetent: "", // 리뷰 내용
+        p_id: 0,        // 약국 id
+    },
+    reviews: {},
+    
 }
 
 // Mutations의 주요 목적은 state를 변경시키는 역할
@@ -49,6 +58,18 @@ export const actions = {
                 console.log("받아오기 실패")
             })
         // dispatch()
+    },
+    postReview(review) {
+        console.log("store-data.js : reviewㅡㅡㅡㅡ")
+        console.log(review)
+        console.log("type:"+typeof(review))
+        api.postReview(review)
+            .then(response =>{
+                console.log(response.data)
+            })
+            .catch(() => {
+                console.log("리뷰 등록 실패")
+            })
     }
 }
 

@@ -29,9 +29,9 @@ export default {
 //   getReviewUser(id) {
 //     return axios.get(`${apiUrl}/users/${id}`);
 //   },
-//   postStoreReview(params) {
-//     return axios.post(`${apiUrl}/reviews`, params);
-//   },
+  postReview(params) {
+    return axios.post(`${apiUrl}/review/create`, params);
+  },
 //   postStoreReviewImages(params) {
 //     return axios.post(`${apiUrl}/review_images`, params);
 //   },
