@@ -91,7 +91,6 @@
 
 <script>
 import Review from "./Review" // 지승 : @/components가 안먹힘 왠지모르겠다.
-// import {  mapActions  } from "vuex";
 import api from "../api"
 import axios from "axios"
 
@@ -109,8 +108,6 @@ export default {
         Review,
     },
     methods: {
-      // ...mapActions("data", ["postReview"]),
-
       async createReview() {
         console.log("writer:"+this.r_writer)
         console.log("pw:"+this.r_pw)
@@ -136,9 +133,9 @@ export default {
       },
       async getIP() {
         var ip
-        await axios.get("http://ipinfo.io?token=86cc1c09262dd1")
+        await axios.get("https://extreme-ip-lookup.com/json")
           .then(response => {
-            ip = response.data.ip;
+            ip = response.data.query;
           })
           .catch(() => {
             console.log("실패")
