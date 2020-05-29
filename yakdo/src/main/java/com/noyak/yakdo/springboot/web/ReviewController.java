@@ -1,6 +1,5 @@
 package com.noyak.yakdo.springboot.web;
 
-import com.noyak.yakdo.springboot.domain.review.Review;
 import com.noyak.yakdo.springboot.result.LongResult;
 import com.noyak.yakdo.springboot.service.ReviewService;
 import com.noyak.yakdo.springboot.web.dto.review.ReviewModifyRequestDto;
@@ -12,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

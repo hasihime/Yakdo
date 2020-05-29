@@ -1,6 +1,5 @@
 package com.noyak.yakdo.springboot.domain.review;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.noyak.yakdo.springboot.domain.BaseTimeEntity;
 import com.noyak.yakdo.springboot.domain.pharmacy.Pharmacy;
 import lombok.Builder;

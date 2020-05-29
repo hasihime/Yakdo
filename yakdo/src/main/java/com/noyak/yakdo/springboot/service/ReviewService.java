@@ -88,7 +88,7 @@ public class ReviewService {
     public ReviewResponseDto find(long r_id) {
         ReviewResponseDto  returnReview = null;
         try {
-            Review review = reviewRepository.findReviewByReviewId(r_id);
+            Review review = reviewRepository.findById(r_id).get();
             returnReview = ReviewResponseDto.builder()
                     .r_id(review.getR_id())
                     .r_writer(review.getR_writer())

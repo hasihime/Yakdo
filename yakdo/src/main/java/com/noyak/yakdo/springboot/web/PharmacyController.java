@@ -30,7 +30,6 @@ public class PharmacyController {
         HttpStatus status = null;
         try {
             PharmacyResponseDto pharmacy = pService.findById(p_id);
-
             resultMap.put("status", true);
             resultMap.put("info", pharmacy);
             status = HttpStatus.ACCEPTED;
