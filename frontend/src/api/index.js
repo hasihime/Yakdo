@@ -1,18 +1,36 @@
 import axios from "axios";
 
 // const apiUrl = "/api"; // root path
-const apiUrl = "http://localhost:8080"; // root path
-// const apiUrl = "http://i02a104.p.ssafy.io:8000/api"; // aws rest api
+// const apiUrl = "http://localhost:8080"; // root path
+const apiUrl = "/api"; // root path
+// const apiUrl = "http://k02a4051.p.ssafy.io:8000/api"; // aws rest api => http
+// const apiUrl = "http://k02a4051.p.ssafy.io:8443/api"; // aws rest api => https
+
 // var config = {
-//   headers: { "Access-Control-Allow-Origin": "*" },
+//     headers: { "Access-Control-Allow-Origin": "*" },
 // };
 
+
 export default {
-//   getStores(params) {
-//     return axios.get(`${apiUrl}/stores`, {
-//       params,
-//     });
-//   },
+  getPharmacy(params) {
+        return axios.get(`${apiUrl}/pharmacies`, {
+            params,
+            // errorHandle: false,
+        });
+
+        // axios
+        //   .get(`${apiUrl}/stores`, {
+        //     params,
+        //     errorHandle: false,
+        //   })
+        //   .then((response) => {
+        //     console.log(response);
+        //     return response;
+        //   })
+        //   .catch((error) => {
+        //     alert("검색 결과가 없습니다");
+        //   });
+    },
   getPharmacyDetail(id) {
     return axios.get(`${apiUrl}/pharmacy/${id}`);
   },
@@ -66,4 +84,4 @@ export default {
 //       params,
 //     });
 //   },
-};
+

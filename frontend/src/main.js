@@ -5,8 +5,12 @@ import store from './store'
 // import Vuetify from 'vuetify'
 // import 'vuetify/dist/vuetify.min.css'
 import vuetify from '@/plugins/vuetify'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
-// Vue.use(Vuetify)
+import infiniteScroll from "vue-infinite-scroll"
+Vue.use(infiniteScroll);
+import store from "./store";
+
 // Vue.config.productionTip = false
 
 new Vue({
@@ -14,5 +18,6 @@ new Vue({
     store,
     router,
     vuetify,
+    store,
     render:h => h(App)
 }).$mount('#app')
