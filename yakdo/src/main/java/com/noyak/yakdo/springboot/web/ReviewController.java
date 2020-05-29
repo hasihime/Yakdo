@@ -1,5 +1,6 @@
 package com.noyak.yakdo.springboot.web;
 
+import com.noyak.yakdo.springboot.result.BoolResult;
 import com.noyak.yakdo.springboot.result.LongResult;
 import com.noyak.yakdo.springboot.service.ReviewService;
 import com.noyak.yakdo.springboot.web.dto.review.ReviewModifyRequestDto;
@@ -89,18 +90,18 @@ public class ReviewController {
     public ResponseEntity<Object> deleteReview(@RequestBody ReviewSaveRequestDto requestDto) {
         log.trace("review: {}", requestDto);
         Long r_id = reviewService.findReviewId((requestDto.getP_id()));
-        LongResult lr = null;
+        BoolResult br = null;
         try {
             boolean result = reviewService.remove(requestDto);
             if(result) {
-                lr = new LongResult("deleteReview", r_id, "SUCCESS");
+                br = new BoolResult(true,"deleteReview", "SUCCESS");
             } else {
-                lr = new LongResult("deleteReview", -1, "FAIL");
+                br = new BoolResult(false, "deleteReview", "FAIL");
             }
         } catch (RuntimeException e) {
             log.error("deleteReview", e);
             throw e;
         }
-        return new ResponseEntity<Object>(lr, HttpStatus.OK);
+        return new ResponseEntity<Object>(br, HttpStatus.OK);
     }
 }
