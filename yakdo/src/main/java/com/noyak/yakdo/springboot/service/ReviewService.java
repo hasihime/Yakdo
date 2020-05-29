@@ -67,8 +67,6 @@ public class ReviewService {
 
         Optional<Pharmacy> pharmacy = pharmacyRepository.findById(p_id);
         Pharmacy pharm = pharmacy.get(); // 약국 찾기
-        System.out.println(pharm.toString());
-
         try {
             reviews = reviewRepository.findByPharmacy(pharm);
             System.out.println(reviews.toString());
@@ -85,6 +83,22 @@ public class ReviewService {
             throw e;
         }
         return returnReviews;
+    }
+
+    public ReviewResponseDto find(long r_id) {
+        ReviewResponseDto  returnReview = null;
+        try {
+            Review review = reviewRepository.findReviewByReviewId(r_id);
+            returnReview = ReviewResponseDto.builder()
+                    .r_id(review.getR_id())
+                    .r_writer(review.getR_writer())
+                    .r_content(review.getR_content())
+                    .build();
+        } catch (RuntimeException e) {
+            logger.error("리뷰 조회 실패");
+            throw e;
+        }
+        return returnReview;
     }
 
     // 리뷰 수정

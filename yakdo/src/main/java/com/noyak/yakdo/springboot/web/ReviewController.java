@@ -24,15 +24,27 @@ import java.util.List;
 public class ReviewController {
     private final ReviewService reviewService;
 
+    @GetMapping("/find/{r_id}")
+    public ReviewResponseDto findReview(@PathVariable long r_id) {
+        ReviewResponseDto review = null;
+        try {
+            review = reviewService.find(r_id);
+        } catch (RuntimeException e) {
+            log.error("findReview", e);
+            throw e;
+        }
+        return review;
+    }
+
     @GetMapping("/all/{p_id}")
-    public List<ReviewResponseDto> selectAllReview(@PathVariable int p_id) {
+    public List<ReviewResponseDto> findAllReview(@PathVariable int p_id) {
         List<ReviewResponseDto> reviews = null;
         System.out.println("약국 : "+p_id);
         try {
             // 각 약국마다 조회
             reviews = reviewService.all(p_id);
         } catch (RuntimeException e) {
-            log.error("selectAllReview", e);
+            log.error("findAllReview", e);
             throw e;
         }
         return reviews;
