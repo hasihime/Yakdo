@@ -40,4 +40,8 @@ public class Review extends BaseTimeEntity { // 만들어졌을때, 업데이트
         this.r_content = r_content;
         this.p_id = p_id;
     }
+
+    public void update(String r_content) {
+        this.r_content = r_content;
+    }
 }
