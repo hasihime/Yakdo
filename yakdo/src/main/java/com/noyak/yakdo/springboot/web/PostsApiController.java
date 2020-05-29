@@ -1,6 +1,6 @@
 package com.noyak.yakdo.springboot.web;
 
-import com.noyak.yakdo.springboot.service.posts.PostsService;
+import com.noyak.yakdo.springboot.service.PostsService;
 import com.noyak.yakdo.springboot.web.dto.PostsListResponseDto;
 import com.noyak.yakdo.springboot.web.dto.PostsResponseDto;
 import com.noyak.yakdo.springboot.web.dto.PostsSaveRequestDto;

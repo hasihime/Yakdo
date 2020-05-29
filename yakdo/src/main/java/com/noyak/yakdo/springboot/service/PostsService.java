@@ -1,4 +1,4 @@
-package com.noyak.yakdo.springboot.service.posts;
+package com.noyak.yakdo.springboot.service;
 
 import com.noyak.yakdo.springboot.domain.posts.Posts;
 import com.noyak.yakdo.springboot.domain.posts.PostsRepository;

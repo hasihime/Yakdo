@@ -5,7 +5,7 @@ export default [
     name: "home"
   },
   {
-    path: "/pharmacy", // /:id
+    path: "/pharmacy/:id", // /:id
     view: "PharmacyDetail",
     name: "pharmacyDetail"
   },
