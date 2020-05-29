@@ -4,39 +4,106 @@
         <div id="map" style="height:100vh;"></div>
         <!-- 상단바는 맵 위로 올라가야한다 -->
 
-        <v-btn class="menu-btn" v-if="responsive" icon @click.stop="onClickOpener">
-            메뉴버튼
-            <v-icon>mdi-view-list</v-icon>
-        </v-btn>
+        <div class="menus">
+            <v-btn class="menu-btn" icon @click="onClickOpener">
+                <!--                <span class="mdi mdi-view-list"></span>-->
+                <v-icon>mdi-view-list</v-icon>
+            </v-btn>
 
-        <input id=text
-               type="text"
-               class='search-bar'
-               name="search"
-               v-on:keyup.enter="submit"
-               placeholder="검색을 원하는 주소를 입력해주세요"
-        />
+            <input id=text
+                   type="text"
+                   class='search-bar'
+                   name="search"
+                   v-on:keyup.enter="submit"
+                   placeholder="주소 검색을 지원합니다"
+            />
 
-        <v-btn class="search-btn" icon @click.stop="doSearch()">
-            검색
-            <v-icon>mdi-view-list</v-icon>
-        </v-btn>
+            <v-btn class="search-btn" icon @click.stop="doSearch()">
+                <v-icon>mdi-magnify</v-icon>
+            </v-btn>
 
-        <!-- https://apis.map.kakao.com/web/sample/moveMap/ -->
-        <v-btn class="pos-btn"
+            <!-- https://apis.map.kakao.com/web/sample/moveMap/ -->
+            <v-btn class="pos-btn"
+                   icon
+                   @click.stop="panTo()">
+
+                <v-icon>mdi-crosshairs-gps</v-icon>
+            </v-btn>
+
+        </div>
+<!--        <div class="notice-bar content-width">-->
+<!--            &lt;!&ndash;안내 메시지 &ndash;&gt;-->
+<!--            (예시) 가장 가까운 약국은 500m 떨어진 XX 약국이며, 운영종료시간은 22시입니다.-->
+<!--            <br>-->
+<!--            (예시) 반경 1km 내에 열린 약국이 없습니다.-->
+<!--        </div>-->
+
+
+        <v-btn class="left-btn"
                icon
                @click.stop="panTo()">
-            현위치
-            <v-icon>mdi-view-list</v-icon>
+            <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
 
-        <div class="notice-bar">
-            <!--안내 메시지 -->
-            (예시) 가장 가까운 약국은 500m 떨어진 XX 약국이며, 운영종료시간은 22시입니다.
-            <br>
-            (예시) 반경 1km 내에 열린 약국이 없습니다.
+        <div class="yg-list yg1 content-width">
+            <span class="left-align">약국 1</span>
+            <span class="left-align">100m</span>
+            <!--                    {{ content 1 }}-->
+            <v-btn class="call-btn right-align"
+                   icon
+                   @click.stop="panTo()">
+                <!--                        {{ tel }}-->
+                <v-icon>mdi-phone</v-icon>
+            </v-btn>
+            <v-btn class="road-btn right-align"
+                   icon
+                   @click.stop="panTo()">
+                <!--                        {{ address }}-->
+                <v-icon>mdi-map-search</v-icon>
+            </v-btn>
         </div>
 
+        <div class="yg-list yg2 content-width">
+            <span class="left-align">약국 1</span>
+            <span class="left-align">100m</span>
+            <!--                    {{ content 1 }}-->
+            <v-btn class="call-btn right-align"
+                   icon
+                   @click.stop="panTo()">
+                <!--                        {{ tel }}-->
+                <v-icon>mdi-phone</v-icon>
+            </v-btn>
+            <v-btn class="road-btn right-align"
+                   icon
+                   @click.stop="panTo()">
+                <!--                        {{ address }}-->
+                <v-icon>mdi-map-search</v-icon>
+            </v-btn>
+        </div>
+
+        <div class="yg-list yg3 content-width">
+            <span class="left-align">약국 1</span>
+            <span class="left-align">100m</span>
+            <!--                    {{ content 1 }}-->
+            <v-btn class="call-btn right-align"
+                   icon
+                   @click.stop="panTo()">
+                <!--                        {{ tel }}-->
+                <v-icon>mdi-phone</v-icon>
+            </v-btn>
+            <v-btn class="road-btn right-align"
+                   icon
+                   @click.stop="panTo()">
+                <!--                        {{ address }}-->
+                <v-icon>mdi-map-search</v-icon>
+            </v-btn>
+        </div>
+
+        <v-btn class="right-btn"
+               icon
+               @click.stop="panTo()">
+            <v-icon>mdi-chevron-right</v-icon>
+        </v-btn>
 
 
         <!-- 네비게이션바는 기본적으로 감춰져있어야한다 -->
@@ -55,7 +122,6 @@
         },
         data() {
             return {
-                responsive: false,
                 menutoggle: false,
                 centerlat: 0,
                 centerlng: 0,
@@ -82,8 +148,8 @@
         mounted() { // child 인 Home 의 mounted가 끝나고 => 상위 mounted 실행
             console.log("Home vue mounted");
 
-            this.onResponsiveInverted();
-            window.addEventListener("resize", this.onResponsiveInverted);
+            // this.onResponsiveInverted();
+            // window.addEventListener("resize", this.onResponsiveInverted);
 
             this.getMyPos();
             window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
@@ -91,7 +157,7 @@
             this.centerlng = this.mylng;
         },
         beforeDestroy() {
-            window.removeEventListener("resize", this.onResponsiveInverted);
+            // window.removeEventListener("resize", this.onResponsiveInverted);
         },
         methods: {
             ...mapActions("map", ["getMyPos"]),
@@ -145,97 +211,157 @@
                 this.kmap.panTo(moveLatLon);
             },
             submit() {
-                console.log("enter 입력");
-                this.doSearch();
+                // console.log("enter 입력");
+                // console.log(document.getElementsByName("search")[0].value)
+                var searchText = document.getElementsByName("search")[0].value;
+                if(searchText != null && searchText != "") {
+                    this.doSearch();
+                }
             },
             doSearch() {
                 console.log("doSearch");
                 // axios로 현위치와 시간을 전송하고
 
-                // 돌려받은 약국 리스트를 보여주는 방식 => 3개씩 슬라이드 방식?
+                // 돌려받은 약국 리스트를 보여주는 방식 => 3개씩 슬라이드 방식 완성 ㅇㅇㅇ
 
                 //
 
             },
-
-
             /* 햄버거 버튼 */
             ...mapMutations("navbar", ["setOpen"]),
             onClickOpener() {
                 this.setOpen(!this.isOpen);
             },
-            onResponsiveInverted() {
-                if (window.innerWidth < 10000) {
-                    this.responsive = true;
-                } else {
-                    this.responsive = false;
-                }
-            },
+            // onResponsiveInverted() {
+            //     if (window.innerWidth < 10000) {
+            //         this.responsive = true;
+            //     } else {
+            //         this.responsive = false;
+            //     }
+            // },
         },
     };
 </script>
 <style scoped>
 
-    .menu-btn {
+    .menus {
         position: fixed;
         z-index: 3;
         top: 2%;
         left: 5%;
-        padding: 15px 30px;
+        width: 90%;
+        height: 50px;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .menu-btn {
+        display: inline-block;
+        float: left;
+        /*padding: 15px 30px;*/
         border-radius: 10px;
-        background-color: magenta;
-        color: #ffffff;
+        background-color: white;
+        color: black;
         box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.3);
     }
 
     .search-bar {
-        position: fixed;
-        z-index: 3;
-        top: 2%;
-        left: 15%;
         display: inline-block;
-        width: 60%;
+        float: left;
+        width: calc(100% - 108px);
+        /* 버튼 3개 * 각 36px */
         height: 36px;
         border: 3px solid #200400;
-        border-radius: 25px;
+        border-radius: 10px;
         background: white;
         padding-left: 15px;
         padding-right: 15px;
     }
 
     .search-btn {
-        position: fixed;
-        z-index: 3;
-        top: 2%;
-        right: 15%;
-        padding: 15px 30px;
+        display: inline-block;
+        float: left;
         border-radius: 10px;
-        background-color: magenta;
         color: #ffffff;
+        background-color: white;
         box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.3);
     }
 
     .pos-btn {
-        position: fixed;
-        z-index: 3;
-        top: 2%;
-        right: 5%;
-        padding: 15px 30px;
+        display: inline-block;
+        float: left;
         border-radius: 10px;
-        background-color: magenta;
         color: #ffffff;
-        box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.3);
+        background-color: white;
+        box-shadow: 0 -3px 7px rgba(0, 0, 0.3, 0.1);
     }
 
     .notice-bar {
         position: fixed;
         z-index: 3;
         top: 8%;
-        left: 5%;
         display: inline-block;
-        width: 90%;
         height: 50px;
         background: white;
     }
+
+    .content-width {
+        left: 14%;
+        width: 72%;
+    }
+
+    .left-align {
+        float: left;
+        padding-left:10px;
+        padding-top:10px;
+    }
+
+    .right-align {
+        float: right;
+    }
+
+
+    .yg-list{
+        position: fixed;
+        z-index: 3;
+        display: inline-block;
+        border-radius: 10px;
+        height :42px;
+        background: white;
+        box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.3);
+    }
+
+    .yg1 {
+        bottom: 17%;
+    }
+    .yg2 {
+        bottom: 10%;
+    }
+    .yg3 {
+        bottom: 3%;
+    }
+
+    .left-btn {
+        position: fixed;
+        z-index: 3;
+        bottom: 10%;
+        left: 3%;
+        border-radius: 10px;
+        background-color: white;
+        color: #ffffff;
+        box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.3);
+    }
+
+    .right-btn {
+        position: fixed;
+        z-index: 3;
+        bottom: 10%;
+        right: 3%;
+        border-radius: 10px;
+        background-color: white;
+        color: #ffffff;
+        box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.3);
+    }
+
 
 </style>
