@@ -44,4 +44,8 @@ public class Review extends BaseTimeEntity { // 만들어졌을때, 업데이트
     public void update(String r_content) {
         this.r_content = r_content;
     }
+
+    public void delete() {
+
+    }
 }

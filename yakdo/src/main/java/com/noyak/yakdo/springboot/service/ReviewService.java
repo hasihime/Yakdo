@@ -4,6 +4,7 @@ import com.noyak.yakdo.springboot.domain.pharmacy.Pharmacy;
 import com.noyak.yakdo.springboot.domain.pharmacy.PharmacyRepository;
 import com.noyak.yakdo.springboot.domain.review.Review;
 import com.noyak.yakdo.springboot.domain.review.ReviewRepository;
+import com.noyak.yakdo.springboot.web.dto.review.ReviewDeleteRequestDto;
 import com.noyak.yakdo.springboot.web.dto.review.ReviewModifyRequestDto;
 import com.noyak.yakdo.springboot.web.dto.review.ReviewResponseDto;
 import com.noyak.yakdo.springboot.web.dto.review.ReviewSaveRequestDto;
@@ -69,7 +70,6 @@ public class ReviewService {
         Pharmacy pharm = pharmacy.get(); // 약국 찾기
         try {
             reviews = reviewRepository.findByPharmacy(pharm);
-            System.out.println(reviews.toString());
             for (Review review : reviews) {
                 ReviewResponseDto newReview = ReviewResponseDto.builder()
                         .r_id(review.getR_id())
@@ -103,11 +103,10 @@ public class ReviewService {
 
     // 리뷰 수정
     @Transactional
-    public boolean modify(long id, ReviewModifyRequestDto requestDto) {
-        Long r_id = 0l;
+    public boolean modify(ReviewModifyRequestDto requestDto) {
         System.out.println(requestDto.toString());
         try {
-            Review review = reviewRepository.findById(id).get();
+            Review review = reviewRepository.findById(requestDto.getR_id()).get();
             // 비밀번호 일치 여부 판단
             if(requestDto.getR_pw().equals(review.getR_pw())) {
                 review.update(requestDto.getR_content());
@@ -122,19 +121,21 @@ public class ReviewService {
     }
 
     @Transactional
-    public boolean remove(ReviewSaveRequestDto requestDto) {
+    public boolean remove(ReviewDeleteRequestDto requestDto) {
         Long r_id = 0l;
         System.out.println(requestDto.toString());
 
         try {
-            Pharmacy pharm = pharmacyRepository.findById(requestDto.getP_id()).get();
-            r_id = reviewRepository.findReviewById(pharm);
+//            Pharmacy pharm = pharmacyRepository.findById(requestDto.getP_id()).get();
+//            r_id = reviewRepository.findReviewById(pharm);
             // 기존 리뷰 찾기
-            Review review = reviewRepository.findById(r_id).get();
+            Review review = reviewRepository.findById(requestDto.getR_id()).get();
             // 패스워드 일치 여부
             if(requestDto.getR_pw().equals(review.getR_pw())) {
-                reviewRepository.delete(review);
+                System.out.println("비밀번호 같음ㅋ");
+                reviewRepository.deleteById(review.getR_id());
             } else {
+                System.out.println("불일치 : "+requestDto.getR_pw()+ " "+review.getR_pw());
                 return false;
             }
         } catch (RuntimeException e) {

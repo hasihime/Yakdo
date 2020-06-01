@@ -1,32 +1,22 @@
 <template>
   <v-card id="review" style="padding:20px">
     <h3>N개의 리뷰</h3>
-
-    <Review></Review>
-    <Review></Review>
-    <Review></Review>
-    <!-- <div v-for="review in reviews"
-        :key="review.revew_no">
+    <div v-for="review in this.$store.state.data.reviews"
+        :key="review.r_id">
         <Review
-          :profile="review.profile"
-          :nickname="review.nickname"
-          :regdate="review.reg_date"
-          :before="review.before"
-          :contents="review.contents"
-          :score="review.score"
-          :store_name="store_name"
-          :store_address="store_address"
-          :images="review.images"
+          :r_id="review.r_id"
+          :r_content="review.r_content"
+          :r_writer="review.r_writer"
         />
-      </div>
-    <div v-if="reviews.length == 0" class="store_not_review">리뷰가 없습니다.</div> -->
+    </div>
+    <div v-if="this.$store.state.data.reviews.length == 0" class="store_not_review">리뷰가 없습니다.</div>
     <v-dialog
       v-model="dialog"
       width="500"
     >
       <template v-slot:activator="{ on }">
         <v-btn v-on="on" style="position:fixed;right:20px;bottom:20px;" class="mx-2 primary" fab dark>
-          <v-icon>mdi-pencil</v-icon>
+          <v-icon>mdi-plus</v-icon>
         </v-btn>
       </template>
 
@@ -58,6 +48,7 @@
             <v-text-field
               outlined
               v-model="r_pw"
+              type="password"
             />
           </div>
         </div>
@@ -93,6 +84,7 @@
 import Review from "./Review" // 지승 : @/components가 안먹힘 왠지모르겠다.
 import api from "../api"
 import axios from "axios"
+import {  mapActions , mapState } from "vuex";
 
 export default {
     data() {
@@ -107,15 +99,25 @@ export default {
     components: {
         Review,
     },
+    computed: {
+      ...mapState({
+        reviews : state => state.data.reviews,
+      }),
+    },
     methods: {
+      ...mapActions("data", ["getReviews"]),
       async createReview() {
         console.log("writer:"+this.r_writer)
         console.log("pw:"+this.r_pw)
         console.log("content:"+this.r_content)
 
-        // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-        // 비밀번호 채워졌는지, 내용 채워졌는지 검사
-        // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        if(this.r_content == "" || this.r_content == null) {
+          alert("내용을 입력해주세요.")
+          return false
+        } else if(this.r_pw == "" || this.r_pw == null) {
+          alert("비밀번호를 입력해주세요.")
+          return false
+        }
 
         await api.postReview({
           r_writer: this.r_writer,
@@ -130,6 +132,8 @@ export default {
         this.r_content = ""
         this.r_pw = ""
         alert("리뷰가 등록되었습니다.")
+
+        this.getReviews(this.$route.params.id)
       },
       async getIP() {
         var ip
@@ -141,12 +145,12 @@ export default {
             console.log("실패")
           })
         console.log("ip:"+ip)
-        this.r_writer = ip
+        this.r_writer = ip.split('.')[0] + '.' + ip.split('.')[1] + ".*.*"
       }
     },
     mounted() {
+      this.getReviews(this.$route.params.id)
       this.p_id = this.$route.params.id
-      console.log("약국번호 : "+this.p_id)
       // 로그인일 경우, this.r_writer는 구글 아이디
       // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

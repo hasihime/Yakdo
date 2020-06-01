@@ -3,6 +3,7 @@ package com.noyak.yakdo.springboot.web;
 import com.noyak.yakdo.springboot.domain.review.Review;
 import com.noyak.yakdo.springboot.result.LongResult;
 import com.noyak.yakdo.springboot.service.ReviewService;
+import com.noyak.yakdo.springboot.web.dto.review.ReviewDeleteRequestDto;
 import com.noyak.yakdo.springboot.web.dto.review.ReviewModifyRequestDto;
 import com.noyak.yakdo.springboot.web.dto.review.ReviewResponseDto;
 import com.noyak.yakdo.springboot.web.dto.review.ReviewSaveRequestDto;
@@ -69,15 +70,15 @@ public class ReviewController {
         return new ResponseEntity<Object>(lr, HttpStatus.OK);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Object> updateReview(@PathVariable Long id, @RequestBody ReviewModifyRequestDto requestDto) {
+    @PutMapping("/update")
+    public ResponseEntity<Object> updateReview(@RequestBody ReviewModifyRequestDto requestDto) {
         log.trace("review: {}", requestDto);
         LongResult lr = null;
         try {
-            boolean result = reviewService.modify(id, requestDto);
+            boolean result = reviewService.modify(requestDto);
             if(result) {
 //                Long r_id = reviewService.findReviewId(id);
-                lr = new LongResult("updateReview", id, "SUCCESS");
+                lr = new LongResult("updateReview", requestDto.getR_id(), "SUCCESS");
             } else {
                 lr = new LongResult("updateReview", -1, "FAIL");
             }
@@ -89,10 +90,13 @@ public class ReviewController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Object> deleteReview(@RequestBody ReviewSaveRequestDto requestDto) {
+    public ResponseEntity<Object> deleteReview(@RequestBody ReviewDeleteRequestDto requestDto) {
+        System.out.println(requestDto.toString());
+        System.out.println("controller");
         log.trace("review: {}", requestDto);
-        Long r_id = reviewService.findReviewId((requestDto.getP_id()));
+
         LongResult lr = null;
+        Long r_id = requestDto.getR_id();
         try {
             boolean result = reviewService.remove(requestDto);
             if(result) {

@@ -26,7 +26,7 @@
       centered
       grow
       elevation="0"
-    >
+    > <!-- class = "fixed-tabs-bar" -->
       <v-tab style="margin:0px">상세정보</v-tab>
       <v-tab>지도</v-tab>
       <v-tab>리뷰</v-tab>

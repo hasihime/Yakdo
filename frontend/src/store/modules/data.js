@@ -53,6 +53,20 @@ export const mutations = {
             
             state.pharmacy.p_special = p_special
         }
+
+        // 위치정보 가공 
+        if(state.pharmacy.p_loc.length) {
+            var locArr = pharmacy.p_loc.split(":")
+        // 공백제거, ]제거
+            var loc_blank = locArr[1],
+                loc = loc_blank.replace(' ',''),
+                p_loc = loc.replace(']','')
+            
+                state.pharmacy.p_loc = p_loc
+        }
+    },
+    setReviews(state, reviews) {
+        state.reviews = reviews
     }
 }
 
@@ -77,7 +91,15 @@ export const actions = {
             })
         // dispatch()
     },
-
+    getReviews({commit}, id) {
+        api.getReviews(id)
+            .then(response => {
+                commit('setReviews', response.data)
+            })
+            .catch(() => {
+                console.log("리뷰 불러오기 실패")
+            })
+    }
     // 안되는 코드! 따라하지마세유
     // postReview(review) {
     //     console.log("store-data.js : reviewㅡㅡㅡㅡ")
