@@ -110,8 +110,17 @@ $ sudo certbot --nginx -d k02a4051.p.ssafy.io
     making regular backups of this folder is ideal.
 ```
 
+
 완료가 되면 nginx를 재시작 해준다.
 
 ```bash
 $ sudo systemctl restart nginx
 ```
+2-3 방화벽 설정
+
+https 포트인 443 port를 열어주자.
+```bash
+$ sudo firewall-cmd --add-port 443/tcp --permanent
+$ sudo firewall-cmd --reload
+```
+https://www.ssllabs.com/ssltest
