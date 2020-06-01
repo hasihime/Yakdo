@@ -43,61 +43,69 @@ $ sudo certbot --nginx -d k02a4051.p.ssafy.io
 
 이후 나오는 화면에서 본인 이메일 입력
 
-> Saving debug log to /var/log/letsencrypt/letsencrypt.log
-> Plugins selected: Authenticator nginx, Installer nginx
-> Enter email address (used for urgent renewal and security notices) (Enter 'c' to cancel)
+```
+ Saving debug log to /var/log/letsencrypt/letsencrypt.log
+ Plugins selected: Authenticator nginx, Installer nginx
+ Enter email address (used for urgent renewal and security notices) (Enter 'c' to cancel)
+```
 
 다음을 화면에서  A 입력
 
-> - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-> Please read the Terms of Service at
-> https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf. You must 
-> agree in order to register with the ACME server at
-> https://acme-v02.api.letsencrypt.org/directory
-> - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-> (A)gree/(C)ancel:
+```
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ Please read the Terms of Service at
+ https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf. You must 
+ agree in order to register with the ACME server at
+ https://acme-v02.api.letsencrypt.org/directory
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ (A)gree/(C)ancel:
+```
 
 다음화면에서 Y 입력
 
-> - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-> Would you be willing to share your email address with the Electronic Frontier
-> Foundation, a founding partner of the Let's Encrypt project and the non-profit
-> organization that develops Certbot? We'd like to send you email about our work
-> encrypting the web, EFF news, campaigns, and ways to support digital freedom.
-> - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-> (Y)es/(N)o:
+```
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ Would you be willing to share your email address with the Electronic Frontier
+ Foundation, a founding partner of the Let's Encrypt project and the non-profit
+ organization that develops Certbot? We'd like to send you email about our work
+ encrypting the web, EFF news, campaigns, and ways to support digital freedom.
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ (Y)es/(N)o:
+```
 
 다음은 Http로 접근 했을 때 자동으로 https로 리다이렉트 할 수 있게 해주게 설정을 위해 2번을 클릭
-
-> Please choose whether or not to redirect HTTP traffic to HTTPS, removing HTTP access.
-> - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-> 1: No redirect - Make no further changes to the webserver configuration.
-> 2: Redirect - Make all requests redirect to secure HTTPS access. Choose this for
-> new sites, or if you're confident your site works on HTTPS. You can undo this
-> change by editing your web server's configuration.
-> - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-> Select the appropriate number [1-2] then [enter] (press 'c' to cancel): 
+```
+ Please choose whether or not to redirect HTTP traffic to HTTPS, removing HTTP access.
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 1: No redirect - Make no further changes to the webserver configuration.
+ 2: Redirect - Make all requests redirect to secure HTTPS access. Choose this for
+ new sites, or if you're confident your site works on HTTPS. You can undo this
+ change by editing your web server's configuration.
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ Select the appropriate number [1-2] then [enter] (press 'c' to cancel): 
+```
 
 성공적으로 완료 되면 다음과 같이 나온다.
-> - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -   
-> new certificate deployed with reload of nginx server; fullchain is
-> /etc/letsencrypt/live/k02a4051.p.ssafy.io/fullchain.pem
-> - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
->
-> - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-> ** DRY RUN: simulating 'certbot renew' close to cert expiry
-> **          (The test certificates below have not been saved.)
->
-> Congratulations, all renewals succeeded. The following certs have been renewed:
->   /etc/letsencrypt/live/k02a4051.p.ssafy.io/fullchain.pem (success)
-> ** DRY RUN: simulating 'certbot renew' close to cert expiry
-> **          (The test certificates above have not been saved.)
-> - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
->
-> IMPORTANT NOTES:
->  - Your account credentials have been saved in your Certbot
->    configuration directory at /etc/letsencrypt. You should make a
->    secure backup of this folder now. This configuration directory will
->    also contain certificates and private keys obtained by Certbot so
->    making regular backups of this folder is ideal.
+```
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -   
+ new certificate deployed with reload of nginx server; fullchain is
+ /etc/letsencrypt/live/k02a4051.p.ssafy.io/fullchain.pem
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ ** DRY RUN: simulating 'certbot renew' close to cert expiry
+ **          (The test certificates below have not been saved.)
+
+ Congratulations, all renewals succeeded. The following certs have been renewed:
+   /etc/letsencrypt/live/k02a4051.p.ssafy.io/fullchain.pem (success)
+ ** DRY RUN: simulating 'certbot renew' close to cert expiry
+ **          (The test certificates above have not been saved.)
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ IMPORTANT NOTES:
+  - Your account credentials have been saved in your Certbot
+    configuration directory at /etc/letsencrypt. You should make a
+    secure backup of this folder now. This configuration directory will
+    also contain certificates and private keys obtained by Certbot so
+    making regular backups of this folder is ideal.
+```
