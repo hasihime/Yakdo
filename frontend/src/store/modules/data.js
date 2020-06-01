@@ -35,6 +35,24 @@ const state = {
 export const mutations = {
     setPharmacy(state, pharmacy) {
         state.pharmacy = pharmacy
+
+        // 카테고리 가공
+        if(state.pharmacy.p_status.includes("연중")) { // "연중"
+            state.pharmacy.p_status = "연중무휴"
+        }else if(state.pharmacy.p_status.includes(".")) { // "연.야"
+            state.pharmacy.p_status = "연중무휴,야간"
+        }
+
+        // 길이가 0보다 큰경우
+        if(state.pharmacy.p_special.length) {
+            var specialArr = state.pharmacy.p_special.split(":")
+        // 공백제거, ]제거
+            var special_blank = specialArr[1],
+                special = special_blank.replace(' ',''),
+                p_special = special.replace(']','')
+            
+            state.pharmacy.p_special = p_special
+        }
     }
 }
 
