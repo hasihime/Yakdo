@@ -109,3 +109,9 @@ $ sudo certbot --nginx -d k02a4051.p.ssafy.io
     also contain certificates and private keys obtained by Certbot so
     making regular backups of this folder is ideal.
 ```
+
+완료가 되면 nginx를 재시작 해준다.
+
+```bash
+$ sudo systemctl restart nginx
+```
