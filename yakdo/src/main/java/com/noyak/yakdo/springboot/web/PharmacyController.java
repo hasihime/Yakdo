@@ -1,6 +1,7 @@
 package com.noyak.yakdo.springboot.web;
 
 import com.noyak.yakdo.springboot.service.PharmacyService;
+import com.noyak.yakdo.springboot.web.dto.pharmacy.PharmacyListResponseDto;
 import com.noyak.yakdo.springboot.web.dto.pharmacy.PharmacyResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,10 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
-
 @RequiredArgsConstructor
 @Slf4j
 @CrossOrigin({"*"})
@@ -41,4 +42,10 @@ public class PharmacyController {
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
+
+    @GetMapping("/pharmacy/list/p_x/{p_x}/p_y/{p_y}")
+    public List<PharmacyListResponseDto> findListBy(@PathVariable double p_x, @PathVariable double p_y) {
+        return pService.findAllDesc(p_x, p_y);
+    }
 }
+
