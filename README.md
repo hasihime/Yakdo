@@ -20,3 +20,19 @@
 1. Intellij - File - Open - frontend
 2. yarn install (Intellij에서 자동 실행)
 3. 그 외 frontend/README.md 참조
+
+## Server
+
+1. 기본 설정
+2. SSL 적용
+
+Let’s Encrypt를 이용해서 SSL을 적용해보자.
+
+2-1. certbot 설치
+
+```bash
+$ sudo add-apt-repository ppa:certbot/certbot
+$ sudo apt-get update
+$ sudo apt-get install python-certbot-nginx``
+```
+
