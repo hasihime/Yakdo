@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -44,11 +46,13 @@ public class PharmacyController {
     }
 
     @GetMapping("/pharmacy/list/p_x/{p_x}/p_y/{p_y}")
-    public List<PharmacyResponseDto> findListBy(@PathVariable double p_x, @PathVariable double p_y) {
-
-        return pService.findAllDesc(p_x, p_y);
+    public List<PharmacyResponseDto> findByPosition(@PathVariable double p_x, @PathVariable double p_y) {
+        return pService.findByPosition(p_x, p_y);
     }
 
-    // OK 성공
+    @GetMapping("/pharmacy/list/address/{address}/p_x/{p_x}/p_y/{p_y}")
+    public List<PharmacyResponseDto> findWithAddress(@PathVariable String address, @PathVariable double p_x, @PathVariable double p_y) {
+        return pService.findWithAddress(address, p_x, p_y);
+    }
 }
 
