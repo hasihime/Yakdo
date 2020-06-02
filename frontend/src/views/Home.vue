@@ -16,7 +16,7 @@
         class="search-bar"
         name="search"
         v-on:keyup.enter="submit"
-        placeholder="주소 검색을 지원합니다"
+        placeholder="도로명 주소 검색(강동구 or 올림픽로)"
       />
 
       <v-btn class="search-btn" icon @click.stop="doSearch()">
@@ -233,7 +233,7 @@ export default {
       if (searchText != null && searchText != "") {
         // this.doSearch();
         api
-          .searchPharmacy(searchText)
+          .findWithAddress(searchText, this.mylat, this.mylng)
           .then((result) => {
             console.log(result.data.length);
             this.maxIdx = result.data.length;
@@ -253,7 +253,7 @@ export default {
       console.log("autoSearch");
       // axios로 현위치를 전송하고
       api
-        .getPharmacy(lat, lng)
+        .findByPosition(lat, lng)
         .then((result) => {
           console.log(result.data);
           this.maxIdx = result.data.length;
@@ -274,12 +274,16 @@ export default {
         this.idx += 3;
       }
       //   console.log(this.idx);
+      // idx에 따라서 화면에 마커 뿌려주기
+      this.marking();
     },
     minusIdx() {
       if (this.idx >= 3) {
         this.idx -= 3;
       }
       //   console.log(this.idx);
+      // idx에 따라서 화면에 마커 뿌려주기
+      this.marking();
     },
     telephone(idx) {
       console.log(this.pharmacies[idx].p_tel);
@@ -287,7 +291,10 @@ export default {
       this.href = "`tel:${str}`";
       console.log("tel:" + str);
     },
-
+    marking() {
+      // 기존 마커를 지우고
+      // 현위치, idx, idx+1, idx+2 마커를 새로 만든다
+    },
     /* 햄버거 버튼 */
     ...mapMutations("navbar", ["setOpen"]),
     onClickOpener() {
@@ -329,6 +336,10 @@ export default {
   background: white;
   padding-left: 15px;
   padding-right: 15px;
+}
+
+::placeholder {
+  font-size: x-small;
 }
 
 .search-btn {

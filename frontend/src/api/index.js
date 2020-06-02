@@ -9,21 +9,13 @@ const apiUrl = "http://localhost:8080"; // root path
 // };
 
 export default {
-  getPharmacy(p_x, p_y) {
+  findByPosition(p_x, p_y) {
     return axios.get(`${apiUrl}/pharmacy/list/p_x/${p_x}/p_y/${p_y}`);
-
-    // axios
-    //   .get(`${apiUrl}/stores`, {
-    //     params,
-    //     errorHandle: false,
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //     return response;
-    //   })
-    //   .catch((error) => {
-    //     alert("검색 결과가 없습니다");
-    //   });
+  },
+  findWithAddress(addr, p_x, p_y) {
+    return axios.get(
+      `${apiUrl}/pharmacy/address/${addr}/list/p_x/${p_x}/p_y/${p_y}`
+    );
   },
   getPharmacyDetail(id) {
     return axios.get(`${apiUrl}/pharmacies/${id}`);
