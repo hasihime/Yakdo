@@ -1,6 +1,7 @@
 package com.noyak.yakdo.springboot.web.dto.pharmacy;
 
 import com.noyak.yakdo.springboot.domain.pharmacy.Pharmacy;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -41,5 +42,4 @@ public class PharmacyResponseDto {
     public String toString() {
         return "PharmacyResponseDto(p_id=" + this.getP_id() + ", p_name=" + this.getP_name() + ", p_addr=" + this.getP_addr() + ", p_tel=" + this.getP_tel() + ", p_oper=" + this.getP_oper() + ", p_status=" + this.getP_status() + ", p_special=" + this.getP_special() + ", p_loc=" + this.getP_loc() + ", p_post=" + this.getP_post() + ", p_x=" + this.getP_x() + ", p_y=" + this.getP_y() + ")";
     }
-    
 }
