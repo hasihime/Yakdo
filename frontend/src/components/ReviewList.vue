@@ -1,6 +1,6 @@
 <template>
   <v-card id="review" style="padding:20px">
-    <h3>N개의 리뷰</h3>
+    <h3>{{this.$store.state.data.reviews.length}}개의 리뷰</h3>
     <div v-for="review in this.$store.state.data.reviews"
         :key="review.r_id">
         <Review
@@ -107,10 +107,6 @@ export default {
     methods: {
       ...mapActions("data", ["getReviews"]),
       async createReview() {
-        console.log("writer:"+this.r_writer)
-        console.log("pw:"+this.r_pw)
-        console.log("content:"+this.r_content)
-
         if(this.r_content == "" || this.r_content == null) {
           alert("내용을 입력해주세요.")
           return false

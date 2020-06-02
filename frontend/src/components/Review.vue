@@ -8,7 +8,7 @@
       width="500"
     >
       <template v-slot:activator="{ on }">
-        <v-btn v-on="on" icon id="modify">
+        <v-btn v-on="on" icon id="modify" color="#D3D3D3">
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
       </template>
@@ -68,7 +68,7 @@
       width="500"
     >
       <template v-slot:activator="{ on }">
-        <v-btn v-on="on" icon id="delete">
+        <v-btn v-on="on" icon id="delete" color="#D3D3D3">
           <v-icon>mdi-delete</v-icon>
         </v-btn>
       </template>
@@ -199,7 +199,7 @@ export default {
       api.deleteReview({
         r_id:this.r_id,
         r_pw:this.newPw
-      })
+      }) 
         .then(response => {
           // 수정되면
           if(response.data.state=="SUCCESS") {
