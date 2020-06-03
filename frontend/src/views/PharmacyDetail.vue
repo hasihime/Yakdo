@@ -1,11 +1,14 @@
 <template>
   <v-container class="mt-5">
-    <v-card-text class="text-center" > <!-- v-if="store"-->
-    <p class="display-1 pa-2">💊</p>
-    <!-- <p id="title" class="accent--text">{{this.p_name}}</p> -->
-    <p id="title" class="accent--text">{{this.$store.state.data.pharmacy.p_name}}</p>
-    <!-- mapState 사용할때 -->
-    <!-- <p id="title" class="accent--text">{{pharmacy.p_name}}</p> -->
+    <v-card-text class="text-center">
+      <!-- v-if="store"-->
+      <p class="display-1 pa-2">💊</p>
+      <!-- <p id="title" class="accent--text">{{this.p_name}}</p> -->
+      <p id="title" class="accent--text">
+        {{ this.$store.state.data.pharmacy.p_name }}
+      </p>
+      <!-- mapState 사용할때 -->
+      <!-- <p id="title" class="accent--text">{{pharmacy.p_name}}</p> -->
     </v-card-text>
 
     <!-- v-if="p_status.length!= 0" -->
@@ -14,8 +17,10 @@
       class="ma-1"
       color="secondary"
       text-color="white"
-      v-for="category in (this.$store.state.data.pharmacy.p_status.split(','))" :key="category">
-      {{category}}
+      v-for="category in this.$store.state.data.pharmacy.p_status.split(',')"
+      :key="category"
+    >
+      {{ category }}
     </v-chip>
     <v-tabs
       style="margin-top: 20px;"
@@ -26,7 +31,8 @@
       centered
       grow
       elevation="0"
-    > <!-- class = "fixed-tabs-bar" -->
+    >
+      <!-- class = "fixed-tabs-bar" -->
       <v-tab style="margin:0px">상세정보</v-tab>
       <v-tab>지도</v-tab>
       <v-tab>리뷰</v-tab>
@@ -60,10 +66,10 @@
 </template>
 
 <script>
-import Map from "@/components/Map"
-import ReviewList from "@/components/ReviewList"
-import Information from "@/components/Information"
-import {  mapActions, mapState  } from "vuex";
+import Map from "@/components/Map";
+import ReviewList from "@/components/ReviewList";
+import Information from "@/components/Information";
+import { mapActions, mapState } from "vuex";
 
 export default {
   components: {
@@ -71,15 +77,13 @@ export default {
     Map,
     ReviewList,
   },
-  data: function () {
-    return {
-     
-    }
+  data: function() {
+    return {};
   },
   computed: {
     // mapState : state의 속성을 가져온다
     ...mapState({
-      pharmacy : state => state.data.pharmacy,
+      pharmacy: (state) => state.data.pharmacy,
     }),
     // // mapGetter : getters에 정의된 메서드를 가져온다
     // ...mapGetters('modulename', {
@@ -98,7 +102,7 @@ export default {
     // }
   },
   mounted() {
-    this.getPharmacyDetail(this.$route.params.id)
+    this.getPharmacyDetail(this.$route.params.id);
   },
 };
 </script>
