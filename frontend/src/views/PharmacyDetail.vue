@@ -120,7 +120,7 @@ export default {
       font-size: 60px;
     }
   }
-}
+
 
 @media screen and (max-width: 600px) {
   #title {
