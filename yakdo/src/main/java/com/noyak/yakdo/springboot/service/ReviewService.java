@@ -4,11 +4,16 @@ import com.noyak.yakdo.springboot.domain.pharmacy.Pharmacy;
 import com.noyak.yakdo.springboot.domain.pharmacy.PharmacyRepository;
 import com.noyak.yakdo.springboot.domain.review.Review;
 import com.noyak.yakdo.springboot.domain.review.ReviewRepository;
+import com.noyak.yakdo.springboot.web.dto.review.ReviewDeleteRequestDto;
+import com.noyak.yakdo.springboot.web.dto.review.ReviewModifyRequestDto;
+import com.noyak.yakdo.springboot.web.dto.review.ReviewResponseDto;
 import com.noyak.yakdo.springboot.web.dto.review.ReviewSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -54,5 +59,89 @@ public class ReviewService {
         Pharmacy pharm = pharmacyRepository.findById(p_id).get();
         r_id = reviewRepository.findReviewById(pharm);
         return r_id;
+    }
+
+//  리뷰 전체 조회
+    public List<ReviewResponseDto> all(int p_id) {
+        List<Review> reviews = null;
+        List<ReviewResponseDto> returnReviews = new ArrayList<>();
+
+        Optional<Pharmacy> pharmacy = pharmacyRepository.findById(p_id);
+        Pharmacy pharm = pharmacy.get(); // 약국 찾기
+        try {
+            reviews = reviewRepository.findByPharmacy(pharm);
+            for (Review review : reviews) {
+                ReviewResponseDto newReview = ReviewResponseDto.builder()
+                        .r_id(review.getR_id())
+                        .r_writer(review.getR_writer())
+                        .r_content(review.getR_content())
+                        .build();
+                returnReviews.add(newReview);
+            }
+        } catch (RuntimeException e) {
+            logger.error("리뷰 조회 실패");
+            throw e;
+        }
+        return returnReviews;
+    }
+
+    public ReviewResponseDto find(long r_id) {
+        ReviewResponseDto  returnReview = null;
+        try {
+            Review review = reviewRepository.findReviewByReviewId(r_id);
+            returnReview = ReviewResponseDto.builder()
+                    .r_id(review.getR_id())
+                    .r_writer(review.getR_writer())
+                    .r_content(review.getR_content())
+                    .build();
+        } catch (RuntimeException e) {
+            logger.error("리뷰 조회 실패");
+            throw e;
+        }
+        return returnReview;
+    }
+
+    // 리뷰 수정
+    @Transactional
+    public boolean modify(ReviewModifyRequestDto requestDto) {
+        System.out.println(requestDto.toString());
+        try {
+            Review review = reviewRepository.findById(requestDto.getR_id()).get();
+            // 비밀번호 일치 여부 판단
+            if(requestDto.getR_pw().equals(review.getR_pw())) {
+                review.update(requestDto.getR_content());
+            } else {
+                return false;
+            }
+        } catch (RuntimeException e) {
+            logger.error("리뷰 수정 실패");
+            throw e;
+        }
+        return true;
+    }
+
+    @Transactional
+    public boolean remove(ReviewDeleteRequestDto requestDto) {
+        Long r_id = 0l;
+        System.out.println(requestDto.toString());
+
+        try {
+//            Pharmacy pharm = pharmacyRepository.findById(requestDto.getP_id()).get();
+//            r_id = reviewRepository.findReviewById(pharm);
+            // 기존 리뷰 찾기
+            Review review = reviewRepository.findById(requestDto.getR_id()).get();
+            // 패스워드 일치 여부
+            if(requestDto.getR_pw().equals(review.getR_pw())) {
+                System.out.println("비밀번호 같음ㅋ");
+                reviewRepository.deleteById(review.getR_id());
+            } else {
+                System.out.println("불일치 : "+requestDto.getR_pw()+ " "+review.getR_pw());
+                return false;
+            }
+        } catch (RuntimeException e) {
+            logger.error("리뷰 삭제 실패");
+            throw e;
+        }
+        return true;
     }
 }
