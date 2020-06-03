@@ -1,4 +1,4 @@
-import api from "../../api"
+import api from "../../api";
 
 // initial state
 const state = {
@@ -15,6 +15,15 @@ const state = {
         p_x: 0,
         p_y: 0,
     },
+    review: {
+        r_id: 0,
+        r_writer: "",   // 작성자(로그인:구글ID, 비로그인:IP)
+        r_pw: "",       // 비로그인시 패스워드
+        r_conetent: "", // 리뷰 내용
+        p_id: 0,        // 약국 id
+    },
+    reviews: {},
+    
 }
 
 // Mutations의 주요 목적은 state를 변경시키는 역할
@@ -26,6 +35,38 @@ const state = {
 export const mutations = {
     setPharmacy(state, pharmacy) {
         state.pharmacy = pharmacy
+
+        // 카테고리 가공
+        if(state.pharmacy.p_status.includes("연중")) { // "연중"
+            state.pharmacy.p_status = "연중무휴"
+        }else if(state.pharmacy.p_status.includes(".")) { // "연.야"
+            state.pharmacy.p_status = "연중무휴,야간"
+        }
+
+        // 길이가 0보다 큰경우
+        if(state.pharmacy.p_special.length) {
+            var specialArr = state.pharmacy.p_special.split(":")
+        // 공백제거, ]제거
+            var special_blank = specialArr[1],
+                special = special_blank.replace(' ',''),
+                p_special = special.replace(']','')
+            
+            state.pharmacy.p_special = p_special
+        }
+
+        // 위치정보 가공 
+        if(state.pharmacy.p_loc.length) {
+            var locArr = pharmacy.p_loc.split(":")
+        // 공백제거, ]제거
+            var loc_blank = locArr[1],
+                loc = loc_blank.replace(' ',''),
+                p_loc = loc.replace(']','')
+            
+                state.pharmacy.p_loc = p_loc
+        }
+    },
+    setReviews(state, reviews) {
+        state.reviews = reviews
     }
 }
 
@@ -49,6 +90,15 @@ export const actions = {
                 console.log("받아오기 실패")
             })
         // dispatch()
+    },
+    getReviews({commit}, id) {
+        api.getReviews(id)
+            .then(response => {
+                commit('setReviews', response.data)
+            })
+            .catch(() => {
+                console.log("리뷰 불러오기 실패")
+            })
     }
 }
 
@@ -57,18 +107,19 @@ export const actions = {
 // Getters에 정의하여 공통으로 쉽게 사용할 수 있습니다.
 // 하위 모듈의 getters를 불러오기 위해서는
 // 특이하게 this.$store.getters["경로명/함수명"]; 을 사용해야 합니다.
-export const getters = {
-    // getPharmacy(state) {
-    //     return !!state.pharmacy // boolean return
-    // }
-    getPharmacy(state) {
-        return state.pharmacy
-    },
-}
+const getters = {
+  // getPharmacy(state) {
+  //     return !!state.pharmacy // boolean return
+  // }
+  getPharmacy(state) {
+    return state.pharmacy;
+  },
+};
 
 export default {
-    namespaced: true,
-    state,
-    actions,
-    mutations,
-}
+  namespaced: true,
+  state,
+  actions,
+  mutations,
+  getters,
+};

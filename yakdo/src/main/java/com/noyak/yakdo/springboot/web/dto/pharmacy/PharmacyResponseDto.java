@@ -1,6 +1,7 @@
 package com.noyak.yakdo.springboot.web.dto.pharmacy;
 
 import com.noyak.yakdo.springboot.domain.pharmacy.Pharmacy;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

@@ -26,7 +26,7 @@
         <div v-if="p_tel.length">
             <h3>전화번호</h3>
             📞 {{p_tel}}
-            <v-btn small color="primary">전화걸기</v-btn>
+            <a href="tel:`p_tel`"><v-btn small color="primary">전화걸기</v-btn></a>
         </div>
         <div v-if="p_special.length">
             <h3>특이사항</h3>
