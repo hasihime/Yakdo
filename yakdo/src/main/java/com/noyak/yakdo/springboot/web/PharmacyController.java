@@ -11,14 +11,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
-
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin({"*"})
+@CrossOrigin
 public class PharmacyController {
 
     private final PharmacyService pService;
@@ -41,4 +44,15 @@ public class PharmacyController {
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
+
+    @GetMapping("/pharmacy/list/p_x/{p_x}/p_y/{p_y}")
+    public List<PharmacyResponseDto> findByPosition(@PathVariable double p_x, @PathVariable double p_y) {
+        return pService.findByPosition(p_x, p_y);
+    }
+
+    @GetMapping("/pharmacy/list/address/{address}/p_x/{p_x}/p_y/{p_y}")
+    public List<PharmacyResponseDto> findWithAddress(@PathVariable String address, @PathVariable double p_x, @PathVariable double p_y) {
+        return pService.findWithAddress(address, p_x, p_y);
+    }
 }
+

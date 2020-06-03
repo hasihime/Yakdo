@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin({"*"})
+@CrossOrigin
 @RequestMapping("/review") // 앞에 공통으로 붙는 url
 public class ReviewController {
     private final ReviewService reviewService;
