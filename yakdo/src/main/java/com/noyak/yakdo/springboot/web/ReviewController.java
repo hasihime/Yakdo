@@ -17,10 +17,10 @@ import javax.xml.ws.Response;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins ="*", maxAge = 6000)
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin
 @RequestMapping("/review") // 앞에 공통으로 붙는 url
 public class ReviewController {
     private final ReviewService reviewService;
