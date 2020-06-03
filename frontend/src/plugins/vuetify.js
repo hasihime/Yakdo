@@ -1,34 +1,37 @@
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
-import '@mdi/font/css/materialdesignicons.css'
-// import colors from 'vuetify/lib/util/colors'
-import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
+import Vue from "vue";
+import Vuetify from "vuetify";
+import "vuetify/dist/vuetify.min.css";
+import "@mdi/font/css/materialdesignicons.css";
 
 Vue.use(Vuetify);
 
 const opts = {
-    icons : {
-        iconfont: 'mdi',
+  theme: {
+    // dark: true, // 다크모드
+    themes: {
+      light: {
+        primary: "#457b3e", // rgb(69, 123, 62)
+        secondary: "#70b366", // rgb(112,179,102)
+        accent: "black",
+        error: "",
+        info: "#fafafa",
+        success: "",
+        warning: "",
+      },
+      dark: {
+        primary: "#70b366", // rgb(69, 123, 62)
+        secondary: "#32572d", // rgb(112,179,102)
+        accent: "white",
+        error: "",
+        info: "#303030",
+        success: "",
+        warning: "",
+      },
     },
-    theme: {
-        light: true,
-        themes: {
-            light: {
-                primary: 'red',
-                secondary: 'blue',
-                accent: '',
-                error: '',
-                info: '',
-                success: '',
-                warning: '',
-            },
-            dark: {
-                primary: 'gray',
-                secondary: 'red'
-            }
-        }
-    },
-}
+  },
+  icons: {
+    iconfont: "mdi",
+  },
+};
 
-export default new Vuetify(opts)
+export default new Vuetify(opts);

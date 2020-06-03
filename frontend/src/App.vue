@@ -1,28 +1,31 @@
 <template>
-    <v-app id="app">
-        <route-view/>
-    </v-app>
+  <v-app id="app">
+    <route-view />
+  </v-app>
 </template>
 
 <script>
+import RouteView from "./components/RouteView";
 
-    import RouteView from "./components/RouteView"
-
-    export default {
-        name: 'app',
-        components: {
-            RouteView,
-        },
-        computed: {}
-    }
+export default {
+  name: "app",
+  components: {
+    RouteView,
+  },
+  computed: {},
+};
 </script>
 
-<style>
-    #app {
-        font-family: Avenir, Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #2c3e50;
-    }
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
+#app {
+  /* font-family: 'Jua', sans-serif !important; */
+  font-family: "Jua", Avenir, Helvetica, Arial, sans-serif !important;
+  // font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  background: rgb(239, 247, 238);
+}
 </style>
