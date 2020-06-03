@@ -5,7 +5,7 @@
     <!-- 상단바는 맵 위로 올라가야한다 -->
 
     <div class="menus">
-      <v-btn class="menu-btn" icon @click="onClickOpener">
+      <v-btn class="menu-btn" icon @click="onClickOpener" title="메뉴">
         <v-icon>mdi-view-list</v-icon>
       </v-btn>
 
@@ -18,7 +18,7 @@
         placeholder="도로명 주소 검색(강동구 or 올림픽로)"
       />
 
-      <v-btn class="search-btn" icon @click.stop="submit()">
+      <v-btn class="search-btn" icon @click.stop="submit()" title="검색">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
@@ -28,7 +28,7 @@
       </v-btn>
     </div>
 
-    <v-btn class="left-btn" icon @click.stop="minusIdx()">
+    <v-btn class="left-btn" icon @click.stop="minusIdx()" title="이전">
       <v-icon>mdi-chevron-left</v-icon>
     </v-btn>
 
@@ -38,18 +38,28 @@
         >{{ pharmacies[idx].distance }} m</span
       >
       <v-btn
+        title="전화"
         class="call-btn right-align"
         icon
-        @click="document.location.href = `tel:${pharmacies[idx + i].p_tel}`"
+        @click="telephone(idx)"
       >
         <v-icon>mdi-phone</v-icon>
       </v-btn>
       <v-btn
+        title="표시된 자리로 이동"
         class="road-btn right-align"
         icon
         @click.stop="panTo(pharmacies[idx].p_x, pharmacies[idx].p_y)"
       >
         <v-icon>mdi-map-search</v-icon>
+      </v-btn>
+      <v-btn
+        title="상세페이지 열기"
+        class="router-btn right-align"
+        icon
+        :to="'/pharmacy/' + pharmacies[idx].p_id"
+      >
+        <v-icon>mdi-dock-window</v-icon>
       </v-btn>
     </div>
 
@@ -58,15 +68,29 @@
       <span class="left-align" style="font-size : small; padding-top:14px;"
         >{{ pharmacies[idx + 1].distance }} m</span
       >
-      <v-btn class="call-btn right-align" icon @click="telephone(idx)">
+      <v-btn
+        title="전화"
+        class="call-btn right-align"
+        icon
+        @click="telephone(idx + 1)"
+      >
         <v-icon>mdi-phone</v-icon>
       </v-btn>
       <v-btn
+        title="표시된 자리로 이동"
         class="road-btn right-align"
         icon
         @click.stop="panTo(pharmacies[idx + 1].p_x, pharmacies[idx + 1].p_y)"
       >
         <v-icon>mdi-map-search</v-icon>
+      </v-btn>
+      <v-btn
+        title="상세페이지 열기"
+        class="router-btn right-align"
+        icon
+        :to="'/pharmacy/' + pharmacies[idx + 1].p_id"
+      >
+        <v-icon>mdi-dock-window</v-icon>
       </v-btn>
     </div>
 
@@ -75,19 +99,33 @@
       <span class="left-align" style="font-size : small; padding-top:14px;"
         >{{ pharmacies[idx + 2].distance }} m</span
       >
-      <v-btn class="call-btn right-align" icon @click="telephone(idx + 2)">
+      <v-btn
+        title="전화"
+        class="call-btn right-align"
+        icon
+        @click="telephone(idx + 2)"
+      >
         <v-icon>mdi-phone</v-icon>
       </v-btn>
       <v-btn
+        title="표시된 자리로 이동"
         class="road-btn right-align"
         icon
         @click.stop="panTo(pharmacies[idx + 2].p_x, pharmacies[idx + 2].p_y)"
       >
         <v-icon>mdi-map-search</v-icon>
       </v-btn>
+      <v-btn
+        title="상세페이지 열기"
+        class="router-btn right-align"
+        icon
+        :to="'/pharmacy/' + pharmacies[idx + 2].p_id"
+      >
+        <v-icon>mdi-dock-window</v-icon>
+      </v-btn>
     </div>
 
-    <v-btn class="right-btn" icon @click.stop="plusIdx()">
+    <v-btn class="right-btn" icon @click.stop="plusIdx()" title="이후">
       <v-icon>mdi-chevron-right</v-icon>
     </v-btn>
 

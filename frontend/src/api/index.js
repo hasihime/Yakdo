@@ -22,6 +22,6 @@ export default {
     );
   },
   getPharmacyDetail(id) {
-    return axios.get(`${apiUrl}/pharmacies/${id}`);
+    return axios.get(`${apiUrl}/pharmacy/${id}`);
   },
 };
