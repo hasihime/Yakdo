@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +35,7 @@ public class MypharmacyActivity extends AppCompatActivity {
     }
 
     public void testdelete(){
-        mDbOpenHelper.deleteAllColumns();
+        mDbOpenHelper.deleteAllColumns0();
     }
 
     public void testinsert(){
@@ -45,9 +46,9 @@ public class MypharmacyActivity extends AppCompatActivity {
 
     public void showList(){
         Cursor c = mDbOpenHelper.selectDrugs();
+        drugList = new LinkedList();
         if(c != null){
             if(c.moveToFirst()){
-                drugList = new LinkedList();
                 do {
 
                     //테이블에서 두개의 컬럼값을 가져와서
@@ -81,7 +82,11 @@ public class MypharmacyActivity extends AppCompatActivity {
         list.setAdapter(adapter);
     }
 
-    public void onClick(View view) {
+    public void goMain(View view) {
         finish();
+    }
+    public void goLog(View view) {
+        Intent intent = new Intent(this, LogActivity.class);
+        startActivity(intent);
     }
 }

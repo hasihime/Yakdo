@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+    android:id="@+id/mypharmacy"
+    android:layout_width="58dp"
+    android:layout_height="58dp"
+    android:onClick="onClick"
+    android:padding="0sp"
+    android:scaleType="centerCrop"
+    android:src="@drawable/mypharmacy"
+    app:layout_constraintStart_toStartOf="parent"
+    tools:ignore="MissingConstraints"></ImageButton>
+
+
+    <ImageButton
+        android:id="@+id/before"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:onClick="goBefore"
+        android:padding="0sp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/before"
+        android:background="#00ffffff"
+        app:layout_constraintStart_toEndOf="@+id/mypharmacy"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="0dp"></ImageButton>
+
+    <ImageButton
+        android:id="@+id/after"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginEnd="74dp"
+        android:layout_marginRight="74dp"
+        android:onClick="goAfter"
+        android:padding="0sp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/after"
+        android:background="#00ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="0dp"></ImageButton>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/mypharmacy"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
+        app:layout_constraintEnd_toStartOf="@+id/after"
+        app:layout_constraintStart_toEndOf="@+id/before"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

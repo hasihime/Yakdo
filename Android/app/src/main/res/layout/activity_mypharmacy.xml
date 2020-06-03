@@ -7,19 +7,45 @@
     android:layout_height="match_parent">
 
     <ImageButton
-        android:id="@+id/mypharmacy"
-        android:onClick="onClick"
-        android:padding="0sp"
-        android:scaleType="centerCrop"
+        android:id="@+id/main"
         android:layout_width="58dp"
         android:layout_height="58dp"
+        android:onClick="goMain"
+        android:padding="0sp"
+        android:scaleType="centerCrop"
         android:src="@drawable/mypharmacy"
-        tools:ignore="MissingConstraints">
-    </ImageButton>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"></ImageButton>
+
+    <ImageButton
+        android:id="@+id/log"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:onClick="goLog"
+        android:padding="0sp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/log"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"></ImageButton>
 
     <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="58dp"
+        android:text="나만의 약국"
+        android:textSize="45dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toStartOf="@+id/log"
+        app:layout_constraintStart_toEndOf="@+id/main"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
