@@ -24,4 +24,16 @@ export default {
   getPharmacyDetail(id) {
     return axios.get(`${apiUrl}/pharmacy/${id}`);
   },
+  getReviews(id) {
+    return axios.get(`${apiUrl}/review/all/${id}`);
+  },
+  postReview(params) {
+    return axios.post(`${apiUrl}/review/create`, params);
+  },
+  putReview(params) {
+    return axios.put(`${apiUrl}/review/update`, params)
+  },
+  deleteReview(params) {
+    return axios.delete(`${apiUrl}/review/delete`, {data: params})
+  }
 };
