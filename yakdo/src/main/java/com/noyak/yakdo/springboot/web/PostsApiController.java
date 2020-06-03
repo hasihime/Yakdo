@@ -12,6 +12,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin
 public class PostsApiController {
 
     private final PostsService postsService;
