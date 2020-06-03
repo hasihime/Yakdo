@@ -18,10 +18,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins ="*", maxAge = 6000)
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin
 public class PharmacyController {
 
     private final PharmacyService pService;
