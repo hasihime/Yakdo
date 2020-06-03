@@ -6,7 +6,6 @@
 
     <div class="menus">
       <v-btn class="menu-btn" icon @click="onClickOpener">
-        <!--                <span class="mdi mdi-view-list"></span>-->
         <v-icon>mdi-view-list</v-icon>
       </v-btn>
 
@@ -19,7 +18,7 @@
         placeholder="도로명 주소 검색(강동구 or 올림픽로)"
       />
 
-      <v-btn class="search-btn" icon @click.stop="doSearch()">
+      <v-btn class="search-btn" icon @click.stop="submit()">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
@@ -28,37 +27,10 @@
         <v-icon>mdi-crosshairs-gps</v-icon>
       </v-btn>
     </div>
-    <!--        <div class="notice-bar content-width">-->
-    <!--            &lt;!&ndash;안내 메시지 &ndash;&gt;-->
-    <!--            (예시) 가장 가까운 약국은 500m 떨어진 XX 약국이며, 운영종료시간은 22시입니다.-->
-    <!--            <br>-->
-    <!--            (예시) 반경 1km 내에 열린 약국이 없습니다.-->
-    <!--        </div>-->
 
     <v-btn class="left-btn" icon @click.stop="minusIdx()">
       <v-icon>mdi-chevron-left</v-icon>
     </v-btn>
-
-    <!-- <v-layout v-for="i in 3" :key="i">
-      <div class="yg content-width">
-        <span class="left-align">{{ pharmacies[idx + i].p_name }}</span>
-        <span class="left-align">{{ pharmacies[idx + i].distance }} m</span>
-        <v-btn
-          class="call-btn right-align"
-          icon
-          @click="document.location.href = `tel:${pharmacies[idx + i].p_tel}`"
-        >
-          <v-icon>mdi-phone</v-icon>
-        </v-btn>
-        <v-btn
-          class="road-btn right-align"
-          icon
-          @click.stop="panTo(pharmacies[idx + i].p_x, pharmacies[idx + i].p_y)"
-        >
-          <v-icon>mdi-map-search</v-icon>
-        </v-btn>
-      </div>
-    </v-layout> -->
 
     <div v-if="pharmacies[idx] != null" class="yg-list yg1 content-width">
       <span class="left-align">{{ pharmacies[idx].p_name }}</span>
@@ -161,51 +133,28 @@ export default {
     // console.log("this.mylat : ", this.mylat);
     // console.log("this.mylng : ", this.mylng);
   },
+  beforeMount() {
+    this.getMyPos();
+    console.log("Home vue before mounted");
+    window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
+  },
   mounted() {
     // child 인 Home 의 mounted가 끝나고 => 상위 mounted 실행
     console.log("Home vue mounted");
-
-    // this.onResponsiveInverted();
-    // window.addEventListener("resize", this.onResponsiveInverted);
-
-    this.getMyPos();
-    window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
-    this.autoSearch(this.mylat, this.mylng);
-  },
-  beforeDestroy() {
-    // window.removeEventListener("resize", this.onResponsiveInverted);
+    this.autoSearch();
   },
   methods: {
     ...mapActions("map", ["getMyPos"]),
     initMap() {
       var container = document.getElementById("map");
-      // console.log("state 기본 저장된 서울 시청 위치");
-      // console.log(this.mylat, this.mylng);
       var options = {
         center: new kakao.maps.LatLng(this.mylat, this.mylng),
         level: 4,
       };
       var map = new kakao.maps.Map(container, options);
-      this.setMap(map);
-      // 마커 추가시 객체 추가
-      var marker = new kakao.maps.Marker({
-        position: this.kmap.getCenter(),
-        title: "현위치",
-      });
-      marker.setMap(this.kmap);
-
-      var here = new kakao.maps.InfoWindow({
-        zIndex: 1,
-        content:
-          '<div id="infowindow" style="padding:5px;font-size:12px;text-align:center;" onclick="this.parentNode.parentNode.style.display=\'none\';">현위치</div>',
-      });
-
-      here.open(this.kmap, marker);
-
-      var wincss = document.getElementById("infowindow");
-      wincss.parentNode.style.position = "";
+      this.mapSetter(map);
     },
-    setMap(map) {
+    mapSetter(map) {
       this.kmap = map;
     },
     addScript() {
@@ -235,7 +184,7 @@ export default {
         api
           .findWithAddress(searchText, this.mylat, this.mylng)
           .then((result) => {
-            console.log(result.data.length);
+            // console.log(result.data.length);
             this.maxIdx = result.data.length;
             if (this.maxIdx == 0) {
               alert("반경 3km 내에 열린 약국이 없습니다");
@@ -246,16 +195,20 @@ export default {
           .catch((err) => {
             console.log(err);
             alert("검색 결과가 없습니다");
-          });
+          })
+          .finally(() => this.marking());
       }
     },
-    autoSearch(lat, lng) {
-      console.log("autoSearch");
+    autoSearch() {
+      this.getMyPos();
+      var lat = this.mylat;
+      var lng = this.mylng;
+      //   console.log("autoSearch");
       // axios로 현위치를 전송하고
       api
         .findByPosition(lat, lng)
         .then((result) => {
-          console.log(result.data);
+          // console.log(result.data);
           this.maxIdx = result.data.length;
           if (this.maxIdx == 0) {
             alert("반경 3km 내에 열린 약국이 없습니다");
@@ -265,7 +218,8 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-        });
+        })
+        .finally(() => this.marking());
       // 돌려받은 약국 리스트를 보여주는 방식 => 3개씩 슬라이드 방식 완성 ㅇㅇㅇ
     },
     plusIdx() {
@@ -286,18 +240,100 @@ export default {
       this.marking();
     },
     telephone(idx) {
-      console.log(this.pharmacies[idx].p_tel);
+      //   console.log(this.pharmacies[idx].p_tel);
       var str = String(this.pharmacies[idx].p_tel);
       this.href = "`tel:${str}`";
-      console.log("tel:" + str);
+      console.log("클릭한 전화번호 : " + str);
     },
     marking() {
-      // 기존 마커를 지우고
+      this.mapSetter(null);
+      //   this.addScript();
       // 현위치, idx, idx+1, idx+2 마커를 새로 만든다
+
+      var container = document.getElementById("map");
+      container.innerHTML = "";
+
+      // console.log("state에 저장된 위치");
+      // console.log(this.mylat, this.mylng);
+
+      var options = {
+        center: new kakao.maps.LatLng(this.mylat, this.mylng),
+        level: 4,
+      };
+      var map = new kakao.maps.Map(container, options);
+      this.mapSetter(map);
+
+      // 마커 추가시 객체 추가
+      var marker = new kakao.maps.Marker({
+        position: new kakao.maps.LatLng(this.mylat, this.mylng),
+        title: "현위치",
+      });
+      marker.setMap(this.kmap);
+
+      var here = new kakao.maps.CustomOverlay({
+        position: new kakao.maps.LatLng(this.mylat, this.mylng),
+        zIndex: 10,
+        yAnchor: 2.5,
+        content:
+          '<div id="CustomOverlay"' +
+          'style="background-color:white;padding:5px;font-size:12px;text-align:center;border:1px solid black; border-radius:1px;">' +
+          "현위치" +
+          "</div>",
+      });
+      here.setMap(this.kmap);
+      //   here.open(this.kmap, marker); // 이 지도의 marker 위치에 info Window 현위치를 표시
+      //   var wincss = document.getElementById("CustomOverlay");
+      //   wincss.parentNode.style.position = "";
+
+      // 리스트 3개 마커
+
+      // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+      // LatLngBounds 객체에 좌표를 추가합니다
+      var bounds = new kakao.maps.LatLngBounds();
+
+      for (var i = this.idx; i < this.idx + 3 && i < this.maxIdx; i++) {
+        var y = this.pharmacies[i].p_x;
+        var x = this.pharmacies[i].p_y;
+
+        if (y === null || y === undefined || x === null || x === undefined)
+          continue;
+
+        var name = this.pharmacies[i].p_name;
+        // console.log(name);
+        var num = this.pharmacies[i].p_id;
+
+        // 마커를 생성하고 지도에 표시합니다
+        var addMarker = new kakao.maps.Marker({
+          position: new kakao.maps.LatLng(y, x),
+          title: name,
+        });
+        addMarker.setMap(this.kmap);
+
+        bounds.extend(new kakao.maps.LatLng(y, x));
+
+        // 장소명을 표출할 인포윈도우 입니다
+        var infowindow = new kakao.maps.CustomOverlay({
+          position: new kakao.maps.LatLng(y, x),
+          zIndex: 10,
+          yAnchor: 2.5,
+          content:
+            '<div id="CustomOverlay' +
+            num +
+            '" style="background-color:white;padding:5px;font-size:12px;text-align:center;border:1px solid black; border-radius:1px;">' +
+            name +
+            "</div>",
+        });
+        infowindow.setMap(this.kmap);
+        // infowindow.open(this.kmap, addMarker); // 이 지도의 marker 위치에 info Window 현위치를 표시
+        //   var wincss = document.getElementById("infowindow"+num);
+        //   wincss.parentNode.style.position = "";
+      }
+
+      this.kmap.setBounds(bounds); // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
     },
-    /* 햄버거 버튼 */
     ...mapMutations("navbar", ["setOpen"]),
     onClickOpener() {
+      /* 햄버거 버튼 */
       this.setOpen(!this.isOpen);
     },
   },
