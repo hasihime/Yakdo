@@ -1,28 +1,23 @@
 <template>
   <div class="col-md-12">
-      <div v-if="checkUser">
-        <GoogleLogin
-            class="big-button"
-            :params="params"
-            :renderParams="renderParams"
-            :onSuccess="onSuccess"
-            :onFailure="onFailure"
-            
-            >
-            Login
-        </GoogleLogin>
-      </div>
-      <div v-if="checkUser">
-        <GoogleLogin
-            class="big-button"
-            :params="params"
-            :renderParams="renderParams"
-            :onSuccess="logout"
-            :logoutButton=true
-            
-            >Logout
-        </GoogleLogin>
-    </div>
+      <GoogleLogin
+        class="big-button"
+        :params="params"
+        :renderParams="renderParams"
+        :onSuccess="onSuccess"
+        :onFailure="onFailure"
+        >
+        Login
+      </GoogleLogin>
+      <GoogleLogin
+        class="big-button"
+        :params="params"
+        :renderParams="renderParams"
+        :onSuccess="logout"
+        v-if="login"
+        :logoutButton=true
+        >Logout
+    </GoogleLogin>
 
   </div>
 </template>
@@ -41,7 +36,8 @@ export default {
                 width: 250,
                 height: 50,
                 logtitle: true,
-            }
+            },
+            login: false,
         }
     },
     components: {
@@ -55,8 +51,6 @@ export default {
     methods: {
         // ...mapActions("data", ["login"]),
         onSuccess(googleUser) {
-            // console.log(googleUser)
-            // console.log(googleUser.getBasicProfile())
             /*
                 Google Login 하면 주는 정보
             */
@@ -69,7 +63,9 @@ export default {
 
             sessionStorage.setItem("user",googleUser.getBasicProfile().getEmail())
             console.log(sessionStorage.getItem("user"))
-
+            alert("로그인 성공!")
+            this.login = true
+            
             // 쓸모없는 것 같아서 지움
             // this.login({
             //     id: googleUser.getId(),
@@ -87,12 +83,12 @@ export default {
         logout() {
             sessionStorage.clear()
             console.log("로그아웃:"+sessionStorage.getItem("user"))
+            alert("로그아웃 되었습니다.")
+            this.login = false
         },
-        checkUser() {
-            console.log("체크:"+sessionStorage.getItem('user'))
-            if(sessionStorage.getItem('user')!= null) return true;
-            else return false;
-        },
+    },
+    mounted() {
+        // this.email = sessionStorage.getItem("user")
     },
 }
 </script>
