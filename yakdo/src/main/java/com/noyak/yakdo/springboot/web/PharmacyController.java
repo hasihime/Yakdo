@@ -21,7 +21,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin({"*"})
+@CrossOrigin
 public class PharmacyController {
 
     private final PharmacyService pService;
