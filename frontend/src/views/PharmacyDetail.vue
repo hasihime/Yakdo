@@ -115,12 +115,12 @@ export default {
   z-index: 2;
 }
 
-  @media screen and (min-width: 601px) {
-    #title {
-      font-size: 60px;
-    }
+@media screen and (min-width: 601px) {
+  #title {
+    font-size: 60px;
   }
 }
+
 
 @media screen and (max-width: 600px) {
   #title {
