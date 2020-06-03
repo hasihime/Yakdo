@@ -1,5 +1,6 @@
 <template>
   <v-container class="mt-5">
+    <Toolbar></Toolbar>
     <v-card-text class="text-center" > <!-- v-if="store"-->
     <p class="display-1 pa-2">💊</p>
     <!-- <p id="title" class="accent--text">{{this.p_name}}</p> -->
@@ -64,12 +65,14 @@ import Map from "@/components/Map"
 import ReviewList from "@/components/ReviewList"
 import Information from "@/components/Information"
 import {  mapActions, mapState  } from "vuex";
+import Toolbar from "@/components/Toolbar"
 
 export default {
   components: {
     Information,
     Map,
     ReviewList,
+    Toolbar,
   },
   data: function () {
     return {

@@ -37,6 +37,10 @@
                 </v-list-item>
             </v-list>
         </v-layout>
+        <div v-if="checkUser()"
+        class="grey--text"
+        style="margin-left:5px;position:absolute;right:11px;bottom:11px;"
+        >{{userMessage}}</div>
     </v-navigation-drawer>
 </template>
 
@@ -57,7 +61,11 @@
                     icon: "mdi-home",
                     text: "Home"
                 },
-            ]
+                {
+                    // to: "/log"
+                }
+            ],
+            userMessage: "",
         }),
         computed: {
             /* store/modules 의 navbar.js 파일 내부의 isOpen state를 사용하겠다 선언 */
@@ -75,7 +83,17 @@
         },
         methods: {
             /* store/modules 의 navbar.js 파일 내부의 setOpen mutation을 사용하겠다 선언 */
-            ...mapMutations("navbar", ["setOpen"])
+            ...mapMutations("navbar", ["setOpen"]),
+            checkUser() {
+                if(sessionStorage.getItem("user") != null) {
+                    this.userMessage = sessionStorage.getItem("name")+"님 환영합니다 :)"
+                    return true;
+                }
+                else {
+                    this.userMessage = "로그인을 해주세요:)"
+                    return true;
+                }
+            }
         }
     };
 </script>

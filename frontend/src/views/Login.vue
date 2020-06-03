@@ -62,6 +62,7 @@ export default {
             // console.log(googleUser.getBasicProfile().getGivenName()) // 이름
 
             sessionStorage.setItem("user",googleUser.getBasicProfile().getEmail())
+            sessionStorage.setItem("name",googleUser.getBasicProfile().getName())
             console.log(sessionStorage.getItem("user"))
             alert("로그인 성공!")
             this.login = true
@@ -88,7 +89,7 @@ export default {
         },
     },
     mounted() {
-        // this.email = sessionStorage.getItem("user")
+        if(sessionStorage.getItem("user")!=null) this.login = true
     },
 }
 </script>
