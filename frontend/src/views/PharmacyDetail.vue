@@ -27,6 +27,7 @@
       grow
       elevation="0"
     >
+ <Barcode/>
       <v-tab style="margin:0px">상세정보</v-tab>
       <v-tab>지도</v-tab>
       <v-tab>리뷰</v-tab>
@@ -59,6 +60,7 @@
 
 <script>
 import Map from "@/components/Map"
+import Barcode from "@/components/barcode"
 import ReviewList from "@/components/ReviewList"
 import Information from "@/components/Information"
 import {  mapActions, mapState  } from "vuex";
@@ -66,6 +68,7 @@ import {  mapActions, mapState  } from "vuex";
 export default {
   components : {
     Information,
+    Barcode,
     Map,
     ReviewList,
   },

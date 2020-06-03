@@ -9,5 +9,7 @@ export default [
     view: "PharmacyDetail",
     name: "pharmacyDetail"
   },
+
+ 
  
 ];
