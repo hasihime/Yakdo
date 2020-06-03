@@ -23,7 +23,12 @@
       </v-btn>
 
       <!-- https://apis.map.kakao.com/web/sample/moveMap/ -->
-      <v-btn class="pos-btn" icon @click.stop="panTo(mylat, mylng)">
+      <v-btn
+        class="pos-btn"
+        icon
+        @click.stop="panTo(mylat, mylng)"
+        title="현위치"
+      >
         <v-icon>mdi-crosshairs-gps</v-icon>
       </v-btn>
     </div>
@@ -146,6 +151,7 @@ export default {
   },
   data() {
     return {
+      maploading: true,
       menutoggle: false,
       kmap: null,
       pharmacies: [],
@@ -167,19 +173,22 @@ export default {
   created() {
     // 상위 App created => 하위 child created
     console.log("Home vue created");
-    this.getMyPos();
-    // console.log("this.mylat : ", this.mylat);
-    // console.log("this.mylng : ", this.mylng);
   },
   beforeMount() {
-    this.getMyPos();
     console.log("Home vue before mounted");
-    window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
   },
   mounted() {
+    window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
     // child 인 Home 의 mounted가 끝나고 => 상위 mounted 실행
     console.log("Home vue mounted");
-    this.autoSearch();
+  },
+  beforeUpdate() {
+    if (this.loading) {
+      setTimeout(function() {
+        // location.reload();
+      }, 1000);
+      this.loading = false;
+    }
   },
   methods: {
     ...mapActions("map", ["getMyPos"]),
@@ -191,6 +200,7 @@ export default {
       };
       var map = new kakao.maps.Map(container, options);
       this.mapSetter(map);
+      this.autoSearch();
     },
     mapSetter(map) {
       this.kmap = map;
@@ -256,6 +266,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          alert("검색 결과가 없습니다");
         })
         .finally(() => this.marking());
       // 돌려받은 약국 리스트를 보여주는 방식 => 3개씩 슬라이드 방식 완성 ㅇㅇㅇ
@@ -283,7 +294,7 @@ export default {
       this.href = "`tel:${str}`";
       console.log("클릭한 전화번호 : " + str);
     },
-    marking() {
+    async marking() {
       this.mapSetter(null);
       //   this.addScript();
       // 현위치, idx, idx+1, idx+2 마커를 새로 만든다
