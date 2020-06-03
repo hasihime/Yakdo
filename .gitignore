@@ -4,6 +4,7 @@
 
 .idea
 .out
+application-oauth.properties
 
 ### Eclipse ###
 
