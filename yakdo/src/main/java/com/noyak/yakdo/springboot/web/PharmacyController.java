@@ -54,5 +54,10 @@ public class PharmacyController {
     public List<PharmacyResponseDto> findWithAddress(@PathVariable String address, @PathVariable double p_x, @PathVariable double p_y) {
         return pService.findWithAddress(address, p_x, p_y);
     }
+
+    @GetMapping("/pharmacy/list/geocoder/p_x/{p_x}/p_y/{p_y}")
+    public List<PharmacyResponseDto> findWithGeoCoder(@PathVariable double p_x, @PathVariable double p_y) {
+        return pService.findWithGeoCoder(p_x, p_y);
+    }
 }
 
