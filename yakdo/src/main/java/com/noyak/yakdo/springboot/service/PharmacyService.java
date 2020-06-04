@@ -43,7 +43,7 @@ public class PharmacyService {
         List<PharmacyResponseDto> list = new ArrayList<>();
         int lpsize = lp.size();
 
-        LocalDateTime time = LocalDateTime.now().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        LocalDateTime time = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
         System.out.println(time);
         int minutes = time.getHour()*60 + time.getMinute();
 
