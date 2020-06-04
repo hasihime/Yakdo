@@ -23,6 +23,11 @@ const state = {
         p_id: 0,        // 약국 id
     },
     reviews: {},
+    medicine: {
+        no:0,
+        m_name:"",
+    },
+    medicines:{},
     
 }
 
@@ -68,6 +73,9 @@ export const mutations = {
     setReviews(state, reviews) {
         state.reviews = reviews
     }
+    ,setMedicines(state, medicines) {
+        state.medicines = medicines
+    }
 }
 
 // Actions의 주요 목적은 Mutations를 실행시키는 역할
@@ -99,6 +107,15 @@ export const actions = {
             .catch(() => {
                 console.log("리뷰 불러오기 실패")
             })
+    },
+    getMedicines({commit}, id){
+        api.getMedicines(id)
+        .then(response => {
+            commit('setMedicines', response.data)
+        })
+        .catch(() => {
+            console.log("약 정보 불러오기 실패")
+        })
     }
 }
 
@@ -113,6 +130,9 @@ const getters = {
   // }
   getPharmacy(state) {
     return state.pharmacy;
+  },
+  getMedicine(state) {
+    return state.medicine;
   },
 };
 

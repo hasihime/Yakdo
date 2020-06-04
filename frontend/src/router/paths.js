@@ -9,5 +9,9 @@ export default [
     view: "PharmacyDetail",
     name: "pharmacyDetail"
   },
- 
+  {
+    path: "/mypharmacy", // /:id
+    view: "MyPharmacy",
+    name: "MyPharmacy"
+  },
 ];
