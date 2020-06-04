@@ -23,14 +23,6 @@ const state = {
         p_id: 0,        // 약국 id
     },
     reviews: {},
-    // user: {
-    //     id: "", // 고유id
-    //     name: "", // 성+이름
-    //     email: "",  // 이메일
-    //     imageUrl: "", // 이미지
-    //     familyName: "", // 성
-    //     givenName: "", // 이름
-    // }
 }
 
 // Mutations의 주요 목적은 state를 변경시키는 역할
@@ -75,12 +67,6 @@ export const mutations = {
     setReviews(state, reviews) {
         state.reviews = reviews
     },
-    // setLoginUser(state, user) {
-    //     state.user = user
-    //     sessionStorage.setItem("user",user.email)
-    //     console.log("session : "+sessionStorage.getItem("user"))
-    //     console.log(state.user)
-    // },
 }
 
 // Actions의 주요 목적은 Mutations를 실행시키는 역할
@@ -113,9 +99,6 @@ export const actions = {
                 console.log("리뷰 불러오기 실패")
             })
     },
-    // login({commit}, params) {
-    //     commit("setLoginUser", params);
-    // }
 }
 
 // 각 Components의 계산된 속성(computed)의 공통 사용 정의
