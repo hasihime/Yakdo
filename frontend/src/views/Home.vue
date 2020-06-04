@@ -15,7 +15,7 @@
         class="search-bar"
         name="search"
         v-on:keyup.enter="submit"
-        placeholder="도로명 주소 검색(강동구 or 올림픽로)"
+        placeholder="주소 검색을 지원합니다"
       />
 
       <v-btn class="search-btn" icon @click.stop="submit()" title="검색">
@@ -266,24 +266,37 @@ export default {
       // var searchText = document.getElementsByName("search")[0].value;
       var searchText = document.getElementById("search-bar-text").value;
       if (searchText != null && searchText != "") {
-        // this.doSearch();
-        api
-          .findWithAddress(searchText, this.mylat, this.mylng)
-          .then((result) => {
-            // console.log(result.data.length);
-            this.maxIdx = result.data.length;
-            if (this.maxIdx == 0) {
-              alert("반경 5km 내에 열린 약국이 없습니다");
-              this.alterSearch();
-            } else {
-              this.pharmacies = result.data;
-              this.marking();
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-            alert("에러가 발생했습니다. 관리자에게 문의바랍니다.");
-          });
+        // console.log(this);
+        var geocoder = new kakao.maps.services.Geocoder();
+        geocoder.addressSearch(searchText, (results, status) => {
+          // console.log(results);
+          // console.log(status);
+          if (status === kakao.maps.services.Status.OK) {
+            api
+              .findWithGeoCoder(results[0].y, results[0].x)
+              .then((result) => {
+                // console.log(result);
+                // console.log(result.data);
+                // console.log(result.data.length);
+                // console.log(this);
+                // 화살표 함수가 아니라 functions을 쓰면 this가 Vue 객체를 지칭하지 못하고 undefined가 된다
+                this.maxIdx = result.data.length;
+                if (this.maxIdx == 0) {
+                  alert("검색한 주소 반경 5km 내에 열린 약국이 없습니다");
+                  this.alterSearch();
+                } else {
+                  this.pharmacies = result.data;
+                  this.marking();
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+                alert("에러가 발생했습니다. 관리자에게 문의바랍니다.");
+              });
+          }
+        });
+      } else {
+        this.autoSearch();
       }
     },
     alterSearch() {

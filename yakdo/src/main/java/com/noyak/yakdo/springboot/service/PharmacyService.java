@@ -42,9 +42,10 @@ public class PharmacyService {
         List<PharmacyResponseDto> list = new ArrayList<>();
         int lpsize = lp.size();
 
-
         ZonedDateTime time = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
 //        Date time = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
+//       LocalDateTime time = LocalDateTime.now().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
         System.out.println(time);
         int minutes = time.getHour()*60 + time.getMinute();
 
