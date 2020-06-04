@@ -10,7 +10,7 @@
       </v-btn>
 
       <input
-        id="text"
+        id="search-bar-text"
         type="text"
         class="search-bar"
         name="search"
@@ -37,98 +37,135 @@
       <v-icon>mdi-chevron-left</v-icon>
     </v-btn>
 
+    <!-- 약국 리스트 시작 -->
+
     <div v-if="pharmacies[idx] != null" class="yg-list yg1 content-width">
-      <span class="left-align">{{ pharmacies[idx].p_name }}</span>
-      <span class="left-align" style="font-size : small; padding-top:14px;"
-        >{{ pharmacies[idx].distance }} m</span
-      >
-      <v-btn
-        title="전화"
-        class="call-btn right-align"
-        icon
-        @click="telephone(idx)"
-      >
+      <div style="float:left;padding-top:5px; padding-left:10px;">
+        <div>{{ pharmacies[idx].p_name }}</div>
+
+        <div v-if="pharmacies[idx].distance > 1000" style="font-size : small;">
+          {{ (pharmacies[idx].distance / 1000.0).toFixed(1) }} km |
+          {{ pharmacies[idx].p_oper }}
+        </div>
+        <div v-else style="font-size : small;">
+          {{ pharmacies[idx].distance }} m | {{ pharmacies[idx].p_oper }}
+        </div>
+      </div>
+
+      <div class="yg-list-btn">
+        <!-- <v-btn        title="전화"        class="call-btn right-align"        icon        @click="telephone(idx)"      >
         <v-icon>mdi-phone</v-icon>
-      </v-btn>
-      <v-btn
-        title="표시된 자리로 이동"
-        class="road-btn right-align"
-        icon
-        @click.stop="panTo(pharmacies[idx].p_x, pharmacies[idx].p_y)"
-      >
-        <v-icon>mdi-map-search</v-icon>
-      </v-btn>
-      <v-btn
-        title="상세페이지 열기"
-        class="router-btn right-align"
-        icon
-        :to="'/pharmacy/' + pharmacies[idx].p_id"
-      >
-        <v-icon>mdi-dock-window</v-icon>
-      </v-btn>
+      </v-btn> -->
+        <v-btn
+          title="표시된 자리로 이동"
+          class="road-btn right-align"
+          icon
+          x-large
+          @click.stop="panTo(pharmacies[idx].p_x, pharmacies[idx].p_y)"
+        >
+          <v-icon>mdi-map-search</v-icon>
+        </v-btn>
+        <v-btn
+          title="상세페이지 열기"
+          class="router-btn right-align"
+          icon
+          x-large
+          :to="'/pharmacy/' + pharmacies[idx].p_id"
+        >
+          <v-icon>mdi-dock-window</v-icon>
+        </v-btn>
+      </div>
     </div>
+
+    <!--  -->
 
     <div v-if="pharmacies[idx + 1] != null" class="yg-list yg2 content-width">
-      <span class="left-align">{{ pharmacies[idx + 1].p_name }}</span>
-      <span class="left-align" style="font-size : small; padding-top:14px;"
-        >{{ pharmacies[idx + 1].distance }} m</span
-      >
-      <v-btn
-        title="전화"
-        class="call-btn right-align"
-        icon
-        @click="telephone(idx + 1)"
-      >
+      <div style="float:left;padding-top:5px; padding-left:10px;">
+        <div>{{ pharmacies[idx + 1].p_name }}</div>
+
+        <div
+          v-if="pharmacies[idx + 1].distance > 1000"
+          style="font-size : small;"
+        >
+          {{ (pharmacies[idx + 1].distance / 1000.0).toFixed(1) }} km |
+          {{ pharmacies[idx + 1].p_oper }}
+        </div>
+        <div v-else style="font-size : small;">
+          {{ pharmacies[idx + 1].distance }} m |
+          {{ pharmacies[idx + 1].p_oper }}
+        </div>
+      </div>
+
+      <div class="yg-list-btn">
+        <!-- <v-btn        title="전화"        class="call-btn right-align"        icon        @click="telephone(idx)"      >
         <v-icon>mdi-phone</v-icon>
-      </v-btn>
-      <v-btn
-        title="표시된 자리로 이동"
-        class="road-btn right-align"
-        icon
-        @click.stop="panTo(pharmacies[idx + 1].p_x, pharmacies[idx + 1].p_y)"
-      >
-        <v-icon>mdi-map-search</v-icon>
-      </v-btn>
-      <v-btn
-        title="상세페이지 열기"
-        class="router-btn right-align"
-        icon
-        :to="'/pharmacy/' + pharmacies[idx + 1].p_id"
-      >
-        <v-icon>mdi-dock-window</v-icon>
-      </v-btn>
+      </v-btn> -->
+        <v-btn
+          title="표시된 자리로 이동"
+          class="road-btn right-align"
+          icon
+          x-large
+          @click.stop="panTo(pharmacies[idx + 1].p_x, pharmacies[idx + 1].p_y)"
+        >
+          <v-icon>mdi-map-search</v-icon>
+        </v-btn>
+        <v-btn
+          title="상세페이지 열기"
+          class="router-btn right-align"
+          icon
+          x-large
+          :to="'/pharmacy/' + pharmacies[idx + 1].p_id"
+        >
+          <v-icon>mdi-dock-window</v-icon>
+        </v-btn>
+      </div>
     </div>
 
+    <!--  -->
+
     <div v-if="pharmacies[idx + 2] != null" class="yg-list yg3 content-width">
-      <span class="left-align">{{ pharmacies[idx + 2].p_name }}</span>
-      <span class="left-align" style="font-size : small; padding-top:14px;"
-        >{{ pharmacies[idx + 2].distance }} m</span
-      >
-      <v-btn
-        title="전화"
-        class="call-btn right-align"
-        icon
-        @click="telephone(idx + 2)"
-      >
+      <div style="float:left;padding-top:5px; padding-left:10px;">
+        <div>{{ pharmacies[idx + 2].p_name }}</div>
+
+        <div
+          v-if="pharmacies[idx + 2].distance > 1000"
+          style="font-size : small;"
+        >
+          {{ (pharmacies[idx + 2].distance / 1000.0).toFixed(1) }} km |
+          {{ pharmacies[idx + 2].p_oper }}
+        </div>
+        <div v-else style="font-size : small;">
+          {{ pharmacies[idx + 2].distance }} m |
+          {{ pharmacies[idx + 2].p_oper }}
+        </div>
+      </div>
+
+      <div class="yg-list-btn">
+        <!-- <v-btn        title="전화"        class="call-btn right-align"        icon        @click="telephone(idx)"      >
         <v-icon>mdi-phone</v-icon>
-      </v-btn>
-      <v-btn
-        title="표시된 자리로 이동"
-        class="road-btn right-align"
-        icon
-        @click.stop="panTo(pharmacies[idx + 2].p_x, pharmacies[idx + 2].p_y)"
-      >
-        <v-icon>mdi-map-search</v-icon>
-      </v-btn>
-      <v-btn
-        title="상세페이지 열기"
-        class="router-btn right-align"
-        icon
-        :to="'/pharmacy/' + pharmacies[idx + 2].p_id"
-      >
-        <v-icon>mdi-dock-window</v-icon>
-      </v-btn>
+      </v-btn> -->
+        <v-btn
+          title="표시된 자리로 이동"
+          class="road-btn right-align"
+          icon
+          x-large
+          @click.stop="panTo(pharmacies[idx + 2].p_x, pharmacies[idx + 2].p_y)"
+        >
+          <v-icon>mdi-map-search</v-icon>
+        </v-btn>
+        <v-btn
+          title="상세페이지 열기"
+          class="router-btn right-align"
+          icon
+          x-large
+          :to="'/pharmacy/' + pharmacies[idx + 2].p_id"
+        >
+          <v-icon>mdi-dock-window</v-icon>
+        </v-btn>
+      </div>
     </div>
+
+    <!-- 약국 리스트 종료 -->
 
     <v-btn class="right-btn" icon @click.stop="plusIdx()" title="이후">
       <v-icon>mdi-chevron-right</v-icon>
@@ -172,15 +209,15 @@ export default {
   },
   created() {
     // 상위 App created => 하위 child created
-    console.log("Home vue created");
+    // console.log("Home vue created");
   },
   beforeMount() {
-    console.log("Home vue before mounted");
+    // console.log("Home vue before mounted");
   },
   mounted() {
-    window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
     // child 인 Home 의 mounted가 끝나고 => 상위 mounted 실행
-    console.log("Home vue mounted");
+    // console.log("Home vue mounted");
+    window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
   },
   beforeUpdate() {
     if (this.loading) {
@@ -226,7 +263,8 @@ export default {
     submit() {
       // console.log("enter 입력");
       // console.log(document.getElementsByName("search")[0].value)
-      var searchText = document.getElementsByName("search")[0].value;
+      // var searchText = document.getElementsByName("search")[0].value;
+      var searchText = document.getElementById("search-bar-text").value;
       if (searchText != null && searchText != "") {
         // this.doSearch();
         api
@@ -235,17 +273,39 @@ export default {
             // console.log(result.data.length);
             this.maxIdx = result.data.length;
             if (this.maxIdx == 0) {
-              alert("반경 3km 내에 열린 약국이 없습니다");
+              alert("반경 5km 내에 열린 약국이 없습니다");
+              this.alterSearch();
             } else {
               this.pharmacies = result.data;
+              this.marking();
             }
           })
           .catch((err) => {
             console.log(err);
-            alert("검색 결과가 없습니다");
-          })
-          .finally(() => this.marking());
+            alert("에러가 발생했습니다. 관리자에게 문의바랍니다.");
+          });
       }
+    },
+    alterSearch() {
+      console.log("alterSearch");
+      document.getElementById("search-bar-text").value = "서울";
+      api
+        .findWithAddress("서울", this.mylat, this.mylng)
+        .then((result) => {
+          // console.log(result.data.length);
+          this.maxIdx = result.data.length;
+          if (this.maxIdx == 0) {
+            alert("서울 내에 열린 약국이 없습니다");
+            this.pharmacies = [];
+          } else {
+            this.pharmacies = result.data;
+            this.marking();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("에러가 발생했습니다. 관리자에게 문의바랍니다.");
+        });
     },
     autoSearch() {
       this.getMyPos();
@@ -259,34 +319,35 @@ export default {
           // console.log(result.data);
           this.maxIdx = result.data.length;
           if (this.maxIdx == 0) {
-            alert("반경 3km 내에 열린 약국이 없습니다");
+            alert("반경 5km 내에 열린 약국이 없습니다");
+            this.alterSearch();
           } else {
             this.pharmacies = result.data;
+            this.marking();
           }
         })
         .catch((err) => {
           console.log(err);
-          alert("검색 결과가 없습니다");
-        })
-        .finally(() => this.marking());
+          alert("에러가 발생했습니다. 관리자에게 문의바랍니다.");
+        });
       // 돌려받은 약국 리스트를 보여주는 방식 => 3개씩 슬라이드 방식 완성 ㅇㅇㅇ
     },
     plusIdx() {
       if (this.idx <= this.maxIdx - 4) {
         // 172보다 4 작으면 68 69 70 | 69 70 71 | 70 71 | 71
         this.idx += 3;
+        //   console.log(this.idx);
+        // idx에 따라서 화면에 마커 뿌려주기
+        this.marking();
       }
-      //   console.log(this.idx);
-      // idx에 따라서 화면에 마커 뿌려주기
-      this.marking();
     },
     minusIdx() {
       if (this.idx >= 3) {
         this.idx -= 3;
+        //   console.log(this.idx);
+        // idx에 따라서 화면에 마커 뿌려주기
+        this.marking();
       }
-      //   console.log(this.idx);
-      // idx에 따라서 화면에 마커 뿌려주기
-      this.marking();
     },
     telephone(idx) {
       //   console.log(this.pharmacies[idx].p_tel);
@@ -455,18 +516,19 @@ export default {
 }
 
 .content-width {
-  left: 14%;
-  width: 72%;
+  left: 12%;
+  width: 76%;
 }
 
 .left-align {
   float: left;
-  padding-left: 10px;
-  padding-top: 10px;
+  padding-top: 3px;
+  padding-left: 3px;
 }
 
 .right-align {
   float: right;
+  width: 50px;
 }
 
 .yg {
@@ -484,17 +546,17 @@ export default {
   z-index: 3;
   display: inline-block;
   border-radius: 10px;
-  height: 42px;
+  height: 50px;
   background: white;
   box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.3);
 }
 
 .yg1 {
-  bottom: 17%;
+  bottom: 19%;
 }
 
 .yg2 {
-  bottom: 10%;
+  bottom: 11%;
 }
 
 .yg3 {
@@ -504,8 +566,8 @@ export default {
 .left-btn {
   position: fixed;
   z-index: 3;
-  bottom: 10%;
-  left: 3%;
+  bottom: 12%;
+  left: 1.5%;
   border-radius: 10px;
   background-color: white;
   color: #ffffff;
@@ -515,11 +577,27 @@ export default {
 .right-btn {
   position: fixed;
   z-index: 3;
-  bottom: 10%;
-  right: 3%;
+  bottom: 12%;
+  right: 1.5%;
   border-radius: 10px;
   background-color: white;
   color: #ffffff;
   box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.3);
+}
+
+.router-btn {
+  width: 36px;
+  height: 36px;
+}
+
+.road-btn {
+  width: 36px;
+  height: 36px;
+}
+
+.yg-list-btn {
+  padding-top: 5px;
+  float: right;
+  width: 72px;
 }
 </style>
