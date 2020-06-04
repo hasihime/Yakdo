@@ -25,9 +25,9 @@
       </div>
       <div v-if="p_tel.length">
         <h3>전화번호</h3>
-        📞 {{ p_tel }}
-        <a href="`tel:${p_tel}`"
-          ><v-btn small color="primary">전화걸기</v-btn></a
+        📞
+        <a :href="`tel: + ${p_tel}`"
+          ><v-btn small color="primary">{{ p_tel }}</v-btn></a
         >
       </div>
       <div v-if="p_special.length">
