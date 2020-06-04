@@ -8,13 +8,6 @@
     android:paddingRight="10dp" >
 
     <TextView
-        android:id="@+id/yearmonth"
-        android:layout_width="0dp"
-        android:layout_weight="0.3"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"/>
-
-    <TextView
         android:id="@+id/plaintext"
         android:layout_width="0dp"
         android:layout_weight="0.3"

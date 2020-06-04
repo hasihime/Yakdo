@@ -18,6 +18,10 @@
         </activity>
         <activity android:name=".LogActivity">
         </activity>
+        <activity android:name=".RegPopUpActivity"  android:theme="@android:style/Theme.Dialog">
+        </activity>
+        <activity android:name=".UsePopUpActivity"  android:theme="@android:style/Theme.Dialog">
+        </activity>
         <activity android:name=".SplashActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />

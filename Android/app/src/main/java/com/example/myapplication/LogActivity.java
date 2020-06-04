@@ -43,8 +43,8 @@ public class LogActivity extends AppCompatActivity {
         mDbOpenHelper = new DbOpenHelper(this);
         mDbOpenHelper.open();
         mDbOpenHelper.create();
-        testdelete();
-        testinsert();
+//        testdelete();
+//        testinsert();
         showList();
     }
 
@@ -68,13 +68,11 @@ public class LogActivity extends AppCompatActivity {
                 do {
                     //테이블에서 두개의 컬럼값을 가져와서
                     String Plaintext = c.getString(c.getColumnIndex("plaintext"));
-                    String YearMonth = c.getString(c.getColumnIndex("yearmonth"));
 
                     //HashMap에 넣습니다.
                     HashMap<String,String> logs = new HashMap<String,String>();
 
                     logs.put("plaintext" ,Plaintext);
-                    logs.put("yearmonth" ,YearMonth);
 
                     //ArrayList에 추가합니다..
                     logList.add(logs);
@@ -86,8 +84,8 @@ public class LogActivity extends AppCompatActivity {
 
         adapter = new SimpleAdapter(
                 this, logList, R.layout.log_list_item,
-                new String[]{"plaintext" ,"yearmonth"},
-                new int[]{ R.id.plaintext, R.id.yearmonth}
+                new String[]{"plaintext"},
+                new int[]{ R.id.plaintext}
         );
 
 

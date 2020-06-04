@@ -1,22 +1,25 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class MypharmacyActivity extends AppCompatActivity {
 
     private DbOpenHelper mDbOpenHelper;
-    private LinkedList drugList;
+    private ArrayList<HashMap<String, String>> drugList;
     ListView list;
     ListAdapter adapter;
 
@@ -29,8 +32,8 @@ public class MypharmacyActivity extends AppCompatActivity {
         mDbOpenHelper = new DbOpenHelper(this);
         mDbOpenHelper.open();
         mDbOpenHelper.create();
-        testdelete();
-        testinsert();
+//        testdelete();
+//        testinsert();
         showList();
     }
 
@@ -46,12 +49,13 @@ public class MypharmacyActivity extends AppCompatActivity {
 
     public void showList(){
         Cursor c = mDbOpenHelper.selectDrugs();
-        drugList = new LinkedList();
+        drugList = new ArrayList();
         if(c != null){
             if(c.moveToFirst()){
                 do {
 
-                    //테이블에서 두개의 컬럼값을 가져와서
+                    //테이블에서 네개의 컬럼값을 가져와서
+                    String KeyId = c.getString(0);
                     String Name = c.getString(c.getColumnIndex("name"));
                     String Stock = c.getString(c.getColumnIndex("stock"));
                     String Type = c.getString(c.getColumnIndex("type"));
@@ -59,6 +63,7 @@ public class MypharmacyActivity extends AppCompatActivity {
                     //HashMap에 넣습니다.
                     HashMap<String,String> drugs = new HashMap<String,String>();
 
+                    drugs.put("key_id" ,KeyId);
                     drugs.put("name" ,Name);
                     drugs.put("stock" ,Stock);
                     drugs.put("type", Type);
@@ -73,13 +78,25 @@ public class MypharmacyActivity extends AppCompatActivity {
 
         adapter = new SimpleAdapter(
                 this, drugList, R.layout.list_item,
-                new String[]{"name" ,"stock" ,"type"},
-                new int[]{ R.id.name, R.id.stock, R.id.type}
+                new String[]{"key_id", "name" ,"stock" ,"type"},
+                new int[]{R.id.key_id, R.id.name, R.id.stock, R.id.type}
         );
 
 
         //화면에 보여주기 위해 Listview에 연결합니다.
         list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), UsePopUpActivity.class);
+                intent.putExtra("key_id", drugList.get(position).get("key_id"));
+                intent.putExtra("name", drugList.get(position).get("name"));
+                intent.putExtra("stock", drugList.get(position).get("stock"));
+                intent.putExtra("type", drugList.get(position).get("type"));
+                startActivityForResult(intent, 1);
+            }
+        });
     }
 
     public void goMain(View view) {
@@ -89,4 +106,26 @@ public class MypharmacyActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LogActivity.class);
         startActivity(intent);
     }
+
+    public void goReg(View view){
+        //데이터 담아서 팝업(액티비티) 호출
+        Intent intent = new Intent(this, RegPopUpActivity.class);
+        startActivityForResult(intent, 1);
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==1){
+            if(resultCode==RESULT_OK){
+                //데이터 받기
+                boolean result = data.getBooleanExtra("result", false);
+                if(result) {
+                    mDbOpenHelper.open();
+                    showList();
+                }
+            }
+        }
+    }
+
 }
