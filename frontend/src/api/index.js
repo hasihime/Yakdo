@@ -3,8 +3,8 @@ import axios from "axios";
 //  axios.defaults.baseURL = "http://myurl";
 // axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8";
 // axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
-const apiUrl = "https://localhost:8080";
-// const apiUrl = "https://k02a4051.p.ssafy.io:8080"; // root path
+// const apiUrl = "https://localhost:8080";
+const apiUrl = "https://k02a4051.p.ssafy.io:8080"; // root path
 // const apiUrl = "http://k02a4051.p.ssafy.io:8000/api"; // aws rest api => http
 // const apiUrl = "http://k02a4051.p.ssafy.io:8443/api"; // aws rest api => https
 
