@@ -21,12 +21,23 @@
     <div id="list" >
         <div>
             <h3>영업시간</h3>
-                🕛 {{p_oper}}
+            <v-chip
+                small
+                label
+                class="ma-1"
+                color="secondary"
+                text-color="white"
+                v-for="category in (this.$store.state.data.pharmacy.p_status.split(','))"
+                :key="category">
+                {{category}}
+            </v-chip>
+            <div style="margin:5px;">🕛 {{p_oper}}</div>
         </div>
         <div v-if="p_tel.length">
             <h3>전화번호</h3>
             📞 {{p_tel}}
-            <a href="tel:`p_tel`"><v-btn small color="primary">전화걸기</v-btn></a>
+            <a :href="'tel:'+p_tel"><v-btn small color="primary">전화걸기</v-btn></a>
+            <!-- <a v-bind:href="p_tel"> -->
         </div>
         <div v-if="p_special.length">
             <h3>특이사항</h3>

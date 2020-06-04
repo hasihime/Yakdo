@@ -2,7 +2,8 @@
   <v-container class="mt-5">
     <Toolbar></Toolbar>
     <v-card-text class="text-center" > <!-- v-if="store"-->
-    <p class="display-1 pa-2">💊</p>
+    <div style="height:60px;"></div>
+    <!-- <p class="display-1 pa-2">💊</p> -->
     <!-- <p id="title" class="accent--text">{{this.p_name}}</p> -->
     <p id="title" class="accent--text">{{this.$store.state.data.pharmacy.p_name}}</p>
     <!-- mapState 사용할때 -->
@@ -10,14 +11,9 @@
     </v-card-text>
 
     <!-- v-if="p_status.length!= 0" -->
-    <v-chip
-      label
-      class="ma-1"
-      color="secondary"
-      text-color="white"
-      v-for="category in (this.$store.state.data.pharmacy.p_status.split(','))" :key="category">
-      {{category}}
-    </v-chip>
+    <div v-if="checkChips()">
+    
+    </div>
     <v-tabs
       style="margin-top: 20px;"
       background-color="rgb(250,250,250)"
@@ -42,6 +38,7 @@
       <v-tab-item>
         <!-- 지도-->
         <Map
+          :p_name="this.$store.state.data.pharmacy.p_name"
           :p_post="this.$store.state.data.pharmacy.p_post"
           :p_addr="this.$store.state.data.pharmacy.p_addr"
           :p_loc="this.$store.state.data.pharmacy.p_loc"
@@ -50,11 +47,7 @@
         />
       </v-tab-item>
       <v-tab-item>
-        <!--리뷰-->
         <ReviewList />
-        <!-- :percent="reviewStatistics.percent"
-          :count="reviewStatistics.count"
-          :review_total_count="reviewStatistics.review_total_count" -->
       </v-tab-item>
     </v-tabs>
   </v-container>
@@ -76,7 +69,7 @@ export default {
   },
   data: function () {
     return {
-     
+      // chips: false,
     }
   },
   computed: {
@@ -99,6 +92,10 @@ export default {
     //   // router.pus가 작동이 안된다..!
     //   this.$router.push(`/store/${this.$route.params.id}/review`)
     // }
+    checkChips() {
+      if(this.$store.state.data.pharmacy.p_status.length > 0) return true
+      else false
+    }
   },
   mounted() {
     this.getPharmacyDetail(this.$route.params.id)

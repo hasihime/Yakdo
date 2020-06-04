@@ -18,7 +18,7 @@
               font-size:20px;
               color:white;
               background-color: darkseagreen;
-              ">약도
+              " class="primary">약도
             </div>
         </h1>
         <v-layout column>
@@ -27,7 +27,7 @@
                         v-for="(link, i) in links"
                         :key="i"
                         :to="link.to"
-                        active-class="red accent-2 white--text"
+                        active-class="secondary white--text"
                         class="v-list-item ma-3"
                 >
                     <v-list-item-action>
@@ -82,6 +82,7 @@
             }
         },
         methods: {
+            
             /* store/modules 의 navbar.js 파일 내부의 setOpen mutation을 사용하겠다 선언 */
             ...mapMutations("navbar", ["setOpen"]),
             checkUser() {
