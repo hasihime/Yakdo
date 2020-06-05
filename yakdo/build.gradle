@@ -60,5 +60,8 @@ dependencies {
     // 로깅
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
 
+    // 스프링 시큐리티
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+
 }
 

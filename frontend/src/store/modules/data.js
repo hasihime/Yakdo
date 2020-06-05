@@ -23,7 +23,6 @@ const state = {
         p_id: 0,        // 약국 id
     },
     reviews: {},
-    
 }
 
 // Mutations의 주요 목적은 state를 변경시키는 역할
@@ -67,7 +66,7 @@ export const mutations = {
     },
     setReviews(state, reviews) {
         state.reviews = reviews
-    }
+    },
 }
 
 // Actions의 주요 목적은 Mutations를 실행시키는 역할
@@ -99,7 +98,7 @@ export const actions = {
             .catch(() => {
                 console.log("리뷰 불러오기 실패")
             })
-    }
+    },
 }
 
 // 각 Components의 계산된 속성(computed)의 공통 사용 정의
