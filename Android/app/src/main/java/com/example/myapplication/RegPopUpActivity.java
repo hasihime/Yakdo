@@ -50,7 +50,7 @@ public class RegPopUpActivity extends Activity {
 
     //등록 버튼 클릭
     public void submit(View view){
-        if(nameText.getText().toString().trim().equals("")) return;
+        if(nameText.getText().toString().trim().equals("") || countNum.getText().toString().trim().equals("")) return;
         //데이터 전달하기
         mDbOpenHelper = new DbOpenHelper(this);
         mDbOpenHelper.open();

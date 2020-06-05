@@ -39,6 +39,7 @@
             android:inputType="textPersonName"
             android:text=""
             android:hint="약품명"
+            android:maxLength="15"
             tools:ignore="MissingConstraints" />
 
         <EditText

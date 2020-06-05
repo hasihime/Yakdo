@@ -79,6 +79,7 @@ public class UsePopUpActivity extends Activity {
     }
 
     public void onGive(View view){
+        if(countUse.getText().toString().trim().equals("")) return;
         long usingCount = Long.parseLong(countUse.getText().toString());
         //데이터 전달하기
         mDbOpenHelper = new DbOpenHelper(this);

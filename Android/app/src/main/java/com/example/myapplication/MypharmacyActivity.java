@@ -4,14 +4,21 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -20,7 +27,7 @@ public class MypharmacyActivity extends AppCompatActivity {
 
     private DbOpenHelper mDbOpenHelper;
     private ArrayList<HashMap<String, String>> drugList;
-    ListView list;
+    TableLayout table;
     ListAdapter adapter;
 
     @Override
@@ -28,7 +35,7 @@ public class MypharmacyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypharmacy);
 
-        list = (ListView) findViewById(R.id.listView);
+        table = (TableLayout) findViewById(R.id.tableView);
         mDbOpenHelper = new DbOpenHelper(this);
         mDbOpenHelper.open();
         mDbOpenHelper.create();
@@ -75,28 +82,47 @@ public class MypharmacyActivity extends AppCompatActivity {
             }
         }
         mDbOpenHelper.close();
-
-        adapter = new SimpleAdapter(
-                this, drugList, R.layout.list_item,
-                new String[]{"key_id", "name" ,"stock" ,"type"},
-                new int[]{R.id.key_id, R.id.name, R.id.stock, R.id.type}
-        );
-
-
-        //화면에 보여주기 위해 Listview에 연결합니다.
-        list.setAdapter(adapter);
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), UsePopUpActivity.class);
-                intent.putExtra("key_id", drugList.get(position).get("key_id"));
-                intent.putExtra("name", drugList.get(position).get("name"));
-                intent.putExtra("stock", drugList.get(position).get("stock"));
-                intent.putExtra("type", drugList.get(position).get("type"));
-                startActivityForResult(intent, 1);
+        table.removeAllViewsInLayout();
+        TableRow tableRow = new TableRow(this);
+        tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        for(int i = 0; i < drugList.size(); i++){
+            if(i != 0 && i % 3 == 0){
+                table.addView(tableRow);
+                tableRow = new TableRow(this);
+                tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
             }
-        });
+            ConstraintLayout cl = (ConstraintLayout) LayoutInflater.from(this).inflate(R.layout.list_item, null);
+            cl.setId(i);
+            TextView name = (TextView) cl.findViewById(R.id.name);
+            name.setText(drugList.get(i).get("name"));
+            TextView type = (TextView) cl.findViewById(R.id.type);
+            type.setText(drugList.get(i).get("type"));
+            TextView stock = (TextView) cl.findViewById(R.id.stock);
+            stock.setText("x" + drugList.get(i).get("stock"));
+            cl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TextView 클릭될 시 할 코드작성
+                    Intent intent = new Intent(getApplicationContext(), UsePopUpActivity.class);
+                    intent.putExtra("key_id", drugList.get(v.getId()).get("key_id"));
+                    intent.putExtra("name", drugList.get(v.getId()).get("name"));
+                    intent.putExtra("stock", drugList.get(v.getId()).get("stock"));
+                    intent.putExtra("type", drugList.get(v.getId()).get("type"));
+                    startActivityForResult(intent, 1);
+                }
+            });
+            tableRow.addView(cl);
+        }
+        table.addView(tableRow);
+        tableRow = new TableRow(this);
+        tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        for (int i = 0; i < 3; i++){
+            TextView tmpView = new TextView(this);
+            tableRow.addView(tmpView);
+        }
+        table.addView(tableRow);
+        ImageButton regButton = (ImageButton) findViewById(R.id.reg);
+        regButton.bringToFront();
     }
 
     public void goMain(View view) {
