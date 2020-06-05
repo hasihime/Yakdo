@@ -1,9 +1,9 @@
 import axios from "axios";
 
 // const apiUrl = "/api"; // root path
-const apiUrl = "http://localhost:8080"; // root path
+// const apiUrl = "http://localhost:8080"; // root path
 // const apiUrl = "/api"; // root path
-// const apiUrl = "http://k02a4051.p.ssafy.io:8000/api"; // aws rest api => http
+const apiUrl = "https://k02a4051.p.ssafy.io:8080"; // aws rest api => http
 // const apiUrl = "http://k02a4051.p.ssafy.io:8443/api"; // aws rest api => https
 
 // var config = {

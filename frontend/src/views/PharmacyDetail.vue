@@ -1,7 +1,7 @@
 <template>
   <v-container class="mt-5">
     <Toolbar></Toolbar>
-    <v-card-text class="text-center" > <!-- v-if="store"-->
+    <v-card-text class="text-center" >
     <div style="height:60px;"></div>
     <!-- <p class="display-1 pa-2">💊</p> -->
     <!-- <p id="title" class="accent--text">{{this.p_name}}</p> -->
@@ -9,11 +9,6 @@
     <!-- mapState 사용할때 -->
     <!-- <p id="title" class="accent--text">{{pharmacy.p_name}}</p> -->
     </v-card-text>
-
-    <!-- v-if="p_status.length!= 0" -->
-    <div v-if="checkChips()">
-    
-    </div>
     <v-tabs
       style="margin-top: 20px;"
       background-color="rgb(250,250,250)"
@@ -69,7 +64,6 @@ export default {
   },
   data: function () {
     return {
-      // chips: false,
     }
   },
   computed: {
@@ -88,14 +82,6 @@ export default {
   methods: {
     // actions에 정의된 메서드를 가져온다
     ...mapActions("data", ["getPharmacyDetail"]),
-    // goCreateReview() {
-    //   // router.pus가 작동이 안된다..!
-    //   this.$router.push(`/store/${this.$route.params.id}/review`)
-    // }
-    checkChips() {
-      if(this.$store.state.data.pharmacy.p_status.length > 0) return true
-      else false
-    }
   },
   mounted() {
     this.getPharmacyDetail(this.$route.params.id)
@@ -107,10 +93,10 @@ export default {
 .fixed-tabs-bar .v-tabs-bar {
   position: sticky;
   /*
-          PC 버전일 경우 toolbar의 height가 달라져 top도 달라져야 함....
-          toolbar의 크기를 고정하거나 toolbar의 height를 얻어와서 적용해줘야 할듯....
-          일단은 모바일로 맞춰놓고 다른 기능들이 얼추 완성되면 하자....
-         */
+    PC 버전일 경우 toolbar의 height가 달라져 top도 달라져야 함....
+    toolbar의 크기를 고정하거나 toolbar의 height를 얻어와서 적용해줘야 할듯....
+    일단은 모바일로 맞춰놓고 다른 기능들이 얼추 완성되면 하자....
+  */
   top: 56px;
   z-index: 2;
 }
