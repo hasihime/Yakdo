@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
             initWebView();
         }
     }
+    
     /** GPS 설정 유무 확인 **/
     private void alertCheckGPS() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
