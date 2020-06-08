@@ -3,7 +3,7 @@ import axios from "axios";
 //  axios.defaults.baseURL = "http://myurl";
 // axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8";
 // axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
-
+// const apiUrl = "https://localhost:8080";
 const apiUrl = "https://k02a4051.p.ssafy.io:8080"; // root path
 // const apiUrl = "http://k02a4051.p.ssafy.io:8000/api"; // aws rest api => http
 // const apiUrl = "http://k02a4051.p.ssafy.io:8443/api"; // aws rest api => https
@@ -21,6 +21,9 @@ export default {
       `${apiUrl}/pharmacy/list/address/${addr}/p_x/${p_x}/p_y/${p_y}`
     );
   },
+  findWithGeoCoder(p_x, p_y) {
+    return axios.get(`${apiUrl}/pharmacy/list/geocoder/p_x/${p_x}/p_y/${p_y}`);
+  },
   getPharmacyDetail(id) {
     return axios.get(`${apiUrl}/pharmacy/${id}`);
   },
@@ -31,9 +34,9 @@ export default {
     return axios.post(`${apiUrl}/review/create`, params);
   },
   putReview(params) {
-    return axios.put(`${apiUrl}/review/update`, params)
+    return axios.put(`${apiUrl}/review/update`, params);
   },
   deleteReview(params) {
-    return axios.delete(`${apiUrl}/review/delete`, {data: params})
-  }
+    return axios.delete(`${apiUrl}/review/delete`, { data: params });
+  },
 };

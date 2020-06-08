@@ -14,7 +14,12 @@
             <p style="padding-left:8px;margin:0px">{{p_addr}}</p>
             <p v-if="p_loc.length!=0" class="primary--text" style="padding-left:8px;margin:0px">{{p_loc}}</p>
         </div>
-        <v-btn style="margin-left:5px;position:absolute;right:11px;bottom:11px;" small color="primary">길찾기</v-btn>
+        <v-btn
+            :href="'https://map.kakao.com/link/to/'+p_name+','+latitude+','+longitude"
+            style="margin-left:5px;position:absolute;right:11px;bottom:11px;"
+            small color="primary">
+            길찾기
+        </v-btn>
       </v-container>
   </v-card>
 </template>
@@ -24,6 +29,10 @@ let map
 
 export default {
     props: {
+        p_name : {
+            type: String,
+            default: () => ""
+        },
         p_post : {
             type: String,
             default: () => "",
@@ -46,7 +55,9 @@ export default {
         },
     },
     data: () => ({
-        width: window.innerWidth
+        width: window.innerWidth,
+        startlat: 0,
+        startlng: 0,
     }),
     methods :{
         initMap() {
@@ -122,8 +133,8 @@ export default {
 
 <style>
 #map {width: 100%; height: 100%;}
-.map_wrap {position:relative;overflow:hidden;width:100%;height: 300px; margin-bottom: 18px;}
-.map_wrap {position:relative;overflow:hidden;width:100%;height:350px;}
+.map_wrap {position:relative;overflow:hidden;width:100%;height: 50vh; margin-bottom: 18px;}
+.map_wrap {position:relative;overflow:hidden;width:100%;height:50vh;}
 
 .radius_border{border:1px solid #919191;border-radius:5px;}     
 .custom_zoomcontrol {
