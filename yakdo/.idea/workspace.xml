@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:backend" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:frontend" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:backend" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:frontend" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f3167e89-fa15-4055-9b00-90c25523cb52" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Information.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Information.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Map.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Map.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/ReviewList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ReviewList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Toolbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Toolbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/main/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/main/Navbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/PharmacyDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/PharmacyDetail.vue" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1c7HYWiHQjXypzTMHbp9fFU27yj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+    <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.noyak.yakdo.springboot.web.dto.review" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="yakdo.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.noyak.yakdo.springboot.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f3167e89-fa15-4055-9b00-90c25523cb52" name="Default Changelist" comment="" />
+      <created>1589872759481</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589872759481</updated>
+      <workItem from="1589872765744" duration="362000" />
+      <workItem from="1589873141895" duration="599000" />
+      <workItem from="1590390730827" duration="1879000" />
+      <workItem from="1590468216169" duration="59261000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="139" y="72" key="#Plugins" timestamp="1589873127152">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="139" y="72" key="#Plugins/0.0.1536.824@0.0.1536.824" timestamp="1589873127152" />
+    <state x="426" y="247" width="472" height="526" key="#com.intellij.ide.util.MemberChooser" timestamp="1590734482470">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="426" y="247" width="472" height="526" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1590734482470" />
+    <state width="1299" height="237" key="GridCell.Tab.0.bottom" timestamp="1591168537283">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1299" height="237" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591168537283" />
+    <state width="1299" height="237" key="GridCell.Tab.0.center" timestamp="1591168537283">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1299" height="237" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591168537283" />
+    <state width="1299" height="237" key="GridCell.Tab.0.left" timestamp="1591168537283">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1299" height="237" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591168537283" />
+    <state width="1299" height="237" key="GridCell.Tab.0.right" timestamp="1591168537283">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1299" height="237" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591168537283" />
+    <state width="1299" height="237" key="GridCell.Tab.1.bottom" timestamp="1591168537284">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1299" height="237" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591168537284" />
+    <state width="1299" height="237" key="GridCell.Tab.1.center" timestamp="1591168537283">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1299" height="237" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1591168537283" />
+    <state width="1299" height="237" key="GridCell.Tab.1.left" timestamp="1591168537283">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1299" height="237" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1591168537283" />
+    <state width="1299" height="237" key="GridCell.Tab.1.right" timestamp="1591168537284">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1299" height="237" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1591168537284" />
+    <state x="478" y="74" key="SettingsEditor" timestamp="1590570484946">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="478" y="74" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1590570484946" />
+    <state width="498" height="468" key="SwitcherDM" timestamp="1590565285710">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="498" height="468" key="SwitcherDM/0.0.1536.824@0.0.1536.824" timestamp="1590565285710" />
+    <state x="708" y="339" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591171381303">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="708" y="339" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1591171381303" />
+    <state x="507" y="229" key="run.anything.popup" timestamp="1590995422333">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="507" y="229" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1590995422333" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1591170999958">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1591170999958" />
+  </component>
+</project>
