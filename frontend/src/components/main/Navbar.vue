@@ -17,30 +17,55 @@
         style="
               text-align:center;
               padding:12px;
-              font-size:20px;
+              font-size:24px;
               color:white;
               background-color: darkseagreen;
               "
       >
         약도
+        <div style="font-size:17px;">
+          슬기로운 약국 생활
+        </div>
       </div>
     </h1>
-    <v-layout column>
-      <v-list rounded>
-        <v-list-item
-          v-for="(link, i) in links"
-          :key="i"
-          :to="link.to"
-          active-class="red accent-2 white--text"
-          class="v-list-item ma-3"
+
+    <div style="padding:22px; color:white; font-size:13px;"></div>
+
+    <div style="position:fixed; left:12%; bottom : 5%; color: white;">
+      <hr />
+      <div style="padding-top:10px; padding-bottom:15px;">
+        약국 데이터 :
+        <a href="https://data.go.kr/" style="text-decoration:none;"
+          >공공데이터 포털</a
         >
-          <v-list-item-action>
-            <v-icon>{{ link.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-title v-text="link.text" />
-        </v-list-item>
-      </v-list>
-    </v-layout>
+      </div>
+      <div style="border-radius: 10px; color: #ffffff;">
+        <v-btn
+          style="margin-right:15px;background-color:gray;"
+          icon
+          href="mailto:refresh6724.dev@gmail.com"
+          title="contact us"
+        >
+          <v-icon>mdi-email</v-icon></v-btn
+        >
+        <v-btn
+          style="margin-right:15px;background-color:gray;"
+          icon
+          to="/aboutus"
+          title="about us"
+        >
+          <v-icon>mdi-account-group</v-icon></v-btn
+        >
+        <v-btn
+          style="margin-right:0px;background-color:gray;"
+          icon
+          href="https://lab.ssafy.com/s02-final/s02p31a405"
+          title="gitlab"
+        >
+          <v-icon>mdi-gitlab</v-icon></v-btn
+        >
+      </div>
+    </div>
   </v-navigation-drawer>
 </template>
 

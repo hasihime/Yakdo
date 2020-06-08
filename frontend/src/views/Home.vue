@@ -293,6 +293,25 @@ export default {
                 console.log(err);
                 alert("에러가 발생했습니다. 관리자에게 문의바랍니다.");
               });
+          } else {
+            // 주소 검색에 실패한 경우
+            api
+              .findWithAddress(searchText, this.mylat, this.mylng)
+              .then((result) => {
+                // console.log(result.data.length);
+                this.maxIdx = result.data.length;
+                if (this.maxIdx == 0) {
+                  alert(searchText + "로 검색된 열린 약국이 없습니다");
+                  this.pharmacies = [];
+                } else {
+                  this.pharmacies = result.data;
+                  this.marking();
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+                alert("에러가 발생했습니다. 관리자에게 문의바랍니다.");
+              });
           }
         });
       } else {
