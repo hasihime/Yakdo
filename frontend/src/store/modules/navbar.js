@@ -1,17 +1,17 @@
 import { set, toggle } from "@/utils/vuex";
 
 const state = {
-    isOpen: null
+  isOpen: false,
 };
 
 // mutations
 const mutations = {
-    setOpen: set("isOpen"),
-    toggleOpen: toggle("isOpen")
+  setOpen: set("isOpen"),
+  toggleOpen: toggle("isOpen"),
 };
 
 export default {
-    namespaced: true,
-    state,
-    mutations
+  namespaced: true,
+  state,
+  mutations,
 };
