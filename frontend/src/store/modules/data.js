@@ -2,28 +2,29 @@ import api from "../../api";
 
 // initial state
 const state = {
-    pharmacy: {
-        p_id: 0,
-        p_name: "약국",
-        p_addr: "",
-        p_tel: "",
-        p_oper: "", // "09:00 ~ 19:00"
-        p_status: "", // "연.야"
-        p_special: "",
-        p_loc: "", // [위치정보 : 초량6거리버스정류소]
-        p_post: "", // 우편번호
-        p_x: 0,
-        p_y: 0,
-    },
-    review: {
-        r_id: 0,
-        r_writer: "",   // 작성자(로그인:구글ID, 비로그인:IP)
-        r_pw: "",       // 비로그인시 패스워드
-        r_conetent: "", // 리뷰 내용
-        p_id: 0,        // 약국 id
-    },
-    reviews: {},
-}
+  pharmacy: {
+    p_id: 0,
+    p_name: "약국",
+    p_addr: "",
+    p_tel: "",
+    p_oper: "", // "09:00 ~ 19:00"
+    p_status: "", // "연.야"
+    p_special: "",
+    p_loc: "", // [위치정보 : 초량6거리버스정류소]
+    p_post: "", // 우편번호
+    p_x: 0,
+    p_y: 0,
+  },
+  review: {
+    r_id: 0,
+    r_writer: "", // 작성자(로그인:구글ID, 비로그인:IP)
+    r_pw: "", // 비로그인시 패스워드
+    r_conetent: "", // 리뷰 내용
+    p_id: 0, // 약국 id
+  },
+  reviews: {},
+  publicapi: [],
+};
 
 // Mutations의 주요 목적은 state를 변경시키는 역할
 // (Mutations을 통해서만 state를 변경해야 함)
@@ -32,42 +33,47 @@ const state = {
 // commit('함수명', '전달인자')으로 실행 시킬 수 있습니다.
 // mutations 내에 함수 형태로 작성합니다.
 export const mutations = {
-    setPharmacy(state, pharmacy) {
-        state.pharmacy = pharmacy
+  setPharmacy(state, pharmacy) {
+    state.pharmacy = pharmacy;
 
-        // 카테고리 가공
-        if(state.pharmacy.p_status.includes("연중")) { // "연중"
-            state.pharmacy.p_status = "연중무휴"
-        }else if(state.pharmacy.p_status.includes(".")) { // "연.야"
-            state.pharmacy.p_status = "연중무휴,야간"
-        }
+    // 카테고리 가공
+    if (state.pharmacy.p_status.includes("연중")) {
+      // "연중"
+      state.pharmacy.p_status = "연중무휴";
+    } else if (state.pharmacy.p_status.includes(".")) {
+      // "연.야"
+      state.pharmacy.p_status = "연중무휴,야간";
+    }
 
-        // 길이가 0보다 큰경우
-        if(state.pharmacy.p_special.length) {
-            var specialArr = state.pharmacy.p_special.split(":")
-        // 공백제거, ]제거
-            var special_blank = specialArr[1],
-                special = special_blank.replace(' ',''),
-                p_special = special.replace(']','')
-            
-            state.pharmacy.p_special = p_special
-        }
+    // 길이가 0보다 큰경우
+    if (state.pharmacy.p_special.length) {
+      var specialArr = state.pharmacy.p_special.split(":");
+      // 공백제거, ]제거
+      var special_blank = specialArr[1],
+        special = special_blank.replace(" ", ""),
+        p_special = special.replace("]", "");
 
-        // 위치정보 가공 
-        if(state.pharmacy.p_loc.length) {
-            var locArr = pharmacy.p_loc.split(":")
-        // 공백제거, ]제거
-            var loc_blank = locArr[1],
-                loc = loc_blank.replace(' ',''),
-                p_loc = loc.replace(']','')
-            
-                state.pharmacy.p_loc = p_loc
-        }
-    },
-    setReviews(state, reviews) {
-        state.reviews = reviews
-    },
-}
+      state.pharmacy.p_special = p_special;
+    }
+
+    // 위치정보 가공
+    if (state.pharmacy.p_loc.length) {
+      var locArr = pharmacy.p_loc.split(":");
+      // 공백제거, ]제거
+      var loc_blank = locArr[1],
+        loc = loc_blank.replace(" ", ""),
+        p_loc = loc.replace("]", "");
+
+      state.pharmacy.p_loc = p_loc;
+    }
+  },
+  setReviews(state, reviews) {
+    state.reviews = reviews;
+  },
+  setPublicapi(state, data) {
+    state.publicapi = data;
+  },
+};
 
 // Actions의 주요 목적은 Mutations를 실행시키는 역할
 // Mutations이 실행되면 state도 변경됨
@@ -78,28 +84,49 @@ export const mutations = {
 // actions 내에 함수 형태로 작성합니다.
 // 비동기 처리이기 때문에 콜백함수로 주로 작성합니다.
 export const actions = {
-    getPharmacyDetail({commit}, id) { // {commit, dispatch}
-        api.getPharmacyDetail(id)
-            .then(response => {
-                // console.log(pharmacy)
-                // console.log(response.data.info)
-                commit('setPharmacy', response.data.info)
-            })
-            .catch(() => {
-                console.log("받아오기 실패")
-            })
-        // dispatch()
-    },
-    getReviews({commit}, id) {
-        api.getReviews(id)
-            .then(response => {
-                commit('setReviews', response.data)
-            })
-            .catch(() => {
-                console.log("리뷰 불러오기 실패")
-            })
-    },
-}
+  getPharmacyDetail({ commit }, id) {
+    // {commit, dispatch}
+    api
+      .getPharmacyDetail(id)
+      .then((response) => {
+        // console.log(pharmacy)
+        // console.log(response.data.info)
+        commit("setPharmacy", response.data.info);
+      })
+      .catch(() => {
+        console.log("받아오기 실패");
+      });
+    // dispatch()
+  },
+  getReviews({ commit }, id) {
+    api
+      .getReviews(id)
+      .then((response) => {
+        commit("setReviews", response.data);
+      })
+      .catch(() => {
+        console.log("리뷰 불러오기 실패");
+      });
+  },
+  getPharmacyDetailApi({ commit }, params) {
+    // {commit, dispatch}
+    // console.log(params.p_sido);
+    // console.log(params.p_gugun);
+    // console.log(params.p_name);
+    api
+      .getPharmacyDetailApi(params.p_sido, params.p_gugun, params.p_name)
+      .then((response) => {
+        console.log(response);
+        console.log("여기 확인해야함");
+        console.log(response.data);
+        commit("setPublicapi", response.data);
+      })
+      .catch(() => {
+        console.log("받아오기 실패");
+      });
+    // dispatch()
+  },
+};
 
 // 각 Components의 계산된 속성(computed)의 공통 사용 정의
 // 여러 Components에서 동일한 computed가 사용 될 경우

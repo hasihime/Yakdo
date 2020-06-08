@@ -218,6 +218,9 @@ export default {
     // child 인 Home 의 mounted가 끝나고 => 상위 mounted 실행
     // console.log("Home vue mounted");
     window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
+    // if (!navigator.geolocation) { // 자동으로 서울시청이 찍힌다
+    //   alert("현재 위치 서비스가 꺼져있습니다.");
+    // }
   },
   beforeUpdate() {
     if (this.loading) {

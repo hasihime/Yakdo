@@ -1,9 +1,11 @@
 <template>
   <v-container class="mt-5">
     <Toolbar></Toolbar>
-    <v-card-text class="text-center" >
-    <div style="height:60px;"></div>
-    <p id="title" class="accent--text">{{this.$store.state.data.pharmacy.p_name}}</p>
+    <v-card-text class="text-center">
+      <div style="height:60px;"></div>
+      <p id="title" class="accent--text">
+        {{ this.$store.state.data.pharmacy.p_name }}
+      </p>
     </v-card-text>
     <v-tabs
       style="margin-top: 20px;"
@@ -21,8 +23,9 @@
       <v-tab-item>
         <!-- 상세정보 -->
         <Information
+          :p_name="this.$store.state.data.pharmacy.p_name"
           :p_tel="this.$store.state.data.pharmacy.p_tel"
-          :p_oper="this.$store.state.data.pharmacy.p_oper"
+          :p_addr="this.$store.state.data.pharmacy.p_addr"
           :p_special="this.$store.state.data.pharmacy.p_special"
         />
       </v-tab-item>
@@ -45,11 +48,11 @@
 </template>
 
 <script>
-import Map from "@/components/Map"
-import ReviewList from "@/components/ReviewList"
-import Information from "@/components/Information"
-import {  mapActions, mapState  } from "vuex";
-import Toolbar from "@/components/Toolbar"
+import Map from "@/components/Map";
+import ReviewList from "@/components/ReviewList";
+import Information from "@/components/Information";
+import { mapActions, mapState } from "vuex";
+import Toolbar from "@/components/Toolbar";
 
 export default {
   components: {
@@ -73,10 +76,18 @@ export default {
   },
   methods: {
     // actions에 정의된 메서드를 가져온다
-    ...mapActions("data", ["getPharmacyDetail"]),
+    ...mapActions("data", ["getPharmacyDetail", "getPharmacyDetailApi"]),
   },
   mounted() {
     this.getPharmacyDetail(this.$route.params.id);
+    // console.log(this.$store.state.data.pharmacy.p_addr.split(" "));
+    var addr = this.$store.state.data.pharmacy.p_addr.split(" ");
+    var params = {
+      p_sido: addr[0],
+      p_gugun: addr[1],
+      p_name: this.$store.state.data.pharmacy.p_name,
+    };
+    this.getPharmacyDetailApi(params);
   },
 };
 </script>
@@ -98,7 +109,6 @@ export default {
     font-size: 60px;
   }
 }
-
 
 @media screen and (max-width: 600px) {
   #title {

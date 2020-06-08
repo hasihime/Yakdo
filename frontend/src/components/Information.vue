@@ -4,22 +4,25 @@
       <div>
         <h3>영업시간</h3>
         <div v-if="checkChips()" style="margin:2px;">
-            <v-chip
-                small
-                label
-                class="ma-1"
-                color="secondary"
-                text-color="white"
-                v-for="category in (this.$store.state.data.pharmacy.p_status.split(','))"
-                :key="category">
-                {{category}}
-            </v-chip>
-            </div>
-        🕛 {{ p_oper }}
+          <v-chip
+            small
+            label
+            class="ma-1"
+            color="secondary"
+            text-color="white"
+            v-for="category in this.$store.state.data.pharmacy.p_status.split(
+              ','
+            )"
+            :key="category"
+          >
+            {{ category }}
+          </v-chip>
+        </div>
+        🕛 {{ this.$store.state.data.publicapi[0] }}
       </div>
       <div v-if="p_tel.length">
         <h3>전화번호</h3>
-        📞 {{ p_tel }}
+        📞 {{ this.$store.state.data.publicapi[0] }}
         <a :href="`tel: + ${p_tel}`"
           ><v-btn small color="primary">전화걸기</v-btn></a
         >
@@ -34,27 +37,31 @@
 
 <script>
 export default {
-    props: {
-        p_tel : {
-            type: String,
-            default: () => "",
-        },
-        p_oper: {
-            type: String,
-            default: () => "",
-        },
-        p_special: {
-            type: String,
-            default: () => "",
-        }
+  props: {
+    p_name: {
+      type: String,
+      default: () => "",
     },
-    methods: {
-        checkChips() {
-            if(this.$store.state.data.pharmacy.p_status.length > 0) return true
-            else false
-        }
+    p_tel: {
+      type: String,
+      default: () => "",
     },
-}
+    p_addr: {
+      type: String,
+      default: () => "",
+    },
+    p_special: {
+      type: String,
+      default: () => "",
+    },
+  },
+  methods: {
+    checkChips() {
+      if (this.$store.state.data.pharmacy.p_status.length > 0) return true;
+      else false;
+    },
+  },
+};
 </script>
 
 <style>
