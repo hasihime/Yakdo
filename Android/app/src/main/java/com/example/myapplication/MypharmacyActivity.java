@@ -3,11 +3,13 @@ package com.example.myapplication;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -17,8 +19,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -95,6 +95,9 @@ public class MypharmacyActivity extends AppCompatActivity {
             cl.setId(i);
             TextView name = (TextView) cl.findViewById(R.id.name);
             name.setText(drugList.get(i).get("name"));
+            ImageView image = (ImageView) cl.findViewById(R.id.imageView);
+            image.setImageURI(Uri.parse("android.resource://com.example.myapplication/drawable/" + drugList.get(i).get("type").split(" ")[1]));
+//            image.setImageResource(R.drawable.capsule);
             TextView type = (TextView) cl.findViewById(R.id.type);
             type.setText(drugList.get(i).get("type"));
             TextView stock = (TextView) cl.findViewById(R.id.stock);

@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.MotionEvent;
@@ -26,6 +27,7 @@ public class UsePopUpActivity extends Activity {
     TextView titleText;
     TextView typeText;
     EditText countUse;
+    SquareImageView typeImage;
     private DbOpenHelper mDbOpenHelper;
     private long key;
     private String name;
@@ -42,6 +44,7 @@ public class UsePopUpActivity extends Activity {
         //UI 객체생성
         titleText = (TextView)findViewById(R.id.use_drug_name);
         typeText = (TextView)findViewById(R.id.use_type_Text);
+        typeImage = (SquareImageView)findViewById(R.id.use_image);
         countUse = (EditText)findViewById(R.id.use_drug_count);
 
         //데이터 가져오기
@@ -49,7 +52,8 @@ public class UsePopUpActivity extends Activity {
         this.key = Long.parseLong(intent.getStringExtra("key_id"));
         this.name = intent.getStringExtra("name");
         this.stock = Long.parseLong(intent.getStringExtra("stock"));
-        this.type = intent.getStringExtra("type");
+        this.type = intent.getStringExtra("type").split(" ")[0];
+        this.typeImage.setImageURI(Uri.parse("android.resource://com.example.myapplication/drawable/" + intent.getStringExtra("type").split(" ")[1]));
         titleText.setText(this.name);
         typeText.setText("종류 : " + this.type + "\n");
         countUse.setText("1");
@@ -64,8 +68,8 @@ public class UsePopUpActivity extends Activity {
         mDbOpenHelper.open();
         if(this.stock > usingCount) mDbOpenHelper.updateColumn0(this.key, this.name, this.stock - usingCount, this.type);
         else mDbOpenHelper.deleteColumn(this.key);
-        mDbOpenHelper.insertColumn1(DHM + "        "
-                        + this.type + "형의 약 "
+        mDbOpenHelper.insertColumn1(DHM + " "
+                        + this.type.split(" ")[0] + "형의 약 "
                         + name + "을(를) "
                         + usingCount + "개 사용."
                 , YYYYMM);
@@ -86,7 +90,7 @@ public class UsePopUpActivity extends Activity {
         mDbOpenHelper.open();
         if(this.stock > usingCount) mDbOpenHelper.updateColumn0(this.key, this.name, this.stock - usingCount, this.type);
         else mDbOpenHelper.deleteColumn(this.key);
-        mDbOpenHelper.insertColumn1(DHM + "        "
+        mDbOpenHelper.insertColumn1(DHM + " "
                         + this.type + "형의 약 "
                         + name + "을(를) "
                         + usingCount + "개 줌."
@@ -107,7 +111,7 @@ public class UsePopUpActivity extends Activity {
         mDbOpenHelper.open();
         if(this.stock > usingCount) mDbOpenHelper.updateColumn0(this.key, this.name, this.stock - usingCount, this.type);
         else mDbOpenHelper.deleteColumn(this.key);
-        mDbOpenHelper.insertColumn1(DHM + "        "
+        mDbOpenHelper.insertColumn1(DHM + " "
                         + this.type + "형의 약 "
                         + name + "을(를) "
                         + usingCount + "개 버림."

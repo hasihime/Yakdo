@@ -15,7 +15,7 @@
             android:textSize="20sp"
             android:textColor="#fff"
             android:gravity="center"
-            android:background="#ff7a00"
+            android:background="#2f6f2f"
             android:layout_width="match_parent"
             android:layout_height="53dp" />
     </LinearLayout>
@@ -27,6 +27,15 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <com.example.myapplication.SquareImageView
+            android:id="@+id/use_image"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#0F00FF00"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"/>
+
         <TextView
             android:id="@+id/use_type_Text"
             android:textSize="15sp"
@@ -62,38 +71,38 @@
         <Button
             android:layout_width="0dp"
             android:layout_weight="0.3"
-            android:layout_height="53dp"
-            android:background="#00000000"
+            android:layout_height="wrap_content"
+            android:background="#ff4f4f"
             android:gravity="center"
             android:onClick="onThrow"
             android:padding="16dp"
             android:text="제거"
-            android:textColor="#ff7a00"
-            android:textSize="15sp" />
+            android:textColor="#ffffff"
+            android:textSize="20dp" />
 
         <Button
             android:layout_width="0dp"
             android:layout_weight="0.3"
-            android:layout_height="53dp"
-            android:background="#00000000"
+            android:layout_height="wrap_content"
+            android:background="#ff6f00"
             android:gravity="center"
             android:onClick="onGive"
             android:padding="16dp"
             android:text="나눔"
-            android:textColor="#ff7a00"
-            android:textSize="15sp" />
+            android:textColor="#ffffff"
+            android:textSize="20dp" />
 
         <Button
             android:layout_width="0dp"
             android:layout_weight="0.3"
-            android:layout_height="53dp"
-            android:background="#00000000"
+            android:layout_height="wrap_content"
+            android:background="#4fff4f"
             android:gravity="center"
             android:onClick="onUse"
             android:padding="16dp"
             android:text="복용"
-            android:textColor="#ff7a00"
-            android:textSize="15sp" />
+            android:textColor="#ffffff"
+            android:textSize="20dp" />
 
     </LinearLayout>
     <!--// 닫기 버튼 -->

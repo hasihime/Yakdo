@@ -7,46 +7,51 @@
     android:layout_height="wrap_content">
 
     <ImageButton
-    android:id="@+id/mypharmacy"
-    android:layout_width="58dp"
-    android:layout_height="58dp"
-    android:onClick="onClick"
-    android:padding="0sp"
-    android:scaleType="centerCrop"
-    android:src="@drawable/mypharmacy"
-    app:layout_constraintStart_toStartOf="parent"
-    tools:ignore="MissingConstraints"></ImageButton>
+        android:id="@+id/mypharmacy"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:onClick="onClick"
+        android:padding="0sp"
+        android:paddingTop="5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/mypharmacy"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints">
+
+    </ImageButton>
 
 
     <ImageButton
         android:id="@+id/before"
-        android:layout_width="58dp"
+        android:layout_width="35dp"
         android:layout_height="58dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="#00ffffff"
         android:onClick="goBefore"
         android:padding="0sp"
         android:scaleType="centerCrop"
         android:src="@drawable/before"
-        android:background="#00ffffff"
-        app:layout_constraintStart_toEndOf="@+id/mypharmacy"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="0dp"></ImageButton>
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"></ImageButton>
 
     <ImageButton
         android:id="@+id/after"
-        android:layout_width="58dp"
+        android:layout_width="35dp"
         android:layout_height="58dp"
-        android:layout_marginEnd="74dp"
-        android:layout_marginRight="74dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:background="#00ffffff"
         android:onClick="goAfter"
         android:padding="0sp"
         android:scaleType="centerCrop"
         android:src="@drawable/after"
-        android:background="#00ffffff"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="0dp"></ImageButton>
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"></ImageButton>
 
     <ListView
         android:id="@+id/listView"
@@ -60,10 +65,11 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="58dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
         android:text="TextView"
         android:textSize="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/after"
-        app:layout_constraintStart_toEndOf="@+id/before"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

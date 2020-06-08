@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.MotionEvent;
@@ -26,8 +27,10 @@ public class RegPopUpActivity extends Activity {
     EditText nameText;
     EditText countNum;
     TextView typeText;
+    SquareImageView typeImage;
     private DbOpenHelper mDbOpenHelper;
-    private final String[] types = {"알약", "캡슐"};
+    private final String[] types = {"알약", "캡슐", "밴드", "가루약", "물파스", "파스", "연고", "스프레이", "안약", "기타"};
+    private final String[] typesDB = {"알약 pill", "캡슐 capsule", "밴드 band", "가루약 flour", "물파스 liquid_pas", "파스 patch", "연고 ointment", "스프레이 spray", "안약 drop", "기타 etc"};
     private int type_index = 0;
 
     @Override
@@ -42,10 +45,12 @@ public class RegPopUpActivity extends Activity {
         countNum = (EditText)findViewById(R.id.reg_drug_count);
         countNum.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "1000")});
         typeText = (TextView)findViewById(R.id.reg_drug_type);
+        typeImage = (SquareImageView)findViewById(R.id.reg_image);
 
         //데이터 바인딩
         countNum.setText("1");
         typeText.setText(types[type_index]);
+        typeImage.setImageURI(Uri.parse("android.resource://com.example.myapplication/drawable/" + typesDB[type_index].split(" ")[1]));
     }
 
     //등록 버튼 클릭
@@ -54,8 +59,8 @@ public class RegPopUpActivity extends Activity {
         //데이터 전달하기
         mDbOpenHelper = new DbOpenHelper(this);
         mDbOpenHelper.open();
-        mDbOpenHelper.insertColumn0(nameText.getText().toString(), Long.parseLong(countNum.getText().toString()), types[type_index]);
-        mDbOpenHelper.insertColumn1(DHM + "        "
+        mDbOpenHelper.insertColumn0(nameText.getText().toString(), Long.parseLong(countNum.getText().toString()), typesDB[type_index]);
+        mDbOpenHelper.insertColumn1(DHM + " "
                 + types[type_index] + "형의 약 "
                 + nameText.getText().toString() + "을(를) "
                 + countNum.getText().toString() + "개 구입."
@@ -83,6 +88,7 @@ public class RegPopUpActivity extends Activity {
             type_index += types.length;
         }
         typeText.setText(types[type_index]);
+        typeImage.setImageURI(Uri.parse("android.resource://com.example.myapplication/drawable/" + typesDB[type_index].split(" ")[1]));
     }
 
     public void goNext(View view) {
@@ -90,6 +96,7 @@ public class RegPopUpActivity extends Activity {
             type_index = 0;
         }
         typeText.setText(types[type_index]);
+        typeImage.setImageURI(Uri.parse("android.resource://com.example.myapplication/drawable/" + typesDB[type_index].split(" ")[1]));
     }
 
 }

@@ -33,6 +33,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         webView = (WebView)findViewById(R.id.webView);
+
+        permissionCheck();
+    }
+
+    private void initWebView(){
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setDomStorageEnabled(true);
+        // 자바스크립트 사용을 허용한다.
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -48,16 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         }); // 새로운 창을 띄우지 않고 내부에서 웹뷰를 실행시킨다.
-        permissionCheck();
-    }
-
-    private void initWebView(){
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setLoadWithOverviewMode(true);
-        webSettings.setDomStorageEnabled(true);
-        // 자바스크립트 사용을 허용한다.
-        webView.setWebViewClient(new WebViewClient()); // 새로운 창을 띄우지 않고 내부에서 웹뷰를 실행시킨다.
         webView.setWebChromeClient(new WebChromeClient(){
             @Override
             public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
