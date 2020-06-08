@@ -14,4 +14,9 @@ export default [
     view: "Aboutus",
     name: "aboutus",
   },
+  {
+    path: "/usefulsites",
+    view: "Usefulsites",
+    name: "usefulsites",
+  },
 ];

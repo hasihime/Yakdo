@@ -302,7 +302,7 @@ export default {
                 this.maxIdx = result.data.length;
                 if (this.maxIdx == 0) {
                   alert(searchText + "로 검색된 열린 약국이 없습니다");
-                  this.pharmacies = [];
+                  this.alterSearch();
                 } else {
                   this.pharmacies = result.data;
                   this.marking();

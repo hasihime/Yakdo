@@ -18,27 +18,57 @@
               text-align:center;
               padding:12px;
               font-size:24px;
-              color:white;
+              color:black;
               background-color: darkseagreen;
               "
       >
         약도
-        <div style="font-size:17px;">
+        <div style="font-size:20px;">
           슬기로운 약국 생활
         </div>
       </div>
     </h1>
 
-    <div style="padding:22px; color:white; font-size:13px;"></div>
+    <div style="padding:22px; color:white; font-size:13px;">
+      약도 - 슬기로운 약국 생활은 빠르게 직관적으로 현재 열린 약국을 찾을 수
+      있는 서비스를 제공하기 위해 기획되었습니다.
+      <br />
+      <br />
+      주소기반 검색을 지원하며 시/군/구 명으로 검색할 경우 해당 지방자치단체
+      시군구청을 중심으로 거리를 계산합니다.
+      <br />
+      <br />
+      검색어가 없을 경우 현위치 기반으로 반경 5km 내의 열린 약국을 표시하게
+      됩니다.
+      <br />
+      <br />
+      또한 아래에 링크된 안드로이드 앱을 설치하여 사용하실 경우 나만의 약국
+      서비스를 통하여 본인이 가진 약의 개수와 유통기한, 복약 알림 등을 설정하실
+      수 있습니다.
+      <br />
+      <br />
+    </div>
 
     <div style="position:fixed; left:12%; bottom : 5%; color: white;">
       <hr />
-      <div style="padding-top:10px; padding-bottom:15px;">
+      <div style="padding-top:10px; padding-bottom:10px;">
         약국 데이터 :
         <a href="https://data.go.kr/" style="text-decoration:none;"
           >공공데이터 포털</a
         >
       </div>
+      <div style="padding-top:10px; padding-bottom:20px;">
+        기타 유용한 사이트
+        <v-btn
+          style="background-color:gray;"
+          icon
+          to="/usefulsites"
+          title="usefulsites"
+        >
+          <v-icon>mdi-information-outline</v-icon></v-btn
+        >
+      </div>
+      <!-- <hr /> -->
       <div style="border-radius: 10px; color: #ffffff;">
         <v-btn
           style="margin-right:15px;background-color:gray;"
