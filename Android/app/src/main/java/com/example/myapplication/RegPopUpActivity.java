@@ -46,8 +46,8 @@ public class RegPopUpActivity extends Activity {
             "#9e9e9e", //회색
             "#000000" //검정
     };
-    private final String[] types = {"알약", "캡슐", "밴드", "가루약", "물파스", "파스", "연고", "스프레이", "안약", "기타"};
-    private final String[] typesDB = {"알약 pill", "캡슐 capsule", "밴드 band", "가루약 flour", "물파스 liquid_pas", "파스 patch", "연고 ointment", "스프레이 spray", "안약 drop", "기타 etc"};
+    private final String[] types = {"알약", "캡슐", "밴드", "가루약", "물파스", "파스", "연고", "스프레이", "안약", "시럽", "기타"};
+    private final String[] typesDB = {"알약 pill", "캡슐 capsule", "밴드 band", "가루약 flour", "물파스 liquid_pas", "파스 patch", "연고 ointment", "스프레이 spray", "안약 drop", "시럽 syrup", "기타 etc"};
     private int type_index = 0;
 
     @Override
