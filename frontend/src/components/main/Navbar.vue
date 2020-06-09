@@ -50,6 +50,11 @@
     </div>
 
     <div style="position:fixed; left:12%; bottom : 5%; color: white;">
+      <div>
+        <a href="http://naver.me/GP4v7sp9" style="text-decoration:none;"
+          >나만의 약국 apk 다운로드</a
+        >
+      </div>
       <hr />
       <div style="padding-top:10px; padding-bottom:10px;">
         약국 데이터 :
