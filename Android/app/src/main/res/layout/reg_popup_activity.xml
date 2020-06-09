@@ -108,6 +108,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/reg_image"></ImageButton>
 
+<!--        <DatePicker-->
+<!--            android:theme="@style/Theme.AppCompat.Light.Dialog"-->
+<!--            android:id="@+id/vDatePicker"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:calendarViewShown="false"-->
+<!--            android:datePickerMode="spinner"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/reg_drug_count"-->
+<!--            tools:ignore="MissingConstraints" />-->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!-- Notice -->
 

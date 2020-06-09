@@ -3,6 +3,8 @@ package com.example.myapplication;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -98,6 +100,7 @@ public class MypharmacyActivity extends AppCompatActivity {
             ImageView image = (ImageView) cl.findViewById(R.id.imageView);
             image.setImageURI(Uri.parse("android.resource://com.example.myapplication/drawable/" + drugList.get(i).get("type").split(" ")[1]));
 //            image.setImageResource(R.drawable.capsule);
+//            image.setColorFilter(Color.parseColor("#ff0000"), PorterDuff.Mode.SRC_IN);
             TextView type = (TextView) cl.findViewById(R.id.type);
             type.setText(drugList.get(i).get("type"));
             TextView stock = (TextView) cl.findViewById(R.id.stock);

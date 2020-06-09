@@ -47,7 +47,7 @@
         android:layout_height="fill_parent"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:background="#0F00FF00"
+        android:background="#0FFF00FF"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
