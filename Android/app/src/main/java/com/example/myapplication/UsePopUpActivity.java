@@ -52,10 +52,10 @@ public class UsePopUpActivity extends Activity {
         this.key = Long.parseLong(intent.getStringExtra("key_id"));
         this.name = intent.getStringExtra("name");
         this.stock = Long.parseLong(intent.getStringExtra("stock"));
-        this.type = intent.getStringExtra("type").split(" ")[0];
+        this.type = intent.getStringExtra("type");
         this.typeImage.setImageURI(Uri.parse("android.resource://com.example.myapplication/drawable/" + intent.getStringExtra("type").split(" ")[1]));
         titleText.setText(this.name);
-        typeText.setText("종류 : " + this.type + "\n");
+        typeText.setText("종류 : " + this.type.split(" ")[0] + "\n");
         countUse.setText("1");
         countUse.setFilters(new InputFilter[]{ new InputFilterMinMax("1", this.stock+"")});
     }
@@ -91,7 +91,7 @@ public class UsePopUpActivity extends Activity {
         if(this.stock > usingCount) mDbOpenHelper.updateColumn0(this.key, this.name, this.stock - usingCount, this.type);
         else mDbOpenHelper.deleteColumn(this.key);
         mDbOpenHelper.insertColumn1(DHM + " "
-                        + this.type + "형의 약 "
+                        + this.type.split(" ")[0] + "형의 약 "
                         + name + "을(를) "
                         + usingCount + "개 줌."
                 , YYYYMM);
@@ -112,7 +112,7 @@ public class UsePopUpActivity extends Activity {
         if(this.stock > usingCount) mDbOpenHelper.updateColumn0(this.key, this.name, this.stock - usingCount, this.type);
         else mDbOpenHelper.deleteColumn(this.key);
         mDbOpenHelper.insertColumn1(DHM + " "
-                        + this.type + "형의 약 "
+                        + this.type.split(" ")[0] + "형의 약 "
                         + name + "을(를) "
                         + usingCount + "개 버림."
                 , YYYYMM);
