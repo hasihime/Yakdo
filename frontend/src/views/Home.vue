@@ -336,6 +336,7 @@ export default {
       this.kmap.panTo(moveLatLon);
     },
     submit() {
+      this.idx = 0;
       // console.log("enter 입력");
       // console.log(document.getElementsByName("search")[0].value)
       // var searchText = document.getElementsByName("search")[0].value;
@@ -361,6 +362,7 @@ export default {
                   this.alterSearch();
                 } else {
                   this.pharmacies = result.data;
+
                   this.marking();
                 }
               })
@@ -380,6 +382,7 @@ export default {
                   this.alterSearch();
                 } else {
                   this.pharmacies = result.data;
+
                   this.marking();
                 }
               })
@@ -394,6 +397,7 @@ export default {
       }
     },
     alterSearch() {
+      this.idx = 0;
       console.log("alterSearch");
       document.getElementById("search-bar-text").value = "서울";
       api
@@ -406,6 +410,7 @@ export default {
             this.pharmacies = [];
           } else {
             this.pharmacies = result.data;
+
             this.marking();
           }
         })
@@ -415,6 +420,7 @@ export default {
         });
     },
     autoSearch() {
+      this.idx = 0;
       this.getMyPos();
       var lat = this.mylat;
       var lng = this.mylng;
@@ -430,6 +436,7 @@ export default {
             this.alterSearch();
           } else {
             this.pharmacies = result.data;
+
             this.marking();
           }
         })
