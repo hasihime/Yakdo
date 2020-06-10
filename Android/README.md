@@ -16,4 +16,10 @@ sdk.dir = /usr/lib/android-sdk
 
 - 윈도우에서 sdk licenses 폴더를 리눅스 sdk.dir로 지정된 홈에 복사
 
+```
+sudo cp -r licenses/ /usr/lib/android-sdk/
+```
+
+- gradle test
+
 - gradle build
