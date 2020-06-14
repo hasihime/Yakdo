@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#eeeeee"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content">
+
+    <!-- 타이틀바 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="등록"
+            android:textSize="20sp"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:background="#2f6f2f"
+            android:layout_width="match_parent"
+            android:layout_height="53dp" />
+    </LinearLayout>
+    <!-- //end 타이틀바 -->
+
+    <!-- Notice -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:padding="24dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.example.myapplication.SquareImageView
+            android:id="@+id/reg_image"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#0F00FF00"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="24dp"
+            tools:layout_editor_absoluteY="24dp" />
+
+
+        <EditText
+            android:id="@+id/reg_drug_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:hint="약품명"
+            android:inputType="textPersonName"
+            android:maxLength="15"
+            android:text=""
+            app:layout_constraintTop_toBottomOf="@+id/next"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="24dp" />
+
+        <EditText
+            android:id="@+id/reg_drug_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintTop_toBottomOf="@+id/reg_drug_name"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="24dp" />
+
+        <TextView
+            android:id="@+id/reg_drug_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:alpha="0.87"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/reg_drug_name"
+            app:layout_constraintEnd_toStartOf="@+id/next"
+            app:layout_constraintStart_toEndOf="@+id/pre"
+            app:layout_constraintTop_toBottomOf="@+id/reg_image"
+            tools:ignore="MissingConstraints" />
+
+        <ImageButton
+            android:id="@+id/pre"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:background="#00ffffff"
+            android:onClick="goPre"
+            android:padding="0sp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/before"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reg_image"
+            tools:ignore="MissingConstraints"></ImageButton>
+
+        <ImageButton
+            android:id="@+id/next"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:background="#00ffffff"
+            android:onClick="goNext"
+            android:padding="0sp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/after"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reg_image"></ImageButton>
+
+<!--        <DatePicker-->
+<!--            android:theme="@style/Theme.AppCompat.Light.Dialog"-->
+<!--            android:id="@+id/vDatePicker"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:calendarViewShown="false"-->
+<!--            android:datePickerMode="spinner"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/reg_drug_count"-->
+<!--            tools:ignore="MissingConstraints" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Notice -->
+
+
+    <View
+        android:background="#66bdbdbd"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <!-- 닫기 버튼 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="등록"
+            android:textSize="20dp"
+            android:textColor="#ffffff"
+            android:padding="16dp"
+            android:gravity="center"
+            android:background="#4fff4f"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="submit"/>
+    </LinearLayout>
+    <!--// 닫기 버튼 -->
+</LinearLayout>

@@ -2,12 +2,21 @@ export default [
   {
     path: "",
     view: "Home",
-    name: "home"
+    name: "home",
   },
   {
     path: "/pharmacy/:id", // /:id
     view: "PharmacyDetail",
-    name: "pharmacyDetail"
+    name: "pharmacyDetail",
   },
- 
+  {
+    path: "/aboutus",
+    view: "Aboutus",
+    name: "aboutus",
+  },
+  {
+    path: "/usefulsites",
+    view: "Usefulsites",
+    name: "usefulsites",
+  },
 ];

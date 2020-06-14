@@ -1,6 +1,8 @@
 <template>
   <v-card id="review" style="padding:20px">
-    <h3>{{this.$store.state.data.reviews.length}}개의 리뷰</h3>
+    <h3 v-if="this.$store.state.data.reviews.length != 0">
+      {{this.$store.state.data.reviews.length}}개의 리뷰
+    </h3>
     <div v-for="review in this.$store.state.data.reviews"
         :key="review.r_id">
         <Review

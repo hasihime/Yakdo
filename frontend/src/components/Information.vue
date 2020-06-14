@@ -1,33 +1,27 @@
 <template>
   <v-card style="padding:20px">
-    <!-- <v-list>
-          <v-list-item>
-              <v-list-item-title>
-                  영업시간
-              </v-list-item-title>
-              <v-list-item-subtitle>
-                  00:00 ~ 00:00
-              </v-list-item-subtitle>
-          </v-list-item>
-          <v-list-item>
-              <v-list-item-title>
-                  전화번호
-              </v-list-item-title>
-              <v-list-item-subtitle style="color:black;">
-                  📞 02-2323-232 <v-btn small color="primary">전화걸기</v-btn>
-              </v-list-item-subtitle>
-          </v-list-item>
-      </v-list> -->
     <div id="list">
       <div>
         <h3>영업시간</h3>
+        <div v-if="checkChips()" style="margin:2px;">
+            <v-chip
+                small
+                label
+                class="ma-1"
+                color="secondary"
+                text-color="white"
+                v-for="category in (this.$store.state.data.pharmacy.p_status.split(','))"
+                :key="category">
+                {{category}}
+            </v-chip>
+            </div>
         🕛 {{ p_oper }}
       </div>
       <div v-if="p_tel.length">
         <h3>전화번호</h3>
-        📞
+        📞 {{ p_tel }}
         <a :href="`tel: + ${p_tel}`"
-          ><v-btn small color="primary">{{ p_tel }}</v-btn></a
+          ><v-btn small color="primary">전화걸기</v-btn></a
         >
       </div>
       <div v-if="p_special.length">
@@ -40,21 +34,27 @@
 
 <script>
 export default {
-  props: {
-    p_tel: {
-      type: String,
-      default: () => "",
+    props: {
+        p_tel : {
+            type: String,
+            default: () => "",
+        },
+        p_oper: {
+            type: String,
+            default: () => "",
+        },
+        p_special: {
+            type: String,
+            default: () => "",
+        }
     },
-    p_oper: {
-      type: String,
-      default: () => "",
+    methods: {
+        checkChips() {
+            if(this.$store.state.data.pharmacy.p_status.length > 0) return true
+            else false
+        }
     },
-    p_special: {
-      type: String,
-      default: () => "",
-    },
-  },
-};
+}
 </script>
 
 <style>
