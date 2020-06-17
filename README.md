@@ -1,7 +1,8 @@
 # 약도 - 슬기로운 약국 생활
 
-![약도](design/picture/약도아이콘.png){: width="100" height="100"}{: .center}
-![슬기로운약국생활](design/picture/슬기로운약국생활아이콘.png){: width="100" height="100"}{: .center}
+![약도](design/picture/약도아이콘.png)
+
+![슬기로운약국생활](design/picture/슬기로운약국생활아이콘.png)
 
 ## 기획 배경 및 목적
 
