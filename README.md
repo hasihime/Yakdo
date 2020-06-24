@@ -12,7 +12,7 @@
 
 ### Backend
 
-1. Intellij - File - Open - yakdo 
+1. Intellij - File - Open - yakdo
 2. gradle compileJava (Intellij에서 자동 실행)
 3. 그 외 yakdo/README.md 참조
 
@@ -112,7 +112,7 @@ $ sudo certbot --nginx -d k02a4051.p.ssafy.io
 ```
 
 
-완료가 되면 nginx를 재시작 해준다.
+완료가 되면 nginx 를 재시작 해준다.
 
 ```bash
 $ sudo systemctl restart nginx
